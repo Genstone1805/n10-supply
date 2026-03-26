@@ -1,44 +1,125 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
+    "header": {
+      "type": "header",
+      "disabled": true,
+      "settings": {
+        "logo_position": "middle-left",
+        "mobile_logo_position": "center",
+        "menu": "main-menu",
+        "menu_type_desktop": "dropdown",
+        "sticky_header_type": "on-scroll-up",
+        "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "enable_customer_avatar": true,
+        "margin_bottom": 0,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "app_header_wNLJwC": {
+      "type": "app-header",
       "blocks": {
-        "announcement-bar-0": {
-          "type": "announcement",
+        "nav_link_CGHAFa": {
+          "type": "nav_link",
           "settings": {
-            "text": "Welcome to our store",
-            "text_alignment": "center",
-            "color_scheme": "scheme-1",
+            "label": "Home",
+            "link": ""
+          }
+        },
+        "nav_link_TA3pFz": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Shop Bobrick",
+            "link": ""
+          }
+        },
+        "nav_link_fd9W3z": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Brands",
+            "link": ""
+          }
+        },
+        "nav_link_NdpcDy": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Request a Quote",
+            "link": ""
+          }
+        },
+        "nav_link_RxwEjD": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Contact",
             "link": ""
           }
         }
       },
       "block_order": [
-        "announcement-bar-0"
-      ]
-    },
-    "header": {
-      "type": "header",
+        "nav_link_CGHAFa",
+        "nav_link_TA3pFz",
+        "nav_link_fd9W3z",
+        "nav_link_NdpcDy",
+        "nav_link_RxwEjD"
+      ],
+      "name": "App Header",
       "settings": {
-        "color_scheme": "scheme-1",
-        "logo_position": "middle-left",
-        "menu": "main-menu",
-        "menu_type_desktop": "dropdown",
-        "sticky_header_type": "on-scroll-up",
-        "show_line_separator": true,
-        "enable_country_selector": true,
-        "enable_language_selector": true,
-        "mobile_logo_position": "center",
-        "margin_bottom": 0,
-        "padding_top": 20,
-        "padding_bottom": 20
+        "logo_link": "",
+        "brand_title": "ND10 SUPPLY",
+        "brand_subtitle": "National Division 10",
+        "logo_width": 180,
+        "logo_width_mobile": 140,
+        "enable_sticky": true,
+        "header_height": 80,
+        "container_width": 1280,
+        "desktop_nav_gap": 32,
+        "show_cta": true,
+        "cta_label": "Quote Cart",
+        "cta_link": "",
+        "show_cta_icon": true,
+        "button_padding_x": 16,
+        "button_padding_y": 10,
+        "button_radius": 100,
+        "brand_font_size": 24,
+        "brand_font_size_mobile": 20,
+        "subbrand_font_size": 10,
+        "subbrand_font_size_mobile": 9,
+        "nav_font_size": 14,
+        "button_font_size": 14,
+        "header_bg": "#ffffff",
+        "header_border": "#e5e7eb",
+        "brand_color": "#111827",
+        "subbrand_color": "#6b7280",
+        "nav_color": "#4b5563",
+        "nav_hover_color": "#c58a2b",
+        "nav_active_color": "#c58a2b",
+        "button_bg": "#111827",
+        "button_text": "#ffffff",
+        "button_hover_bg": "#1f2937",
+        "button_hover_text": "#ffffff",
+        "mobile_panel_bg": "#ffffff",
+        "mobile_border": "#e5e7eb",
+        "mobile_icon_stroke": 2
       }
     }
   },
   "order": [
-    "announcement-bar",
-    "header"
+    "header",
+    "app_header_wNLJwC"
   ]
 }

@@ -1,7 +1,137 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "app_footer_TjMxRh": {
+      "type": "app-footer",
+      "blocks": {
+        "quick_link_9VQqDC": {
+          "type": "quick_link",
+          "settings": {
+            "label": "Shop Bobrick",
+            "link": ""
+          }
+        },
+        "quick_link_4i8qhF": {
+          "type": "quick_link",
+          "settings": {
+            "label": "Brands",
+            "link": ""
+          }
+        },
+        "quick_link_cPRFh9": {
+          "type": "quick_link",
+          "settings": {
+            "label": "Request a Quote",
+            "link": ""
+          }
+        },
+        "quick_link_wPWLbf": {
+          "type": "quick_link",
+          "settings": {
+            "label": "Contact Us",
+            "link": ""
+          }
+        },
+        "category_link_HbxqAt": {
+          "type": "category_link",
+          "settings": {
+            "label": "Grab Bars",
+            "link": ""
+          }
+        },
+        "category_link_WciWCy": {
+          "type": "category_link",
+          "settings": {
+            "label": "Towel Dispensers",
+            "link": ""
+          }
+        },
+        "category_link_NqReBz": {
+          "type": "category_link",
+          "settings": {
+            "label": "Mirrors",
+            "link": ""
+          }
+        },
+        "category_link_NzEgRD": {
+          "type": "category_link",
+          "settings": {
+            "label": "Soap Dispensers",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "quick_link_9VQqDC",
+        "quick_link_4i8qhF",
+        "quick_link_cPRFh9",
+        "quick_link_wPWLbf",
+        "category_link_HbxqAt",
+        "category_link_WciWCy",
+        "category_link_NqReBz",
+        "category_link_NzEgRD"
+      ],
+      "name": "App Footer",
+      "settings": {
+        "brand_title": "ND10 SUPPLY",
+        "brand_subtitle": "National Division 10",
+        "brand_link": "",
+        "description": "<p>Your nationwide partner for Division 10 commercial construction specialties. Specializing in Bobrick restroom accessories and high-quality building materials for general contractors.</p>",
+        "show_contact_row": true,
+        "phone_text": "(800) 555-ND10",
+        "phone_link": "",
+        "show_phone_icon": true,
+        "email_text": "sales@nd10supply.com",
+        "email_link": "",
+        "show_email_icon": true,
+        "icon_stroke_width": 2,
+        "quick_links_heading": "Quick Links",
+        "categories_heading": "Categories",
+        "copyright_text": "© 2026 ND10 Supply. All rights reserved.",
+        "privacy_label": "Privacy Policy",
+        "privacy_link": "",
+        "terms_label": "Terms of Service",
+        "terms_link": "",
+        "container_width": 1280,
+        "padding_top": 80,
+        "padding_bottom": 40,
+        "grid_gap": 48,
+        "bottom_padding_top": 40,
+        "bottom_gap": 16,
+        "description_width": 460,
+        "brand_title_size": 24,
+        "brand_title_size_mobile": 20,
+        "brand_subtitle_size": 10,
+        "brand_subtitle_size_mobile": 9,
+        "description_size": 16,
+        "description_size_mobile": 15,
+        "contact_size": 16,
+        "column_heading_size": 14,
+        "link_size": 16,
+        "bottom_text_size": 12,
+        "footer_bg": "#16212b",
+        "footer_text_color": "#ffffff",
+        "footer_muted_color": "#b7bcc2",
+        "footer_heading_color": "#ffffff",
+        "footer_link_hover_color": "#d1a14a",
+        "footer_border_color": "#31404d",
+        "brand_title_color": "#ffffff",
+        "brand_subtitle_color": "#9da7b1",
+        "bottom_text_color": "#8f98a1",
+        "bottom_link_color": "#8f98a1",
+        "bottom_link_hover_color": "#ffffff"
+      }
+    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -23,7 +153,7 @@
           "type": "text",
           "settings": {
             "heading": "Our mission",
-            "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
+            "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>"
           }
         }
       },
@@ -32,10 +162,12 @@
         "footer-1",
         "footer-2"
       ],
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": true,
         "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": true,
         "show_social": true,
         "enable_country_selector": false,
         "enable_language_selector": false,
@@ -48,6 +180,7 @@
     }
   },
   "order": [
+    "app_footer_TjMxRh",
     "footer"
   ]
 }
