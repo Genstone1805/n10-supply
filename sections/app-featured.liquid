@@ -1,0 +1,670 @@
+{% liquid
+  assign section_id = 'featured-product-' | append: section.id
+%}
+
+<section id="{{ section_id }}" class="home-featured-product-section">
+  <style>
+    #{{ section_id }} {
+      --bg-color: {{ section.settings.bg_color }};
+      --heading-color: {{ section.settings.heading_color }};
+      --text-color: {{ section.settings.text_color }};
+      --card-bg: {{ section.settings.card_bg }};
+      --badge-bg: {{ section.settings.badge_bg }};
+      --badge-text: {{ section.settings.badge_text }};
+      --button-bg: {{ section.settings.button_bg }};
+      --button-text: {{ section.settings.button_text }};
+      --button-hover-bg: {{ section.settings.button_hover_bg }};
+      --button-hover-text: {{ section.settings.button_hover_text }};
+      --border-color: {{ section.settings.border_color }};
+      --radius: {{ section.settings.card_radius }}px;
+      --section-pt: {{ section.settings.padding_top }}px;
+      --section-pb: {{ section.settings.padding_bottom }}px;
+      --grid-gap: {{ section.settings.grid_gap }}px;
+      --content-width: {{ section.settings.max_width }}px;
+    }
+
+    #{{ section_id }} {
+      background: var(--bg-color);
+    }
+
+    #{{ section_id }} .featured-wrapper {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: var(--section-pt) 16px var(--section-pb);
+    }
+
+    #{{ section_id }} .featured-header {
+      text-align: {{ section.settings.header_alignment }};
+      margin-bottom: {{ section.settings.header_spacing }}px;
+    }
+
+    #{{ section_id }} .featured-heading {
+      margin: 0 0 16px;
+      color: var(--heading-color);
+      font-size: {{ section.settings.heading_size }}px;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    #{{ section_id }} .featured-description {
+      margin: 0;
+      color: var(--text-color);
+      font-size: {{ section.settings.description_size }}px;
+      line-height: 1.7;
+      max-width: {{ section.settings.description_width }}px;
+      {% if section.settings.header_alignment == 'center' %}
+        margin-left: auto;
+        margin-right: auto;
+      {% elsif section.settings.header_alignment == 'right' %}
+        margin-left: auto;
+      {% endif %}
+    }
+
+    #{{ section_id }} .featured-grid {
+      display: grid;
+      grid-template-columns: repeat({{ section.settings.columns_mobile }}, minmax(0, 1fr));
+      gap: var(--grid-gap);
+    }
+
+    @media (min-width: 768px) {
+      #{{ section_id }} .featured-grid {
+        grid-template-columns: repeat({{ section.settings.columns_tablet }}, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 990px) {
+      #{{ section_id }} .featured-grid {
+        grid-template-columns: repeat({{ section.settings.columns_desktop }}, minmax(0, 1fr));
+      }
+    }
+
+    #{{ section_id }} .featured-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    #{{ section_id }} .featured-media {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--card-bg);
+      margin-bottom: 16px;
+    }
+
+    #{{ section_id }} .featured-media.square {
+      aspect-ratio: 1 / 1;
+    }
+
+    #{{ section_id }} .featured-media.landscape {
+      aspect-ratio: 4 / 3;
+    }
+
+    #{{ section_id }} .featured-media.portrait {
+      aspect-ratio: 3 / 4;
+    }
+
+    #{{ section_id }} .featured-image {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    #{{ section_id }} .featured-card:hover .featured-image {
+      {% if section.settings.enable_hover_zoom %}
+        transform: scale({{ section.settings.zoom_scale }});
+      {% endif %}
+    }
+
+    #{{ section_id }} .featured-placeholder {
+      width: 100%;
+      height: 100%;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-color);
+      opacity: 0.6;
+      font-size: 14px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #{{ section_id }} .featured-badge-wrap {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+    }
+
+    #{{ section_id }} .featured-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: {{ section.settings.badge_size }}px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    #{{ section_id }} .featured-title {
+      margin: 0 0 6px;
+      color: var(--heading-color);
+      font-size: {{ section.settings.title_size }}px;
+      line-height: 1.4;
+      font-weight: 700;
+    }
+
+    #{{ section_id }} .featured-sku {
+      margin: 0 0 16px;
+      color: var(--text-color);
+      opacity: 0.6;
+      font-size: {{ section.settings.sku_size }}px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    #{{ section_id }} .featured-button {
+      margin-top: auto;
+      width: 100%;
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      background: var(--button_bg_fallback, transparent);
+      color: var(--button-text);
+      font-size: {{ section.settings.button_size }}px;
+      font-weight: 700;
+      padding: 12px 18px;
+      transition: all 0.3s ease;
+    }
+
+    #{{ section_id }} .featured-button:hover {
+      background: var(--button-hover-bg);
+      color: var(--button-hover-text);
+      border-color: var(--button-hover-bg);
+    }
+
+    @media (max-width: 767px) {
+      #{{ section_id }} .featured-heading {
+        font-size: {{ section.settings.heading_size_mobile }}px;
+      }
+    }
+  </style>
+
+  <div class="featured-wrapper">
+    {% if section.settings.heading != blank or section.settings.description != blank %}
+      <div class="featured-header">
+        {% if section.settings.heading != blank %}
+          <h2 class="featured-heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <div class="featured-description rte">{{ section.settings.description }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="featured-grid">
+      {% for block in section.blocks %}
+        <div class="featured-card" {{ block.shopify_attributes }}>
+          <div class="featured-media {{ block.settings.image_ratio }}">
+            {% if block.settings.image != blank %}
+              {{
+                block.settings.image
+                | image_url: width: 900
+                | image_tag: class: 'featured-image', loading: 'lazy', alt: block.settings.title
+              }}
+            {% else %}
+              <div class="featured-placeholder">Add product image</div>
+            {% endif %}
+
+            {% if block.settings.badge != blank and section.settings.show_badge %}
+              <div class="featured-badge-wrap">
+                <span class="featured-badge">{{ block.settings.badge }}</span>
+              </div>
+            {% endif %}
+          </div>
+
+          {% if block.settings.title != blank %}
+            <h3 class="featured-title">{{ block.settings.title }}</h3>
+          {% endif %}
+
+          {% if block.settings.sku != blank %}
+            <p class="featured-sku">
+              {{ block.settings.sku_prefix -}}
+              {{- block.settings.sku }}
+            </p>
+          {% endif %}
+
+          {% if block.settings.button_label != blank %}
+            <a
+              class="featured-button"
+              href="{% if block.settings.link != blank %}{{ block.settings.link }}{% else %}#{% endif %}"
+            >
+              {{ block.settings.button_label }}
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home Featured Product",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Featured Bobrick Products"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Industry standard restroom accessories for commercial projects. High-grade stainless steel construction for maximum durability.</p>"
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "description_width",
+      "label": "Description width",
+      "min": 300,
+      "max": 1000,
+      "step": 10,
+      "default": 670
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "label": "Header bottom spacing",
+      "min": 20,
+      "max": 100,
+      "step": 4,
+      "default": 64
+    },
+
+    {
+      "type": "header",
+      "content": "Section layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Content max width",
+      "min": 1000,
+      "max": 1600,
+      "step": 20,
+      "default": 1280
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Desktop columns",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "label": "Tablet columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "label": "Mobile columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 1
+    },
+
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading and title color",
+      "default": "#1f2937"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#6b7280"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Image/card background",
+      "default": "#f5f5f4"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg",
+      "label": "Badge background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "badge_text",
+      "label": "Badge text color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Button border color",
+      "default": "#e5e7eb"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg",
+      "label": "Button hover background",
+      "default": "#1f2937"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text",
+      "label": "Button hover text color",
+      "default": "#ffffff"
+    },
+
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size desktop",
+      "min": 18,
+      "max": 60,
+      "step": 1,
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size mobile",
+      "min": 16,
+      "max": 40,
+      "step": 1,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Product title size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "sku_size",
+      "label": "SKU text size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "badge_size",
+      "label": "Badge text size",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "button_size",
+      "label": "Button text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 14
+    },
+
+    {
+      "type": "header",
+      "content": "Card and image settings"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card image radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 24
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_hover_zoom",
+      "label": "Enable image hover zoom",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "zoom_scale",
+      "label": "Hover zoom scale",
+      "min": 1,
+      "max": 1.2,
+      "step": 0.1,
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show badge",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product image"
+        },
+        {
+          "type": "select",
+          "id": "image_ratio",
+          "label": "Image ratio",
+          "default": "square",
+          "options": [
+            { "value": "square", "label": "Square" },
+            { "value": "landscape", "label": "Landscape" },
+            { "value": "portrait", "label": "Portrait" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge text",
+          "default": "Bobrick"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product title",
+          "default": "Bobrick B-2892 Surface-Mounted Twin Jumbo-Roll Toilet Tissue Dispenser"
+        },
+        {
+          "type": "text",
+          "id": "sku_prefix",
+          "label": "SKU prefix",
+          "default": "SKU: "
+        },
+        {
+          "type": "text",
+          "id": "sku",
+          "label": "SKU",
+          "default": "B-2892"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "View Details"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Product link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Home Featured Product",
+      "blocks": [
+        {
+          "type": "product_card",
+          "settings": {
+            "badge": "Bobrick",
+            "title": "Bobrick B-2892 Surface-Mounted Twin Jumbo-Roll Toilet Tissue Dispenser",
+            "sku_prefix": "SKU: ",
+            "sku": "B-2892",
+            "button_label": "View Details",
+            "image_ratio": "square"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "badge": "Bobrick",
+            "title": "Bobrick B-6806 Series Stainless Steel Grab Bar",
+            "sku_prefix": "SKU: ",
+            "sku": "B-6806x18",
+            "button_label": "View Details",
+            "image_ratio": "square"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "badge": "Bobrick",
+            "title": "Bobrick B-165 Series Channel-Frame Mirror",
+            "sku_prefix": "SKU: ",
+            "sku": "B-165-2436",
+            "button_label": "View Details",
+            "image_ratio": "square"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "badge": "Bobrick",
+            "title": "Bobrick B-262 Surface-Mounted Paper Towel Dispenser",
+            "sku_prefix": "SKU: ",
+            "sku": "B-262",
+            "button_label": "View Details",
+            "image_ratio": "square"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

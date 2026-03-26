@@ -1,0 +1,371 @@
+{% assign section_id = 'app-page-title-' | append: section.id %}
+
+<section
+  id="{{ section_id }}"
+  class="app-page-title-section"
+  style="
+    --section-bg: {{ section.settings.bg_color }};
+    --section-border-color: {{ section.settings.border_color }};
+    --heading-color: {{ section.settings.heading_color }};
+    --desc-color: {{ section.settings.desc_color }};
+    --kicker-color: {{ section.settings.kicker_color }};
+    --pt-desktop: {{ section.settings.padding_top }}px;
+    --pb-desktop: {{ section.settings.padding_bottom }}px;
+    --pt-mobile: {{ section.settings.padding_top_mobile }}px;
+    --pb-mobile: {{ section.settings.padding_bottom_mobile }}px;
+    --heading-size-desktop: {{ section.settings.heading_size }}px;
+    --heading-size-mobile: {{ section.settings.heading_size_mobile }}px;
+    --desc-size-desktop: {{ section.settings.desc_size }}px;
+    --desc-size-mobile: {{ section.settings.desc_size_mobile }}px;
+    --heading-max-width: {{ section.settings.heading_max_width }}px;
+    --desc-max-width: {{ section.settings.desc_max_width }}px;
+  "
+>
+  <div class="app-page-title__inner page-width page-width--{{ section.settings.container_width }}">
+    <div class="app-page-title__content text-{{ section.settings.text_alignment }}">
+      {% if section.settings.kicker != blank %}
+        <p class="app-page-title__kicker">
+          {{ section.settings.kicker }}
+        </p>
+      {% endif %}
+
+      {% if section.settings.page_title != blank %}
+        <h1 class="app-page-title__heading">
+          {{ section.settings.page_title }}
+        </h1>
+      {% endif %}
+
+      {% if section.settings.page_desc != blank %}
+        <div class="app-page-title__desc rte">
+          {{ section.settings.page_desc }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  #{{ section_id }} {
+    background: var(--section-bg);
+    padding-top: var(--pt-mobile);
+    padding-bottom: var(--pb-mobile);
+    {% if section.settings.show_border %}
+      border-bottom: 1px solid var(--section-border-color);
+    {% endif %}
+  }
+
+  #{{ section_id }} .page-width {
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  #{{ section_id }} .page-width--narrow {
+    max-width: 48rem;
+  }
+
+  #{{ section_id }} .page-width--medium {
+    max-width: 64rem;
+  }
+
+  #{{ section_id }} .page-width--wide {
+    max-width: 80rem;
+  }
+
+  #{{ section_id }} .page-width--full {
+    max-width: 100%;
+  }
+
+  #{{ section_id }} .app-page-title__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  #{{ section_id }} .text-left {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  #{{ section_id }} .text-center {
+    text-align: center;
+    align-items: center;
+  }
+
+  #{{ section_id }} .text-right {
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  #{{ section_id }} .app-page-title__kicker {
+    margin: 0;
+    color: var(--kicker-color);
+    font-size: 0.875rem;
+    line-height: 1.2;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  #{{ section_id }} .app-page-title__heading {
+    margin: 0;
+    color: var(--heading-color);
+    font-size: var(--heading-size-mobile);
+    line-height: 1.1;
+    max-width: var(--heading-max-width);
+    font-weight: {{ section.settings.heading_weight }};
+  }
+
+  #{{ section_id }} .app-page-title__desc {
+    margin: 0;
+    color: var(--desc-color);
+    font-size: var(--desc-size-mobile);
+    line-height: 1.6;
+    max-width: var(--desc-max-width);
+  }
+
+  #{{ section_id }} .app-page-title__desc p {
+    margin: 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    #{{ section_id }} {
+      padding-top: var(--pt-desktop);
+      padding-bottom: var(--pb-desktop);
+    }
+
+    #{{ section_id }} .app-page-title__heading {
+      font-size: var(--heading-size-desktop);
+    }
+
+    #{{ section_id }} .app-page-title__desc {
+      font-size: var(--desc-size-desktop);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "App Page Title",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Page Intro"
+    },
+    {
+      "type": "text",
+      "id": "page_title",
+      "label": "Page Title",
+      "default": "Page Title"
+    },
+    {
+      "type": "richtext",
+      "id": "page_desc",
+      "label": "Page Description",
+      "default": "<p>Add a short introduction for this page.</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container Width",
+      "default": "wide",
+      "options": [
+        { "value": "narrow", "label": "Narrow" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "wide", "label": "Wide" },
+        { "value": "full", "label": "Full Width" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#fafaf9"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#111827"
+    },
+    {
+      "type": "color",
+      "id": "desc_color",
+      "label": "Description Color",
+      "default": "#6b7280"
+    },
+    {
+      "type": "color",
+      "id": "kicker_color",
+      "label": "Kicker Color",
+      "default": "#6b7280"
+    },
+    {
+      "type": "header",
+      "content": "Border"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border",
+      "label": "Show Bottom Border",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#0000000d"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding (Desktop)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding (Desktop)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top Padding (Mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom Padding (Mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading Size (Desktop)",
+      "min": 20,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading Size (Mobile)",
+      "min": 18,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading Weight",
+      "default": "700",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" },
+        { "value": "800", "label": "Extra Bold" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_max_width",
+      "label": "Heading Max Width",
+      "min": 300,
+      "max": 1400,
+      "step": 20,
+      "unit": "px",
+      "default": 900
+    },
+    {
+      "type": "header",
+      "content": "Description"
+    },
+    {
+      "type": "range",
+      "id": "desc_size",
+      "label": "Description Size (Desktop)",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "desc_size_mobile",
+      "label": "Description Size (Mobile)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "desc_max_width",
+      "label": "Description Max Width",
+      "min": 300,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "default": 700
+    }
+  ],
+  "presets": [
+    {
+      "name": "App Page Title"
+    }
+  ]
+}
+{% endschema %}

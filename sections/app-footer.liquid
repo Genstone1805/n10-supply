@@ -1,0 +1,787 @@
+{% liquid
+  assign section_id = 'app-footer-' | append: section.id
+%}
+
+<footer id="{{ section_id }}" class="app-footer">
+  <style>
+    #{{ section_id }} {
+      --footer-bg: {{ section.settings.footer_bg }};
+      --footer-text: {{ section.settings.footer_text_color }};
+      --footer-muted: {{ section.settings.footer_muted_color }};
+      --footer-heading: {{ section.settings.footer_heading_color }};
+      --footer-link-hover: {{ section.settings.footer_link_hover_color }};
+      --footer-border: {{ section.settings.footer_border_color }};
+      --container-width: {{ section.settings.container_width }}px;
+      --padding-top: {{ section.settings.padding_top }}px;
+      --padding-bottom: {{ section.settings.padding_bottom }}px;
+      --grid-gap: {{ section.settings.grid_gap }}px;
+      --bottom-gap: {{ section.settings.bottom_gap }}px;
+      background: var(--footer-bg);
+      color: var(--footer-text);
+    }
+
+    #{{ section_id }} .app-footer__inner {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: var(--padding-top) 16px var(--padding-bottom);
+    }
+
+    #{{ section_id }} .app-footer__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--grid-gap);
+      margin-bottom: 64px;
+    }
+
+    @media (min-width: 768px) {
+      #{{ section_id }} .app-footer__grid {
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+      }
+    }
+
+    #{{ section_id }} .app-footer__brand {
+      max-width: 680px;
+    }
+
+    #{{ section_id }} .app-footer__brand-link {
+      display: inline-flex;
+      flex-direction: column;
+      text-decoration: none;
+      margin-bottom: 24px;
+      color: inherit;
+    }
+
+    #{{ section_id }} .app-footer__brand-title {
+      font-size: {{ section.settings.brand_title_size }}px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: {{ section.settings.brand_title_color }};
+      margin: 0;
+    }
+
+    #{{ section_id }} .app-footer__brand-subtitle {
+      margin-top: 6px;
+      font-size: {{ section.settings.brand_subtitle_size }}px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: 500;
+      line-height: 1.2;
+      color: {{ section.settings.brand_subtitle_color }};
+    }
+
+    #{{ section_id }} .app-footer__description {
+      max-width: {{ section.settings.description_width }}px;
+      margin: 0 0 28px;
+      color: var(--footer-muted);
+      font-size: {{ section.settings.description_size }}px;
+      line-height: 1.7;
+    }
+
+    #{{ section_id }} .app-footer__contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px 24px;
+    }
+
+    #{{ section_id }} .app-footer__contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--footer-muted);
+      text-decoration: none;
+      transition: color 0.25s ease;
+      font-size: {{ section.settings.contact_size }}px;
+    }
+
+    #{{ section_id }} .app-footer__contact-link:hover {
+      color: var(--footer-link-hover);
+    }
+
+    #{{ section_id }} .app-footer__contact-link svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    #{{ section_id }} .app-footer__column-title {
+      margin: 0 0 24px;
+      font-size: {{ section.settings.column_heading_size }}px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--footer-heading);
+    }
+
+    #{{ section_id }} .app-footer__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    #{{ section_id }} .app-footer__list-link {
+      color: var(--footer-muted);
+      text-decoration: none;
+      transition: color 0.25s ease;
+      font-size: {{ section.settings.link_size }}px;
+      line-height: 1.5;
+    }
+
+    #{{ section_id }} .app-footer__list-link:hover {
+      color: var(--footer-link-hover);
+    }
+
+    #{{ section_id }} .app-footer__bottom {
+      padding-top: {{ section.settings.bottom_padding_top }}px;
+      border-top: 1px solid var(--footer-border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--bottom-gap);
+      font-size: {{ section.settings.bottom_text_size }}px;
+      color: {{ section.settings.bottom_text_color }};
+    }
+
+    @media (min-width: 768px) {
+      #{{ section_id }} .app-footer__bottom {
+        flex-direction: row;
+      }
+    }
+
+    #{{ section_id }} .app-footer__bottom p {
+      margin: 0;
+    }
+
+    #{{ section_id }} .app-footer__legal {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 32px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #{{ section_id }} .app-footer__legal a {
+      color: {{ section.settings.bottom_link_color }};
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    #{{ section_id }} .app-footer__legal a:hover {
+      color: {{ section.settings.bottom_link_hover_color }};
+    }
+
+    @media (max-width: 767px) {
+      #{{ section_id }} .app-footer__brand-title {
+        font-size: {{ section.settings.brand_title_size_mobile }}px;
+      }
+
+      #{{ section_id }} .app-footer__brand-subtitle {
+        font-size: {{ section.settings.brand_subtitle_size_mobile }}px;
+      }
+
+      #{{ section_id }} .app-footer__description {
+        font-size: {{ section.settings.description_size_mobile }}px;
+      }
+    }
+  </style>
+
+  <div class="app-footer__inner">
+    <div class="app-footer__grid">
+      <div class="app-footer__brand">
+        <a
+          class="app-footer__brand-link"
+          href="{% if section.settings.brand_link != blank %}{{ section.settings.brand_link }}{% else %}{{ routes.root_url }}{% endif %}"
+        >
+          {% if section.settings.brand_title != blank %}
+            <span class="app-footer__brand-title">{{ section.settings.brand_title }}</span>
+          {% endif %}
+          {% if section.settings.brand_subtitle != blank %}
+            <span class="app-footer__brand-subtitle">{{ section.settings.brand_subtitle }}</span>
+          {% endif %}
+        </a>
+
+        {% if section.settings.description != blank %}
+          <div class="app-footer__description rte">{{ section.settings.description }}</div>
+        {% endif %}
+
+        {% if section.settings.show_contact_row %}
+          <div class="app-footer__contact-row">
+            {% if section.settings.phone_text != blank %}
+              <a
+                href="{% if section.settings.phone_link != blank %}{{ section.settings.phone_link }}{% else %}tel:{{ section.settings.phone_text | replace: ' ', '' }}{% endif %}"
+                class="app-footer__contact-link"
+              >
+                {% if section.settings.show_phone_icon %}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="{{ section.settings.icon_stroke_width }}"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path>
+                  </svg>
+                {% endif %}
+                <span>{{ section.settings.phone_text }}</span>
+              </a>
+            {% endif %}
+
+            {% if section.settings.email_text != blank %}
+              <a
+                href="{% if section.settings.email_link != blank %}{{ section.settings.email_link }}{% else %}mailto:{{ section.settings.email_text }}{% endif %}"
+                class="app-footer__contact-link"
+              >
+                {% if section.settings.show_email_icon %}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="{{ section.settings.icon_stroke_width }}"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                  </svg>
+                {% endif %}
+                <span>{{ section.settings.email_text }}</span>
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="app-footer__column">
+        {% if section.settings.quick_links_heading != blank %}
+          <h4 class="app-footer__column-title">{{ section.settings.quick_links_heading }}</h4>
+        {% endif %}
+        <ul class="app-footer__list">
+          {% for block in section.blocks %}
+            {% if block.type == 'quick_link' %}
+              <li {{ block.shopify_attributes }}>
+                <a
+                  class="app-footer__list-link"
+                  href="{% if block.settings.link != blank %}{{ block.settings.link }}{% else %}#{% endif %}"
+                >
+                  {{ block.settings.label }}
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="app-footer__column">
+        {% if section.settings.categories_heading != blank %}
+          <h4 class="app-footer__column-title">{{ section.settings.categories_heading }}</h4>
+        {% endif %}
+        <ul class="app-footer__list">
+          {% for block in section.blocks %}
+            {% if block.type == 'category_link' %}
+              <li {{ block.shopify_attributes }}>
+                <a
+                  class="app-footer__list-link"
+                  href="{% if block.settings.link != blank %}{{ block.settings.link }}{% else %}#{% endif %}"
+                >
+                  {{ block.settings.label }}
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="app-footer__bottom">
+      <p>{{ section.settings.copyright_text }}</p>
+
+      <div class="app-footer__legal">
+        {% if section.settings.privacy_label != blank %}
+          <a href="{% if section.settings.privacy_link != blank %}{{ section.settings.privacy_link }}{% else %}#{% endif %}">
+            {{ section.settings.privacy_label }}
+          </a>
+        {% endif %}
+
+        {% if section.settings.terms_label != blank %}
+          <a href="{% if section.settings.terms_link != blank %}{{ section.settings.terms_link }}{% else %}#{% endif %}">
+            {{ section.settings.terms_label }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "App Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "text",
+      "id": "brand_title",
+      "label": "Brand title",
+      "default": "ND10 SUPPLY"
+    },
+    {
+      "type": "text",
+      "id": "brand_subtitle",
+      "label": "Brand subtitle",
+      "default": "National Division 10"
+    },
+    {
+      "type": "url",
+      "id": "brand_link",
+      "label": "Brand link"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Your nationwide partner for Division 10 commercial construction specialties. Specializing in Bobrick restroom accessories and high-quality building materials for general contractors.</p>"
+    },
+
+    {
+      "type": "header",
+      "content": "Contact row"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact_row",
+      "label": "Show contact row",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "phone_text",
+      "label": "Phone text",
+      "default": "(800) 555-ND10"
+    },
+    {
+      "type": "url",
+      "id": "phone_link",
+      "label": "Phone link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_phone_icon",
+      "label": "Show phone icon",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "email_text",
+      "label": "Email text",
+      "default": "sales@nd10supply.com"
+    },
+    {
+      "type": "url",
+      "id": "email_link",
+      "label": "Email link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_email_icon",
+      "label": "Show email icon",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "icon_stroke_width",
+      "label": "Contact icon stroke width",
+      "min": 1,
+      "max": 3,
+      "step": 0.5,
+      "default": 2
+    },
+
+    {
+      "type": "header",
+      "content": "Column headings"
+    },
+    {
+      "type": "text",
+      "id": "quick_links_heading",
+      "label": "Quick links heading",
+      "default": "Quick Links"
+    },
+    {
+      "type": "text",
+      "id": "categories_heading",
+      "label": "Categories heading",
+      "default": "Categories"
+    },
+
+    {
+      "type": "header",
+      "content": "Bottom bar"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text",
+      "default": "© 2026 ND10 Supply. All rights reserved."
+    },
+    {
+      "type": "text",
+      "id": "privacy_label",
+      "label": "Privacy label",
+      "default": "Privacy Policy"
+    },
+    {
+      "type": "url",
+      "id": "privacy_link",
+      "label": "Privacy link"
+    },
+    {
+      "type": "text",
+      "id": "terms_label",
+      "label": "Terms label",
+      "default": "Terms of Service"
+    },
+    {
+      "type": "url",
+      "id": "terms_link",
+      "label": "Terms link"
+    },
+
+    {
+      "type": "header",
+      "content": "Layout and spacing"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 900,
+      "max": 1800,
+      "step": 20,
+      "default": 1280
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 20,
+      "max": 200,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 20,
+      "max": 160,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap",
+      "min": 12,
+      "max": 80,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_top",
+      "label": "Bottom bar top padding",
+      "min": 8,
+      "max": 60,
+      "step": 2,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "bottom_gap",
+      "label": "Bottom bar gap",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "description_width",
+      "label": "Description width",
+      "min": 240,
+      "max": 700,
+      "step": 10,
+      "default": 460
+    },
+
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "brand_title_size",
+      "label": "Brand title size desktop",
+      "min": 16,
+      "max": 42,
+      "step": 1,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "brand_title_size_mobile",
+      "label": "Brand title size mobile",
+      "min": 14,
+      "max": 34,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "brand_subtitle_size",
+      "label": "Brand subtitle size desktop",
+      "min": 8,
+      "max": 18,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "brand_subtitle_size_mobile",
+      "label": "Brand subtitle size mobile",
+      "min": 8,
+      "max": 16,
+      "step": 1,
+      "default": 9
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description size desktop",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "description_size_mobile",
+      "label": "Description size mobile",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "contact_size",
+      "label": "Contact text size",
+      "min": 11,
+      "max": 20,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "column_heading_size",
+      "label": "Column heading size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "link_size",
+      "label": "Link size",
+      "min": 11,
+      "max": 20,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "bottom_text_size",
+      "label": "Bottom text size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "default": 12
+    },
+
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "footer_bg",
+      "label": "Footer background",
+      "default": "#16212b"
+    },
+    {
+      "type": "color",
+      "id": "footer_text_color",
+      "label": "Base text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "footer_muted_color",
+      "label": "Muted text and link color",
+      "default": "#b7bcc2"
+    },
+    {
+      "type": "color",
+      "id": "footer_heading_color",
+      "label": "Column heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "footer_link_hover_color",
+      "label": "Link hover color",
+      "default": "#d1a14a"
+    },
+    {
+      "type": "color",
+      "id": "footer_border_color",
+      "label": "Border color",
+      "default": "#31404d"
+    },
+    {
+      "type": "color",
+      "id": "brand_title_color",
+      "label": "Brand title color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "brand_subtitle_color",
+      "label": "Brand subtitle color",
+      "default": "#9da7b1"
+    },
+    {
+      "type": "color",
+      "id": "bottom_text_color",
+      "label": "Bottom text color",
+      "default": "#8f98a1"
+    },
+    {
+      "type": "color",
+      "id": "bottom_link_color",
+      "label": "Bottom link color",
+      "default": "#8f98a1"
+    },
+    {
+      "type": "color",
+      "id": "bottom_link_hover_color",
+      "label": "Bottom link hover color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quick_link",
+      "name": "Quick link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Shop Bobrick"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "category_link",
+      "name": "Category link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Grab Bars"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "App Footer",
+      "blocks": [
+        {
+          "type": "quick_link",
+          "settings": {
+            "label": "Shop Bobrick"
+          }
+        },
+        {
+          "type": "quick_link",
+          "settings": {
+            "label": "Brands"
+          }
+        },
+        {
+          "type": "quick_link",
+          "settings": {
+            "label": "Request a Quote"
+          }
+        },
+        {
+          "type": "quick_link",
+          "settings": {
+            "label": "Contact Us"
+          }
+        },
+        {
+          "type": "category_link",
+          "settings": {
+            "label": "Grab Bars"
+          }
+        },
+        {
+          "type": "category_link",
+          "settings": {
+            "label": "Towel Dispensers"
+          }
+        },
+        {
+          "type": "category_link",
+          "settings": {
+            "label": "Mirrors"
+          }
+        },
+        {
+          "type": "category_link",
+          "settings": {
+            "label": "Soap Dispensers"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

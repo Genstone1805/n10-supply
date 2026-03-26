@@ -1,0 +1,524 @@
+<section
+  id="hero-{{ section.id }}"
+  class="app-hero"
+  style="
+    --section-height: {{ section.settings.section_height }};
+    --bg-color: {{ section.settings.bg_color }};
+    --image-opacity: {{ section.settings.image_opacity | divided_by: 100.0 }};
+    --overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --overlay-angle: {{ section.settings.overlay_angle }}deg;
+    --overlay-stop-1: {{ section.settings.overlay_stop_1 }}%;
+    --overlay-stop-2: {{ section.settings.overlay_stop_2 }}%;
+    --overlay-stop-3: {{ section.settings.overlay_stop_3 }}%;
+    --overlay-solid: {{ section.settings.overlay_solid }};
+    --overlay-start: {{ section.settings.overlay_start }};
+    --overlay-middle: {{ section.settings.overlay_middle }};
+    --overlay-end: {{ section.settings.overlay_end }};
+  "
+>
+  <div class="app-hero__media">
+    {% if section.settings.background_image != blank %}
+      <img
+        src="{{ section.settings.background_image | image_url: width: 2200 }}"
+        alt="{{ section.settings.background_image.alt | escape }}"
+        class="app-hero__image"
+        loading="lazy"
+        width="{{ section.settings.background_image.width }}"
+        height="{{ section.settings.background_image.height }}"
+      >
+    {% else %}
+      <img
+        src="https://picsum.photos/seed/construction/1920/1080"
+        alt="Construction background"
+        class="app-hero__image"
+        loading="lazy"
+        width="1920"
+        height="1080"
+      >
+    {% endif %}
+  </div>
+
+  <div class="app-hero__content page-width">
+    <div class="app-hero__inner">
+      {% if section.settings.kicker_text != blank %}
+        <span
+          class="app-hero__kicker"
+          style="
+            background-color: {{ section.settings.kicker_bg }};
+            color: {{ section.settings.kicker_text_color }};
+          "
+        >
+          {{ section.settings.kicker_text }}
+        </span>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h1
+          class="app-hero__title"
+          style="
+            color: {{ section.settings.heading_color }};
+            --heading-mobile: {{ section.settings.heading_size_mobile }}px;
+            --heading-desktop: {{ section.settings.heading_size_desktop }}px;
+          "
+        >
+          {{ section.settings.heading }}
+          {% if section.settings.heading_accent != blank %}
+            <br>
+            <span
+              class="app-hero__title-accent"
+              style="color: {{ section.settings.heading_accent_color }};"
+            >
+              {{ section.settings.heading_accent }}
+            </span>
+          {% endif %}
+        </h1>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <div
+          class="app-hero__description rte"
+          style="
+            color: {{ section.settings.description_color }};
+            font-size: {{ section.settings.description_size }}px;
+          "
+        >
+          {{ section.settings.description }}
+        </div>
+      {% endif %}
+
+      <div class="app-hero__actions">
+        {% if section.settings.primary_button_text != blank %}
+          <a
+            href="{{ section.settings.primary_button_link }}"
+            class="app-hero__button app-hero__button--primary"
+            style="
+              background-color: {{ section.settings.primary_button_bg }};
+              color: {{ section.settings.primary_button_text_color }};
+            "
+          >
+            <span>{{ section.settings.primary_button_text }}</span>
+
+            {% if section.settings.show_primary_icon %}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            {% endif %}
+          </a>
+        {% endif %}
+
+        {% if section.settings.secondary_button_text != blank %}
+          <a
+            href="{{ section.settings.secondary_button_link }}"
+            class="app-hero__button app-hero__button--secondary"
+            style="
+              background-color: {{ section.settings.secondary_button_bg }};
+              color: {{ section.settings.secondary_button_text_color }};
+              border-color: {{ section.settings.secondary_button_border }};
+            "
+          >
+            {{ section.settings.secondary_button_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #hero-{{ section.id }} {
+    position: relative;
+    min-height: var(--section-height);
+    background-color: var(--bg-color);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    isolation: isolate;
+  }
+
+  #hero-{{ section.id }} .app-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  #hero-{{ section.id }} .app-hero__media::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background:
+      linear-gradient(
+        var(--overlay-angle),
+        color-mix(in srgb, var(--overlay-start) calc(var(--overlay-opacity) * 100%), transparent) var(--overlay-stop-1),
+        color-mix(in srgb, var(--overlay-middle) calc(var(--overlay-opacity) * 100%), transparent) var(--overlay-stop-2),
+        color-mix(in srgb, var(--overlay-end) calc(var(--overlay-opacity) * 100%), transparent) var(--overlay-stop-3)
+      ),
+      color-mix(in srgb, var(--overlay-solid) calc(var(--overlay-opacity) * 100%), transparent);
+    pointer-events: none;
+  }
+
+  #hero-{{ section.id }} .app-hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: var(--image-opacity);
+  }
+
+  #hero-{{ section.id }} .app-hero__content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+  }
+
+  #hero-{{ section.id }} .app-hero__inner {
+    max-width: {{- section.settings.content_width -}}px
+    padding: 4rem 1rem;
+  }
+
+  #hero-{{ section.id }} .app-hero__kicker {
+    display: inline-block;
+    padding: 0.45rem 0.85rem;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 1.5rem;
+    border-radius: 0.35rem;
+  }
+
+  #hero-{{ section.id }} .app-hero__title {
+    margin: 0 0 1.5rem;
+    line-height: 1.08;
+    font-weight: 700;
+    font-size: var(--heading-mobile);
+  }
+
+  #hero-{{ section.id }} .app-hero__title-accent {
+    font-style: italic;
+    font-family: serif;
+    font-weight: 400;
+  }
+
+  #hero-{{ section.id }} .app-hero__description {
+    margin-bottom: 2rem;
+    line-height: 1.7;
+    max-width: 38rem;
+  }
+
+  #hero-{{ section.id }} .app-hero__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  #hero-{{ section.id }} .app-hero__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+    width: fit-content;
+  }
+
+  #hero-{{ section.id }} .app-hero__button--secondary {
+    border-style: solid;
+  }
+
+  @media screen and (min-width: 768px) {
+    #hero-{{ section.id }} .app-hero__title {
+      font-size: var(--heading-desktop);
+    }
+
+    #hero-{{ section.id }} .app-hero__inner {
+      padding: 5rem 1.5rem;
+    }
+
+    #hero-{{ section.id }} .app-hero__actions {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "App Hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "section_height",
+      "label": "Section height",
+      "default": "80vh",
+      "info": "Examples: 80vh, 700px, 100vh"
+    },
+    {
+      "type": "number",
+      "id": "content_width",
+      "label": "Section width",
+      "default": 120
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Fallback background color",
+      "default": "#0f172a"
+    },
+    {
+      "type": "range",
+      "id": "image_opacity",
+      "label": "Image opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 55,
+      "unit": "%"
+    },
+    {
+      "type": "color",
+      "id": "overlay_solid",
+      "label": "Overlay base color",
+      "default": "#0f172a"
+    },
+    {
+      "type": "range",
+      "id": "overlay_angle",
+      "label": "Overlay gradient angle",
+      "min": 0,
+      "max": 360,
+      "step": 5,
+      "default": 90,
+      "unit": "deg"
+    },
+    {
+      "type": "color",
+      "id": "overlay_start",
+      "label": "Overlay gradient start",
+      "default": "#0f172a"
+    },
+    {
+      "type": "color",
+      "id": "overlay_middle",
+      "label": "Overlay gradient middle",
+      "default": "#0f172a"
+    },
+    {
+      "type": "color",
+      "id": "overlay_end",
+      "label": "Overlay gradient end",
+      "default": "#0f172a00"
+    },
+    {
+      "type": "range",
+      "id": "overlay_stop_1",
+      "label": "Gradient stop 1",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "overlay_stop_2",
+      "label": "Gradient stop 2",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 45,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "overlay_stop_3",
+      "label": "Gradient stop 3",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "%"
+    },
+    {
+      "type": "text",
+      "id": "kicker_text",
+      "label": "Kicker text",
+      "default": "Division 10 Specialists"
+    },
+    {
+      "type": "color",
+      "id": "kicker_bg",
+      "label": "Kicker background",
+      "default": "#facc15"
+    },
+    {
+      "type": "color",
+      "id": "kicker_text_color",
+      "label": "Kicker text color",
+      "default": "#0f172a"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Main heading",
+      "default": "Commercial Construction"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Accent heading",
+      "default": "Supplies Nationwide."
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_accent_color",
+      "label": "Accent heading color",
+      "default": "#facc15"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size mobile",
+      "min": 24,
+      "max": 64,
+      "step": 2,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size desktop",
+      "min": 36,
+      "max": 120,
+      "step": 2,
+      "default": 72,
+      "unit": "px"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>ND10 Supply provides general contractors with high-quality restroom accessories, grab bars, and mirrors from top manufacturers like Bobrick, Bradley, and ASI.</p>"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#ffffffb3"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Primary button text",
+      "default": "Browse Product Catalog"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_primary_icon",
+      "label": "Show primary button icon",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "primary_button_bg",
+      "label": "Primary button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_text_color",
+      "label": "Primary button text color",
+      "default": "#0f172a"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Secondary button text",
+      "default": "Request a Quote"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_bg",
+      "label": "Secondary button background",
+      "default": "#00000000"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_text_color",
+      "label": "Secondary button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_border",
+      "label": "Secondary button border color",
+      "default": "#ffffff4d"
+    }
+  ],
+  "presets": [
+    {
+      "name": "App Hero"
+    }
+  ]
+}
+{% endschema %}

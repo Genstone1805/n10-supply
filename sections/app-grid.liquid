@@ -1,0 +1,773 @@
+{% liquid
+  assign section_id = 'home-grid-' | append: section.id
+%}
+
+<section id="{{ section_id }}" class="home-grid-1-section">
+  <style>
+    #{{ section_id }} {
+      --bg: {{ section.settings.bg_color }};
+      --text: {{ section.settings.text_color }};
+      --muted: {{ section.settings.muted_text_color }};
+      --accent: {{ section.settings.accent_color }};
+      --card-bg: {{ section.settings.card_bg }};
+      --card-border: {{ section.settings.card_border }};
+      --card-hover-bg: {{ section.settings.card_hover_bg }};
+      --heading-size-desktop: {{ section.settings.heading_size }}px;
+      --heading-size-mobile: {{ section.settings.heading_size_mobile }}px;
+      --text-size: {{ section.settings.body_size }}px;
+      --card-radius: {{ section.settings.card_radius }}px;
+      --section-pt: {{ section.settings.padding_top }}px;
+      --section-pb: {{ section.settings.padding_bottom }}px;
+      --content-width: {% if section.settings.full_width %}100%{% else %}{{ section.settings.max_width }}px{% endif %};
+      --grid-gap: {{ section.settings.grid_gap }}px;
+      --card-padding: {{ section.settings.card_padding }}px;
+      --image-radius: {{ section.settings.image_radius }}px;
+      --border-width: {{ section.settings.border_width }}px;
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    #{{ section_id }} .home-grid-1__inner {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding-left: 16px;
+      padding-right: 16px;
+      padding-top: var(--section-pt);
+      padding-bottom: var(--section-pb);
+    }
+
+    #{{ section_id }} .home-grid-1__header {
+      margin-bottom: {{ section.settings.header_spacing }}px;
+      text-align: {{ section.settings.header_alignment }};
+    }
+
+    #{{ section_id }} .home-grid-1__heading {
+      margin: 0 0 16px;
+      font-size: var(--heading-size-desktop);
+      line-height: 1.15;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    #{{ section_id }} .home-grid-1__description {
+      margin: 0;
+      max-width: {% if section.settings.header_alignment == 'center' %}{{ section.settings.description_width }}px{% elsif section.settings.header_alignment == 'right' %}100%{% else %}{{ section.settings.description_width }}px{% endif %};
+      font-size: var(--text-size);
+      line-height: 1.7;
+      color: var(--muted);
+      {% if section.settings.header_alignment == 'center' %}
+        margin-left: auto;
+        margin-right: auto;
+      {% elsif section.settings.header_alignment == 'right' %}
+        margin-left: auto;
+      {% endif %}
+    }
+
+    #{{ section_id }} .home-grid-1__grid {
+      display: grid;
+      grid-template-columns: repeat({{ section.settings.columns_mobile }}, minmax(0, 1fr));
+      gap: var(--grid-gap);
+    }
+
+    @media (min-width: 768px) {
+      #{{ section_id }} .home-grid-1__grid {
+        grid-template-columns: repeat({{ section.settings.columns_tablet }}, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1024px) {
+      #{{ section_id }} .home-grid-1__grid {
+        grid-template-columns: repeat({{ section.settings.columns_desktop }}, minmax(0, 1fr));
+      }
+    }
+
+    #{{ section_id }} .home-grid-1__card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--card-bg);
+      border: var(--border-width) solid var(--card-border);
+      border-radius: var(--card-radius);
+      padding: var(--card-padding);
+      color: var(--text);
+      text-decoration: none;
+      transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      {% if section.settings.card_shadow %}
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      {% endif %}
+    }
+
+    #{{ section_id }} .home-grid-1__card:hover {
+      background: var(--card-hover-bg);
+      transform: translateY(-3px);
+    }
+
+    #{{ section_id }} .home-grid-1__media {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--image-radius);
+      margin-bottom: 24px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    #{{ section_id }} .home-grid-1__media--square {
+      aspect-ratio: 1 / 1;
+    }
+
+    #{{ section_id }} .home-grid-1__media--landscape {
+      aspect-ratio: 4 / 3;
+    }
+
+    #{{ section_id }} .home-grid-1__media--video {
+      aspect-ratio: 16 / 9;
+    }
+
+    #{{ section_id }} .home-grid-1__media--portrait {
+      aspect-ratio: 3 / 4;
+    }
+
+    #{{ section_id }} .home-grid-1__image {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    #{{ section_id }} .home-grid-1__card:hover .home-grid-1__image {
+      {% if section.settings.enable_image_zoom %}
+        transform: scale({{ section.settings.image_zoom_scale }});
+      {% endif %}
+    }
+
+    #{{ section_id }} .home-grid-1__title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    #{{ section_id }} .home-grid-1__title {
+      margin: 0;
+      font-size: {{ section.settings.card_title_size }}px;
+      line-height: 1.3;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    #{{ section_id }} .home-grid-1__arrow {
+      width: {{ section.settings.arrow_size }}px;
+      height: {{ section.settings.arrow_size }}px;
+      color: var(--accent);
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      flex: 0 0 auto;
+    }
+
+    #{{ section_id }} .home-grid-1__card:hover .home-grid-1__arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    #{{ section_id }} .home-grid-1__text {
+      margin: 0;
+      font-size: {{ section.settings.card_text_size }}px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    #{{ section_id }} .home-grid-1__button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      font-size: {{ section.settings.button_text_size }}px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    #{{ section_id }} .home-grid-1__placeholder {
+      width: 100%;
+      height: 100%;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media (max-width: 767px) {
+      #{{ section_id }} .home-grid-1__inner {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      #{{ section_id }} .home-grid-1__heading {
+        font-size: var(--heading-size-mobile);
+      }
+    }
+  </style>
+
+  <div class="home-grid-1__inner">
+    {% if section.settings.heading != blank or section.settings.description != blank %}
+      <div class="home-grid-1__header">
+        {% if section.settings.heading != blank %}
+          <h2 class="home-grid-1__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <div class="home-grid-1__description rte">{{ section.settings.description }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="home-grid-1__grid">
+      {% for block in section.blocks %}
+        {% liquid
+          assign card_tag = 'div'
+          if block.settings.link != blank
+            assign card_tag = 'a'
+          endif
+        %}
+
+        <{{ card_tag }}
+          {% if card_tag == 'a' %}
+            href="{{ block.settings.link }}"
+          {% endif %}
+          class="home-grid-1__card"
+          {{ block.shopify_attributes }}
+        >
+          {% if block.settings.image != blank or section.settings.show_placeholder_images %}
+            <div class="home-grid-1__media home-grid-1__media--{{ block.settings.image_ratio }}">
+              {% if block.settings.image != blank %}
+                {{
+                  block.settings.image
+                  | image_url: width: 1200
+                  | image_tag: class: 'home-grid-1__image', loading: 'lazy', alt: block.settings.title
+                }}
+              {% else %}
+                <div class="home-grid-1__placeholder">Add image</div>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          <div class="home-grid-1__title-row">
+            {% if block.settings.title != blank %}
+              <h3 class="home-grid-1__title">{{ block.settings.title }}</h3>
+            {% endif %}
+
+            {% if section.settings.show_arrow %}
+              <svg
+                class="home-grid-1__arrow"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            {% endif %}
+          </div>
+
+          {% if block.settings.text != blank %}
+            <p class="home-grid-1__text">{{ block.settings.text }}</p>
+          {% endif %}
+
+          {% if block.settings.button_label != blank
+            and block.settings.link != blank
+            and section.settings.show_button_text
+          %}
+            <span class="home-grid-1__button">
+              {{ block.settings.button_label }}
+              {% if section.settings.show_button_arrow %}
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              {% endif %}
+            </span>
+          {% endif %}
+        </{{ card_tag }}>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home Grid 1",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Bobrick Signature Collections"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Elevate your commercial restroom design with Bobrick's curated collections, offering cohesive aesthetics and industry-leading performance.</p>"
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "description_width",
+      "label": "Description max width",
+      "min": 300,
+      "max": 1200,
+      "step": 20,
+      "default": 700
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "label": "Space below header",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "default": 64
+    },
+
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Content max width",
+      "min": 900,
+      "max": 1800,
+      "step": 20,
+      "default": 1280
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Desktop columns",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "label": "Tablet columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "label": "Mobile columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap",
+      "min": 8,
+      "max": 48,
+      "step": 2,
+      "default": 32
+    },
+
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 96
+    },
+
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#0f2230"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading and card title color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "muted_text_color",
+      "label": "Muted text color",
+      "default": "#9fb0bc"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#d4a44c"
+    },
+
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "rgba(255,255,255,0.05)"
+    },
+    {
+      "type": "color",
+      "id": "card_border",
+      "label": "Card border",
+      "default": "rgba(255,255,255,0.10)"
+    },
+    {
+      "type": "color",
+      "id": "card_hover_bg",
+      "label": "Card hover background",
+      "default": "rgba(255,255,255,0.10)"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Card border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card corner radius",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Card inner padding",
+      "min": 8,
+      "max": 48,
+      "step": 2,
+      "default": 32
+    },
+    {
+      "type": "checkbox",
+      "id": "card_shadow",
+      "label": "Enable card shadow",
+      "default": false
+    },
+
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size desktop",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size mobile",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Description text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "label": "Card title size",
+      "min": 14,
+      "max": 36,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "card_text_size",
+      "label": "Card description size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "label": "Button text size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "default": 14
+    },
+
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_placeholder_images",
+      "label": "Show placeholder when no image is selected",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "label": "Image corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 18
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_image_zoom",
+      "label": "Enable image zoom on hover",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "image_zoom_scale",
+      "label": "Image zoom scale",
+      "min": 1,
+      "max": 2,
+      "step": 0.1,
+      "default": 1
+    },
+
+    {
+      "type": "header",
+      "content": "Arrows and links"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrow",
+      "label": "Show top right arrow on card hover",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "arrow_size",
+      "label": "Arrow size",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button_text",
+      "label": "Show button text under description",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button_arrow",
+      "label": "Show arrow beside button text",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Collection card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card image"
+        },
+        {
+          "type": "select",
+          "id": "image_ratio",
+          "label": "Image ratio",
+          "default": "video",
+          "options": [
+            { "value": "square", "label": "Square" },
+            { "value": "landscape", "label": "Landscape" },
+            { "value": "video", "label": "Video 16:9" },
+            { "value": "portrait", "label": "Portrait" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Fino Collection"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Ultra-modern, minimalist design with slim profiles and seamless construction."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button text",
+          "default": "Explore collection"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Card link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 18,
+  "presets": [
+    {
+      "name": "Home Grid 1",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "title": "Fino Collection",
+            "text": "Ultra-modern, minimalist design with slim profiles and seamless construction.",
+            "button_label": "Explore collection",
+            "image_ratio": "video"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Matte Black",
+            "text": "Bold, contemporary finish that adds a sophisticated touch to any restroom.",
+            "button_label": "Explore collection",
+            "image_ratio": "video"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "TrimLineSeries™",
+            "text": "Clean, architectural lines with concealed flanges for a high-end look.",
+            "button_label": "Explore collection",
+            "image_ratio": "video"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "ConturaSeries®",
+            "text": "Elegant, curvilinear design that balances aesthetics with heavy-duty performance.",
+            "button_label": "Explore collection",
+            "image_ratio": "video"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "ClassicSeries®",
+            "text": "The industry standard for durability, reliability, and timeless design.",
+            "button_label": "Explore collection",
+            "image_ratio": "video"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Cubicle Collection",
+            "text": "Specialized accessories designed specifically for toilet partition environments.",
+            "button_label": "Explore collection",
+            "image_ratio": "video"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,719 @@
+<section
+  class="py-24"
+  style="
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.section_bg }};
+  "
+>
+  <div
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+    style="max-width: {{ section.settings.container_width }}px;"
+  >
+    <div class="space-y-32">
+      <div
+        class="flex flex-col lg:flex-row items-center gap-16 {% if section.settings.reverse_layout %}lg:flex-row-reverse{% endif %}"
+        style="
+          opacity: 1;
+          transform: none;
+          column-gap: {{ section.settings.column_gap }}px;
+          row-gap: {{ section.settings.column_gap_mobile }}px;
+        "
+      >
+        <div class="flex-1">
+          <div
+            class="aspect-video rounded-3xl overflow-hidden bg-stone-100 border border-black/5 mb-8"
+            style="
+              border-radius: {{ section.settings.image_radius }}px;
+              background: {{ section.settings.image_bg }};
+              border-color: {{ section.settings.image_border_color }};
+              border-width: {{ section.settings.image_border_width }}px;
+              {% case section.settings.image_ratio %}
+                {% when 'square' %}
+                  aspect-ratio: 1 / 1;
+                {% when 'portrait' %}
+                  aspect-ratio: 4 / 5;
+                {% when 'landscape' %}
+                  aspect-ratio: 16 / 9;
+                {% when 'wide' %}
+                  aspect-ratio: 21 / 9;
+                {% else %}
+                  aspect-ratio: 16 / 9;
+              {% endcase %}
+            "
+          >
+            {% if section.settings.image != blank %}
+              <img
+                alt="{{ section.settings.image_alt | escape }}"
+                class="w-full h-full object-cover"
+                referrerpolicy="no-referrer"
+                src="{{ section.settings.image | image_url: width: 1600 }}"
+                loading="lazy"
+                style="object-position: {{ section.settings.image_position }};"
+              >
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'w-full h-full object-cover' }}
+            {% endif %}
+          </div>
+        </div>
+
+        <div
+          class="flex-1"
+          style="text-align: {{ section.settings.text_align }};"
+        >
+          {% if section.settings.show_badge %}
+            <div
+              class="flex items-center space-x-3 mb-6"
+              style="
+                justify-content:
+                {% if section.settings.text_align == 'center' %}
+                  center
+                {% elsif section.settings.text_align == 'right' %}
+                  flex-end
+                {% else %}
+                  flex-start
+                {% endif %};
+              "
+            >
+              {% if section.settings.show_badge_icon %}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="{{ section.settings.badge_icon_size }}"
+                  height="{{ section.settings.badge_icon_size }}"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="{{ section.settings.badge_icon_color }}"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-award text-brand-accent"
+                  aria-hidden="true"
+                >
+                  <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"></path>
+                  <circle cx="12" cy="8" r="6"></circle>
+                </svg>
+              {% endif %}
+
+              <span
+                class="text-xs font-bold uppercase tracking-[0.3em] text-brand-primary/40"
+                style="
+                  color: {{ section.settings.badge_text_color }};
+                  font-size: {{ section.settings.badge_font_size }}px;
+                  letter-spacing: {{ section.settings.badge_letter_spacing }}em;
+                "
+              >
+                {{ section.settings.badge_text }}
+              </span>
+            </div>
+          {% endif %}
+
+          {% if section.settings.title != blank %}
+            <h2
+              class="text-4xl font-bold mb-6"
+              style="
+                color: {{ section.settings.title_color }};
+                font-size: {{ section.settings.title_size }}px;
+                line-height: {{ section.settings.title_line_height }};
+              "
+            >
+              {{ section.settings.title }}
+            </h2>
+          {% endif %}
+
+          {% if section.settings.description != blank %}
+            <p
+              class="text-lg text-brand-primary/70 leading-relaxed mb-8"
+              style="
+                color: {{ section.settings.description_color }};
+                font-size: {{ section.settings.description_size }}px;
+                line-height: {{ section.settings.description_line_height }};
+              "
+            >
+              {{ section.settings.description }}
+            </p>
+          {% endif %}
+
+          {% if section.blocks.size > 0 %}
+            <div
+              class="grid !grid-cols-1 sm:g!rid-cols-2 gap-4 mb-10"
+              style="--feature-text-align: {{ section.settings.text_align }};"
+            >
+              {% for block in section.blocks %}
+                {% if block.type == 'feature' %}
+                  <div
+                    class="flex items-center space-x-2 text-sm font-medium"
+                    style="
+                      justify-content:
+                      {% if section.settings.text_align == 'center' %}
+                        center
+                      {% elsif section.settings.text_align == 'right' %}
+                        flex-end
+                      {% else %}
+                        flex-start
+                      {% endif %};
+                    "
+                    {{ block.shopify_attributes }}
+                  >
+                    {% if section.settings.show_feature_icon %}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="{{ section.settings.feature_icon_size }}"
+                        height="{{ section.settings.feature_icon_size }}"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="{{ section.settings.feature_icon_color }}"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-circle-check-big text-emerald-500"
+                        aria-hidden="true"
+                      >
+                        <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                        <path d="m9 11 3 3L22 4"></path>
+                      </svg>
+                    {% endif %}
+                    <span
+                      style="
+                        color: {{ section.settings.feature_text_color }};
+                        font-size: {{ section.settings.feature_text_size }}px;
+                      "
+                    >
+                      {{ block.settings.feature_text }}
+                    </span>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          {% if section.settings.show_button and section.settings.button_text != blank %}
+            <a
+              {% if section.settings.button_link != blank %}
+                href="{{ section.settings.button_link }}"
+              {% else %}
+                role="link" aria-disabled="true"
+              {% endif %}
+              {% if section.settings.button_new_tab %}
+                target="_blank" rel="noopener noreferrer"
+              {% endif %}
+              class="px-8 py-4 bg-brand-primary text-white font-bold rounded-full flex items-center space-x-2 hover:bg-brand-primary/90 transition-all"
+              style="
+                background: {{ section.settings.button_bg }};
+                color: {{ section.settings.button_text_color }};
+                border-radius: {{ section.settings.button_radius }}px;
+                font-size: {{ section.settings.button_font_size }}px;
+                padding-top: {{ section.settings.button_padding_y }}px;
+                padding-bottom: {{ section.settings.button_padding_y }}px;
+                padding-left: {{ section.settings.button_padding_x }}px;
+                padding-right: {{ section.settings.button_padding_x }}px;
+                display: inline-flex;
+                text-decoration: none;
+                border: {{ section.settings.button_border_width }}px solid {{ section.settings.button_border_color }};
+              "
+            >
+              <span>{{ section.settings.button_text }}</span>
+
+              {% if section.settings.show_button_icon %}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="{{ section.settings.button_icon_size }}"
+                  height="{{ section.settings.button_icon_size }}"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-external-link"
+                  aria-hidden="true"
+                >
+                  <path d="M15 3h6v6"></path>
+                  <path d="M10 14 21 3"></path>
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                </svg>
+              {% endif %}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "App Image Card",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 96,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 96,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 800,
+      "max": 1800,
+      "step": 20,
+      "default": 1280,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Desktop column gap",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 64,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "column_gap_mobile",
+      "label": "Mobile column gap",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "reverse_layout",
+      "label": "Reverse layout on desktop",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "default": "Bobrick"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "default": "landscape",
+      "options": [
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "landscape", "label": "Landscape" },
+        { "value": "wide", "label": "Wide" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "image_position",
+      "label": "Image position",
+      "default": "center center",
+      "info": "Example: center center, top center, center left"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "image_bg",
+      "label": "Image background",
+      "default": "#f5f5f4"
+    },
+    {
+      "type": "color",
+      "id": "image_border_color",
+      "label": "Image border color",
+      "default": "#e7e5e4"
+    },
+    {
+      "type": "range",
+      "id": "image_border_width",
+      "label": "Image border width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 1,
+      "unit": "px"
+    },
+
+    {
+      "type": "header",
+      "content": "Badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show badge",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge_icon",
+      "label": "Show badge icon",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Authorized Distributor"
+    },
+    {
+      "type": "range",
+      "id": "badge_font_size",
+      "label": "Badge font size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "badge_letter_spacing",
+      "label": "Badge letter spacing",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.3
+    },
+    {
+      "type": "range",
+      "id": "badge_icon_size",
+      "label": "Badge icon size",
+      "min": 12,
+      "max": 48,
+      "step": 1,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#64748b"
+    },
+    {
+      "type": "color",
+      "id": "badge_icon_color",
+      "label": "Badge icon color",
+      "default": "#f59e0b"
+    },
+
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Bobrick"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 20,
+      "max": 72,
+      "step": 2,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "title_line_height",
+      "label": "Title line height",
+      "default": "1.2"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#0f172a"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "The industry leader in commercial restroom accessories. Bobrick provides high-quality, durable, and ADA-compliant solutions for every type of commercial building."
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "description_line_height",
+      "label": "Description line height",
+      "default": "1.7"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#475569"
+    },
+
+    {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_feature_icon",
+      "label": "Show feature icons",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "feature_icon_size",
+      "label": "Feature icon size",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "feature_icon_color",
+      "label": "Feature icon color",
+      "default": "#10b981"
+    },
+    {
+      "type": "range",
+      "id": "feature_text_size",
+      "label": "Feature text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "feature_text_color",
+      "label": "Feature text color",
+      "default": "#0f172a"
+    },
+
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "View Bobrick Catalog"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_new_tab",
+      "label": "Open button in new tab",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button_icon",
+      "label": "Show button icon",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "button_icon_size",
+      "label": "Button icon size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button font size",
+      "min": 10,
+      "max": 26,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_x",
+      "label": "Button horizontal padding",
+      "min": 8,
+      "max": 60,
+      "step": 2,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_y",
+      "label": "Button vertical padding",
+      "min": 6,
+      "max": 30,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "label": "Button radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 100,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#0f172a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button border color",
+      "default": "#0f172a"
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "label": "Button border width",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "default": 0,
+      "unit": "px"
+    },
+
+    {
+      "type": "header",
+      "content": "Section colors"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_text",
+          "label": "Feature text",
+          "default": "Restroom Accessories"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "App Image Card",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "feature_text": "Restroom Accessories"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_text": "Toilet Partitions"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "feature_text": "Hand Dryers"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
