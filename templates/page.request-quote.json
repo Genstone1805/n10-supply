@@ -55,7 +55,7 @@
             "title": "Fast Turnaround",
             "text": "Quotes delivered within 24 hours.",
             "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 6v6l4 2\"></path><circle cx=\"12\" cy=\"12\" r=\"10\"></circle></svg>",
-            "icon_color": "#f59e0b"
+            "icon_color": "#c49f5e"
           }
         },
         "benefit_4kzQq7": {
@@ -65,7 +65,7 @@
             "title": "Direct Shipping",
             "text": "We ship directly to your job site nationwide.",
             "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2\"></path><path d=\"M15 18H9\"></path><path d=\"M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14\"></path><circle cx=\"17\" cy=\"18\" r=\"2\"></circle><circle cx=\"7\" cy=\"18\" r=\"2\"></circle></svg>",
-            "icon_color": "#f59e0b"
+            "icon_color": "#c49f5e"
           }
         },
         "benefit_x9RwX3": {
@@ -75,7 +75,7 @@
             "title": "Bulk Pricing",
             "text": "Competitive volume discounts for large projects.",
             "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z\"></path><path d=\"M12 22V12\"></path><polyline points=\"3.29 7 12 12 20.71 7\"></polyline><path d=\"m7.5 4.27 9 5.15\"></path></svg>",
-            "icon_color": "#f59e0b"
+            "icon_color": "#c49f5e"
           }
         },
         "contact_item_3xnNmH": {
@@ -181,11 +181,11 @@
         "benefits_card_bg": "#1a1a1a",
         "form_heading_color": "#000000",
         "form_subheading_color": "#6b7280",
-        "label_color": "#64748b",
-        "input_bg": "#f8fafc",
+        "label_color": "#8c8c8c",
+        "input_bg": "#fafaf9",
         "input_border_color": "#e5e7eb",
         "input_text_color": "#111827",
-        "placeholder_color": "#94a3b8",
+        "placeholder_color": "#8c8c8c",
         "input_focus_border_color": "#f59e0b",
         "input_focus_ring_color": "rgba(245, 158, 11, 0.25)",
         "button_bg": "#0f172a",
@@ -193,7 +193,7 @@
         "button_text_color": "#ffffff",
         "benefits_text_color": "#ffffff",
         "benefits_heading_color": "#ffffff",
-        "benefits_body_color": "rgba(255,255,255,0.75)",
+        "benefits_body_color": "#313131",
         "contact_text_color": "#111827",
         "benefit_icon_bg": "rgba(255,255,255,0.08)",
         "contact_icon_bg": "transparent",
@@ -234,18 +234,18 @@
         "form_heading_size": 28,
         "form_subheading_size": 16,
         "side_title_size": 22,
-        "label_font_size": 12,
+        "label_font_size": 15,
         "label_letter_spacing": 0,
-        "input_font_size": 16,
-        "button_font_size": 16,
-        "benefit_item_title_size": 15,
-        "benefit_item_text_size": 13,
+        "input_font_size": 18,
+        "button_font_size": 18,
+        "benefit_item_title_size": 17,
+        "benefit_item_text_size": 14,
         "contact_item_text_size": 15,
         "upload_title_size": 15,
-        "upload_helper_size": 12,
-        "note_text_size": 13,
-        "form_heading_spacing": 8,
-        "form_subheading_spacing": 20,
+        "upload_helper_size": 15,
+        "note_text_size": 15,
+        "form_heading_spacing": 0,
+        "form_subheading_spacing": 0,
         "enable_form_shadow": true,
         "enable_benefits_shadow": true,
         "input_focus_ring_width": 2,
