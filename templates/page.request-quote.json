@@ -120,7 +120,7 @@
       "name": "App Quote Form",
       "settings": {
         "show_section_intro": false,
-        "max_width": 1280,
+        "max_width": 920,
         "section_title": "",
         "section_subtitle": "",
         "form_title": "",
