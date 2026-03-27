@@ -487,6 +487,9 @@
       "name": "App Compliance",
       "settings": {
         "heading": "Committed to Compliance",
+        "bg": "#1a1a1a",
+        "mt": 0,
+        "mb": 100,
         "max_con_w": 1280,
         "description": "All products sourced through ND10 Supply are guaranteed to meet or exceed current ADA (Americans with Disabilities Act) and local building code requirements. We provide full submittal packages and technical data for every order.",
         "padding_top": 96,
