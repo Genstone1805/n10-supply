@@ -13,6 +13,7 @@
       "type": "apps-hero",
       "name": "App Hero",
       "settings": {
+        "background_image": "shopify://shop_images/443-1920x1080.jpg",
         "section_height": "80vh",
         "content_width": 120,
         "bg_color": "#0f172a",
@@ -112,6 +113,7 @@
         "card_Wkptba": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/757-800x600_1.jpg",
             "image_ratio": "video",
             "title": "Fino Collection",
             "text": "Ultra-modern, minimalist design with slim profiles and seamless construction.",
@@ -122,6 +124,7 @@
         "card_kL4ay3": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/114-800x600.jpg",
             "image_ratio": "video",
             "title": "Matte Black",
             "text": "Bold, contemporary finish that adds a sophisticated touch to any restroom.",
@@ -132,6 +135,7 @@
         "card_Kefp96": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/439-800x600.jpg",
             "image_ratio": "video",
             "title": "TrimLineSeries™",
             "text": "Clean, architectural lines with concealed flanges for a high-end look.",
@@ -142,6 +146,7 @@
         "card_XkXi3X": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/324-800x600.jpg",
             "image_ratio": "video",
             "title": "ConturaSeries®",
             "text": "Elegant, curvilinear design that balances aesthetics with heavy-duty performance.",
@@ -152,6 +157,7 @@
         "card_jYLUeD": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/859-800x600.jpg",
             "image_ratio": "video",
             "title": "ClassicSeries®",
             "text": "The industry standard for durability, reliability, and timeless design.",
@@ -162,6 +168,7 @@
         "card_WEgJGe": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/482-800x600.jpg",
             "image_ratio": "video",
             "title": "Cubicle Collection",
             "text": "Specialized accessories designed specifically for toilet partition environments.",
