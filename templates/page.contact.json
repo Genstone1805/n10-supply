@@ -48,7 +48,7 @@
     "app_contact_form_Ha6nFr": {
       "type": "app-contact-form",
       "blocks": {
-        "contact_item_KHPnYt": {
+        "contact_item_MjDR4T": {
           "type": "contact_item",
           "settings": {
             "show_icon": true,
@@ -69,17 +69,17 @@
             "title_letter_spacing": 0,
             "title_margin_bottom": 4,
             "title_uppercase": false,
-            "description": "Toll-free sales and support line.",
+            "description": "Toll-free sales and support line",
             "description_color": "#6b7280",
             "description_size": 16,
             "description_weight": "400",
             "description_line_height": 1.5,
             "description_letter_spacing": 0,
             "description_margin_bottom": 8,
-            "display_mode": "link",
-            "link_text": "(800) 555-ND10",
+            "display_mode": "text",
+            "link_text": "",
             "link_url": "",
-            "value_text": "Houston, Texas Headquarters",
+            "value_text": "(800) 555-ND10",
             "value_color": "#111827",
             "value_size": 20,
             "value_weight": "700",
@@ -100,7 +100,7 @@
             "item_border_width": 0
           }
         },
-        "contact_item_99WPej": {
+        "contact_item_nbek7X": {
           "type": "contact_item",
           "settings": {
             "show_icon": true,
@@ -128,10 +128,10 @@
             "description_line_height": 1.5,
             "description_letter_spacing": 0,
             "description_margin_bottom": 8,
-            "display_mode": "link",
-            "link_text": "sales@nd10supply.com",
+            "display_mode": "text",
+            "link_text": "",
             "link_url": "",
-            "value_text": "Houston, Texas Headquarters",
+            "value_text": "sales@nd10supply.com",
             "value_color": "#111827",
             "value_size": 20,
             "value_weight": "700",
@@ -152,7 +152,7 @@
             "item_border_width": 0
           }
         },
-        "contact_item_MjDR4T": {
+        "contact_item_Q6Tjrg": {
           "type": "contact_item",
           "settings": {
             "show_icon": true,
@@ -293,9 +293,9 @@
         }
       },
       "block_order": [
-        "contact_item_KHPnYt",
-        "contact_item_99WPej",
         "contact_item_MjDR4T",
+        "contact_item_nbek7X",
+        "contact_item_Q6Tjrg",
         "contact_item_Gpecm6",
         "subject_option_UzGjYb",
         "subject_option_KJfnFX",
