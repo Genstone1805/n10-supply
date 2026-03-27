@@ -186,7 +186,7 @@
         "item_count_size": 14,
         "product_title_size": 16,
         "show_sku": true,
-        "sku_size": 10,
+        "sku_size": 12,
         "sku_margin_bottom": 16,
         "breadcrumb_size": 12,
         "container_width": 1280,
