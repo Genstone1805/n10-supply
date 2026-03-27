@@ -745,6 +745,86 @@
   </div>
 </section>
 
+<style>
+  #{{ section_id }} .app-shop__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+#{{ section_id }} .app-shop__pagination-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#{{ section_id }} .app-shop__pagination-btn,
+#{{ section_id }} .app-shop__pagination-dots {
+  min-width: 44px;
+  height: 44px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+#{{ section_id }} .app-shop__pagination-btn:hover {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  border-color: var(--primary);
+}
+
+#{{ section_id }} .app-shop__pagination-btn.is-active {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  border-color: var(--primary);
+}
+
+#{{ section_id }} .app-shop__pagination-dots {
+  border: 0;
+  background: transparent;
+  min-width: auto;
+  padding: 0 4px;
+  color: var(--muted);
+}
+
+#{{ section_id }} .app-shop__pagination-prev,
+#{{ section_id }} .app-shop__pagination-next {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+@media (max-width: 640px) {
+  #{{ section_id }} .app-shop__pagination {
+    gap: 10px;
+  }
+
+  #{{ section_id }} .app-shop__pagination-list {
+    width: 100%;
+    order: 3;
+  }
+
+  #{{ section_id }} .app-shop__pagination-prev,
+  #{{ section_id }} .app-shop__pagination-next {
+    min-width: calc(50% - 6px);
+  }
+}
+</style>
 {% schema %}
 {
   "name": "App Shop",
