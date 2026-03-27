@@ -605,6 +605,150 @@
           {% endif %}
         {% endfor %}
 
+                {% paginate collection.products by section.settings.products_per_page %}
+          {% if collection.products_count > 0 %}
+            <div class="app-shop__products">
+              {% for product in collection.products %}
+                {% assign current_variant = product.selected_or_first_available_variant %}
+
+                <article class="app-shop__card">
+                  <a class="app-shop__image-link" href="{{ product.url }}">
+                    {% if product.featured_image != blank %}
+                      {{
+                        product.featured_image
+                        | image_url: width: 900
+                        | image_tag:
+                          class: 'app-shop__product-image',
+                          loading: 'lazy',
+                          alt: product.title
+                      }}
+                    {% else %}
+                      <div class="app-shop__placeholder">No product image</div>
+                    {% endif %}
+                  </a>
+
+                  <div class="app-shop__content">
+                    <h3 class="app-shop__product-title">
+                      <a href="{{ product.url }}">
+                        {{ product.title }}
+                      </a>
+                    </h3>
+
+                    {% if section.settings.show_vendor %}
+                      <p class="app-shop__sku">{{ product.vendor }}</p>
+                    {% elsif section.settings.show_sku and current_variant.sku != blank %}
+                      <p class="app-shop__sku">
+                        {{ section.settings.sku_prefix }}{{ current_variant.sku }}
+                      </p>
+                    {% endif %}
+
+                    {% if section.settings.show_price %}
+                      <div class="app-shop__price-wrap" style="margin-bottom: 16px;">
+                        {% if product.compare_at_price_max > product.price %}
+                          <p style="margin:0; font-weight:700;">
+                            {{ product.price | money }}
+                          </p>
+                          <p style="margin:4px 0 0; color: var(--muted); text-decoration: line-through;">
+                            {{ product.compare_at_price_max | money }}
+                          </p>
+                        {% else %}
+                          <p style="margin:0; font-weight:700;">
+                            {{ product.price | money }}
+                          </p>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+
+                    <div class="app-shop__actions">
+                      <a class="app-shop__primary-btn" href="{{ product.url }}">
+                        {{ section.settings.primary_button_label }}
+                      </a>
+
+                      {% if section.settings.show_icon_button %}
+                        <a
+                          class="app-shop__secondary-btn"
+                          href="{{ product.url }}"
+                          aria-label="View {{ product.title }}"
+                        >
+                          {% case section.settings.icon_button_icon %}
+                            {% when 'plus' %}
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="{{ section.settings.icon_stroke_width }}"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12h14"></path>
+                                <path d="M12 5v14"></path>
+                              </svg>
+                            {% when 'cart' %}
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="{{ section.settings.icon_stroke_width }}"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                              >
+                                <circle cx="8" cy="21" r="1"></circle>
+                                <circle cx="19" cy="21" r="1"></circle>
+                                <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                              </svg>
+                            {% when 'arrow' %}
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="{{ section.settings.icon_stroke_width }}"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                              </svg>
+                          {% endcase %}
+                        </a>
+                      {% endif %}
+                    </div>
+                  </div>
+                </article>
+              {% endfor %}
+            </div>
+
+            {% if paginate.pages > 1 %}
+              <div class="app-shop__pagination" style="margin-top: 32px; display:flex; gap:12px; flex-wrap:wrap;">
+                {% if paginate.previous %}
+                  <a class="app-shop__filter-button" href="{{ paginate.previous.url }}">Previous</a>
+                {% endif %}
+
+                {% for part in paginate.parts %}
+                  {% if part.is_link %}
+                    <a class="app-shop__filter-button" href="{{ part.url }}">{{ part.title }}</a>
+                  {% else %}
+                    <span class="app-shop__filter-button {% if part.title == paginate.current_page %}is-active{% endif %}">
+                      {{ part.title }}
+                    </span>
+                  {% endif %}
+                {% endfor %}
+
+                {% if paginate.next %}
+                  <a class="app-shop__filter-button" href="{{ paginate.next.url }}">Next</a>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% else %}
+            <div class="app-shop__empty">No products found in this collection.</div>
+          {% endif %}
+        {% endpaginate %}
+
         {% if has_products %}
           <div class="app-shop__products">
             {% for block in section.blocks %}
