@@ -46,28 +46,28 @@
           "type": "category_link",
           "settings": {
             "label": "Grab Bars",
-            "link": ""
+            "link": "shopify://collections/grab-bars"
           }
         },
         "category_link_WciWCy": {
           "type": "category_link",
           "settings": {
-            "label": "Towel Dispensers",
-            "link": ""
+            "label": "Waste Receptacles",
+            "link": "shopify://collections/waste-receptacles"
           }
         },
         "category_link_NqReBz": {
           "type": "category_link",
           "settings": {
             "label": "Mirrors",
-            "link": ""
+            "link": "shopify://collections/mirrors"
           }
         },
         "category_link_NzEgRD": {
           "type": "category_link",
           "settings": {
             "label": "Soap Dispensers",
-            "link": ""
+            "link": "shopify://collections/soap-dispensers-faucets"
           }
         }
       },
