@@ -24,7 +24,7 @@
           "type": "brand_filter",
           "settings": {
             "label": "Bobrick",
-            "link": "shopify://collections/all",
+            "link": "shopify://collections/bobrick",
             "active": false
           }
         },
