@@ -45,28 +45,28 @@
           "type": "nav_link",
           "settings": {
             "label": "Shop Bobrick",
-            "link": ""
+            "link": "shopify://collections/all"
           }
         },
         "nav_link_fd9W3z": {
           "type": "nav_link",
           "settings": {
             "label": "Brands",
-            "link": ""
+            "link": "shopify://pages/brands"
           }
         },
         "nav_link_NdpcDy": {
           "type": "nav_link",
           "settings": {
             "label": "Request a Quote",
-            "link": ""
+            "link": "shopify://pages/request-a-quote"
           }
         },
         "nav_link_RxwEjD": {
           "type": "nav_link",
           "settings": {
             "label": "Contact",
-            "link": ""
+            "link": "shopify://pages/contact"
           }
         }
       },
