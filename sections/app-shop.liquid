@@ -716,26 +716,40 @@
             </div>
 
             {% if paginate.pages > 1 %}
-              <div class="app-shop__pagination" style="margin-top: 32px; display:flex; gap:12px; flex-wrap:wrap;">
-                {% if paginate.previous %}
-                  <a class="app-shop__filter-button" href="{{ paginate.previous.url }}">Previous</a>
-                {% endif %}
+  <nav class="app-shop__pagination" aria-label="Pagination">
+    {% if paginate.previous %}
+      <a class="app-shop__pagination-btn app-shop__pagination-prev" href="{{ paginate.previous.url }}">
+        Previous
+      </a>
+    {% endif %}
 
-                {% for part in paginate.parts %}
-                  {% if part.is_link %}
-                    <a class="app-shop__filter-button" href="{{ part.url }}">{{ part.title }}</a>
-                  {% else %}
-                    <span class="app-shop__filter-button {% if part.title == paginate.current_page %}is-active{% endif %}">
-                      {{ part.title }}
-                    </span>
-                  {% endif %}
-                {% endfor %}
+    <div class="app-shop__pagination-list">
+      {% for part in paginate.parts %}
+        {% if part.is_link %}
+          <a class="app-shop__pagination-btn" href="{{ part.url }}">
+            {{ part.title }}
+          </a>
+        {% else %}
+          {% if part.title == paginate.current_page %}
+            <span class="app-shop__pagination-btn is-active" aria-current="page">
+              {{ part.title }}
+            </span>
+          {% else %}
+            <span class="app-shop__pagination-dots">
+              {{ part.title }}
+            </span>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
 
-                {% if paginate.next %}
-                  <a class="app-shop__filter-button" href="{{ paginate.next.url }}">Next</a>
-                {% endif %}
-              </div>
-            {% endif %}
+    {% if paginate.next %}
+      <a class="app-shop__pagination-btn app-shop__pagination-next" href="{{ paginate.next.url }}">
+        Next
+      </a>
+    {% endif %}
+  </nav>
+{% endif %}
           {% else %}
             <div class="app-shop__empty">No products found in this collection.</div>
           {% endif %}
