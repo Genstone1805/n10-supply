@@ -180,6 +180,9 @@
     width:100%;
     max-width:{{- section.settings.max_con_w -}}px
   }
+  .bg-brand-primary{
+    background-color:{{section.settings.bg }}
+  }
 </style>
 
 {% schema %}
@@ -197,6 +200,12 @@
       "id": "heading",
       "label": "Heading",
       "default": "Committed to Compliance"
+    },
+    {
+      "type": "text",
+      "id": "bg",
+      "label": "Background Color",
+      "default": "#1A1A1A"
     },
     {
       "type": "number",
