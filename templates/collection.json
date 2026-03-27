@@ -195,7 +195,7 @@
         "layout_gap": 48,
         "topbar_margin_bottom": 32,
         "breadcrumb_margin_bottom": 32,
-        "section_bg": "#fff7ed",
+        "section_bg": "#ffffff",
         "text_color": "#16212b",
         "muted_color": "#7b8794",
         "accent_color": "#c58a2b",
