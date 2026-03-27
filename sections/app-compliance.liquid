@@ -175,6 +175,13 @@
   </div>
 </section>
 
+<style>
+  .max-con-w{
+    width:100%;
+    max-width:{{- section.settings.max_con_w -}}px
+  }
+</style>
+
 {% schema %}
 {
   "name": "App Compliance",
@@ -190,6 +197,12 @@
       "id": "heading",
       "label": "Heading",
       "default": "Committed to Compliance"
+    },
+    {
+      "type": "number",
+      "id": "max_con_w",
+      "label": "Maximum Width",
+      "default": 1280
     },
     {
       "type": "textarea",
