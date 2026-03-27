@@ -16,7 +16,7 @@
           "type": "brand_filter",
           "settings": {
             "label": "All Brands",
-            "link": "",
+            "link": "shopify://collections/all",
             "active": false
           }
         },
