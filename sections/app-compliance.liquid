@@ -183,6 +183,11 @@
   .bg-brand-primary{
     background-color:{{section.settings.bg }}
   }
+  .sec-spacing{
+    margin-top:{{-section.settings.mt -}}px;
+    margin-bottom:{{-section.settings.mb-}}
+  }
+
 </style>
 
 {% schema %}
@@ -206,6 +211,24 @@
       "id": "bg",
       "label": "Background Color",
       "default": "#1A1A1A"
+    },
+    {
+      "type": "range",
+      "id": "mt",
+      "label": "Margin Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default":0
+    },
+    {
+      "type": "range",
+      "id": "mb",
+      "label": "Margin Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default":0
     },
     {
       "type": "number",
