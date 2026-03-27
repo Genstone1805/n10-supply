@@ -112,7 +112,7 @@
         "feature_text_color": "#000000",
         "show_button": true,
         "button_text": "View Bobrick Catalog",
-        "button_link": "",
+        "button_link": "shopify://collections/bobrick",
         "button_new_tab": false,
         "show_button_icon": true,
         "button_icon_size": 18,
