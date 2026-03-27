@@ -134,7 +134,7 @@
         "help_heading": "Need Help?",
         "help_text": "Can't find a specific model? We can source any Division 10 item.",
         "help_link_label": "Contact Sales Support",
-        "help_link": "",
+        "help_link": "shopify://pages/contact",
         "help_padding": 24,
         "help_radius": 16,
         "help_title_size": 19,
