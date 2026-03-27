@@ -334,7 +334,7 @@
         "heading": "Need a Custom Quote for Your Project?",
         "description": "<p>Our team specializes in large-scale commercial bids. Send us your hardware schedule or product list and we'll provide competitive pricing within 24 hours.</p>",
         "button_label": "Request a Project Quote",
-        "button_link": "",
+        "button_link": "shopify://pages/request-a-quote",
         "content_width": 1280,
         "text_width": 670,
         "text_alignment": "center",
