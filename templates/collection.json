@@ -28,22 +28,6 @@
             "active": false
           }
         },
-        "brand_filter_kcjtPM": {
-          "type": "brand_filter",
-          "settings": {
-            "label": "Bradley",
-            "link": "",
-            "active": false
-          }
-        },
-        "brand_filter_AKxyGi": {
-          "type": "brand_filter",
-          "settings": {
-            "label": "ASI",
-            "link": "",
-            "active": false
-          }
-        },
         "collection_filter_AaqcaC": {
           "type": "collection_filter",
           "settings": {
@@ -96,8 +80,6 @@
       "block_order": [
         "brand_filter_zanq3L",
         "brand_filter_yUGwJY",
-        "brand_filter_kcjtPM",
-        "brand_filter_AKxyGi",
         "collection_filter_AaqcaC",
         "collection_filter_eMxaQw",
         "collection_filter_zJtdKf",

@@ -96,7 +96,7 @@
         "badge_letter_spacing": 0.3,
         "badge_icon_size": 24,
         "badge_text_color": "#a3a3a3",
-        "badge_icon_color": "#f59e0b",
+        "badge_icon_color": "#c4a058",
         "title": "Bobrick",
         "title_size": 48,
         "title_line_height": "1.2",
@@ -107,7 +107,7 @@
         "description_color": "#475569",
         "show_feature_icon": true,
         "feature_icon_size": 23,
-        "feature_icon_color": "#10b981",
+        "feature_icon_color": "#00bd7e",
         "feature_text_size": 16,
         "feature_text_color": "#000000",
         "show_button": true,
@@ -301,7 +301,7 @@
           "settings": {
             "text": "ANSI A117.1 Standards",
             "custom_icon_svg": "",
-            "icon_color": "#f59e0b",
+            "icon_color": "#c4a058",
             "icon_width": 20,
             "icon_height": 20,
             "icon_stroke_width": 2,
@@ -332,7 +332,7 @@
           "settings": {
             "text": "LEED v4.1 Contribution",
             "custom_icon_svg": "",
-            "icon_color": "#f59e0b",
+            "icon_color": "#c4a058",
             "icon_width": 20,
             "icon_height": 20,
             "icon_stroke_width": 2,
@@ -363,7 +363,7 @@
           "settings": {
             "text": "BIM/Revit Support Available",
             "custom_icon_svg": "",
-            "icon_color": "#f59e0b",
+            "icon_color": "#c4a058",
             "icon_width": 20,
             "icon_height": 20,
             "icon_stroke_width": 2,
@@ -393,7 +393,7 @@
           "type": "badge_item",
           "settings": {
             "text": "ADA Compliant",
-            "text_color": "#f59e0b",
+            "text_color": "#c4a058",
             "text_size": 18,
             "text_weight": "700",
             "text_letter_spacing": 2,
@@ -415,7 +415,7 @@
           "type": "badge_item",
           "settings": {
             "text": "Sustainable Materials",
-            "text_color": "#f59e0b",
+            "text_color": "#c4a058",
             "text_size": 18,
             "text_weight": "700",
             "text_letter_spacing": 2,
@@ -437,7 +437,7 @@
           "type": "badge_item",
           "settings": {
             "text": "Commercial Grade",
-            "text_color": "#f59e0b",
+            "text_color": "#c4a058",
             "text_size": 18,
             "text_weight": "700",
             "text_letter_spacing": 2,
@@ -459,7 +459,7 @@
           "type": "badge_item",
           "settings": {
             "text": "BIM Ready",
-            "text_color": "#f59e0b",
+            "text_color": "#c4a058",
             "text_size": 18,
             "text_weight": "700",
             "text_letter_spacing": 2,
