@@ -226,7 +226,7 @@
         "feature_3DPpNm": {
           "type": "feature",
           "settings": {
-            "feature_text": "Lockers"
+            "feature_text": "Baby Changing Stations"
           }
         }
       },
@@ -289,6 +289,226 @@
         "button_border_width": 0,
         "section_bg": "#ffffff"
       }
+    },
+    "app_compliance_YATJGt": {
+      "type": "app-compliance",
+      "blocks": {
+        "feature_item_BLeBhY": {
+          "type": "feature_item",
+          "settings": {
+            "text": "ANSI A117.1 Standards",
+            "custom_icon_svg": "",
+            "icon_color": "#f59e0b",
+            "icon_width": 20,
+            "icon_height": 20,
+            "icon_stroke_width": 2,
+            "icon_opacity": 100,
+            "icon_gap": 12,
+            "text_color": "#ffffff",
+            "text_size": 16,
+            "text_weight": "500",
+            "text_letter_spacing": 0,
+            "text_line_height": 1.4,
+            "text_uppercase": false,
+            "item_alignment": "left",
+            "item_bg_rgb": "#ffffff",
+            "item_bg_opacity": 0,
+            "item_border_rgb": "#ffffff",
+            "item_border_opacity": 0,
+            "item_border_width": 0,
+            "item_radius": 0,
+            "item_padding_top": 0,
+            "item_padding_right": 0,
+            "item_padding_bottom": 0,
+            "item_padding_left": 0,
+            "item_margin_bottom": 0
+          }
+        },
+        "feature_item_CJWGM9": {
+          "type": "feature_item",
+          "settings": {
+            "text": "LEED v4.1 Contribution",
+            "custom_icon_svg": "",
+            "icon_color": "#f59e0b",
+            "icon_width": 20,
+            "icon_height": 20,
+            "icon_stroke_width": 2,
+            "icon_opacity": 100,
+            "icon_gap": 12,
+            "text_color": "#ffffff",
+            "text_size": 16,
+            "text_weight": "500",
+            "text_letter_spacing": 0,
+            "text_line_height": 1.4,
+            "text_uppercase": false,
+            "item_alignment": "left",
+            "item_bg_rgb": "#ffffff",
+            "item_bg_opacity": 0,
+            "item_border_rgb": "#ffffff",
+            "item_border_opacity": 0,
+            "item_border_width": 0,
+            "item_radius": 0,
+            "item_padding_top": 0,
+            "item_padding_right": 0,
+            "item_padding_bottom": 0,
+            "item_padding_left": 0,
+            "item_margin_bottom": 0
+          }
+        },
+        "feature_item_i8zg7b": {
+          "type": "feature_item",
+          "settings": {
+            "text": "BIM/Revit Support Available",
+            "custom_icon_svg": "",
+            "icon_color": "#f59e0b",
+            "icon_width": 20,
+            "icon_height": 20,
+            "icon_stroke_width": 2,
+            "icon_opacity": 100,
+            "icon_gap": 12,
+            "text_color": "#ffffff",
+            "text_size": 16,
+            "text_weight": "500",
+            "text_letter_spacing": 0,
+            "text_line_height": 1.4,
+            "text_uppercase": false,
+            "item_alignment": "left",
+            "item_bg_rgb": "#ffffff",
+            "item_bg_opacity": 0,
+            "item_border_rgb": "#ffffff",
+            "item_border_opacity": 0,
+            "item_border_width": 0,
+            "item_radius": 0,
+            "item_padding_top": 0,
+            "item_padding_right": 0,
+            "item_padding_bottom": 0,
+            "item_padding_left": 0,
+            "item_margin_bottom": 0
+          }
+        },
+        "badge_item_DwncWj": {
+          "type": "badge_item",
+          "settings": {
+            "text": "ADA Compliant",
+            "text_color": "#f59e0b",
+            "text_size": 12,
+            "text_weight": "700",
+            "text_letter_spacing": 2,
+            "text_line_height": 1.3,
+            "text_uppercase": true,
+            "badge_bg_rgb": "#ffffff",
+            "badge_bg_opacity": 5,
+            "badge_border_rgb": "#ffffff",
+            "badge_border_opacity": 0,
+            "badge_border_width": 0,
+            "badge_radius": 16,
+            "badge_padding": 32,
+            "badge_opacity": 100,
+            "badge_min_height": 180,
+            "badge_aspect_ratio": "1 / 1"
+          }
+        },
+        "badge_item_Tc4ezn": {
+          "type": "badge_item",
+          "settings": {
+            "text": "Sustainable Materials",
+            "text_color": "#f59e0b",
+            "text_size": 12,
+            "text_weight": "700",
+            "text_letter_spacing": 2,
+            "text_line_height": 1.3,
+            "text_uppercase": true,
+            "badge_bg_rgb": "#ffffff",
+            "badge_bg_opacity": 5,
+            "badge_border_rgb": "#ffffff",
+            "badge_border_opacity": 0,
+            "badge_border_width": 0,
+            "badge_radius": 16,
+            "badge_padding": 32,
+            "badge_opacity": 100,
+            "badge_min_height": 180,
+            "badge_aspect_ratio": "1 / 1"
+          }
+        },
+        "badge_item_A8hBkA": {
+          "type": "badge_item",
+          "settings": {
+            "text": "Commercial Grade",
+            "text_color": "#f59e0b",
+            "text_size": 12,
+            "text_weight": "700",
+            "text_letter_spacing": 2,
+            "text_line_height": 1.3,
+            "text_uppercase": true,
+            "badge_bg_rgb": "#ffffff",
+            "badge_bg_opacity": 5,
+            "badge_border_rgb": "#ffffff",
+            "badge_border_opacity": 0,
+            "badge_border_width": 0,
+            "badge_radius": 16,
+            "badge_padding": 32,
+            "badge_opacity": 100,
+            "badge_min_height": 180,
+            "badge_aspect_ratio": "1 / 1"
+          }
+        },
+        "badge_item_agqwJV": {
+          "type": "badge_item",
+          "settings": {
+            "text": "BIM Ready",
+            "text_color": "#f59e0b",
+            "text_size": 12,
+            "text_weight": "700",
+            "text_letter_spacing": 2,
+            "text_line_height": 1.3,
+            "text_uppercase": true,
+            "badge_bg_rgb": "#ffffff",
+            "badge_bg_opacity": 5,
+            "badge_border_rgb": "#ffffff",
+            "badge_border_opacity": 0,
+            "badge_border_width": 0,
+            "badge_radius": 16,
+            "badge_padding": 32,
+            "badge_opacity": 100,
+            "badge_min_height": 180,
+            "badge_aspect_ratio": "1 / 1"
+          }
+        }
+      },
+      "block_order": [
+        "feature_item_BLeBhY",
+        "feature_item_CJWGM9",
+        "feature_item_i8zg7b",
+        "badge_item_DwncWj",
+        "badge_item_Tc4ezn",
+        "badge_item_A8hBkA",
+        "badge_item_agqwJV"
+      ],
+      "name": "App Compliance",
+      "settings": {
+        "heading": "Committed to Compliance",
+        "description": "All products sourced through ND10 Supply are guaranteed to meet or exceed current ADA (Americans with Disabilities Act) and local building code requirements. We provide full submittal packages and technical data for every order.",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "heading_color": "#ffffff",
+        "heading_size": 46,
+        "heading_weight": "900",
+        "heading_letter_spacing": 10,
+        "heading_line_height": 1.2,
+        "heading_align": "left",
+        "heading_uppercase": false,
+        "heading_margin_bottom": 24,
+        "description_color": "#99a1af",
+        "description_size": 16,
+        "description_weight": "400",
+        "description_letter_spacing": 0,
+        "description_line_height": 1.7,
+        "description_align": "left",
+        "description_margin_bottom": 32,
+        "description_max_width": 700,
+        "feature_list_gap": 16,
+        "badge_grid_gap": 16
+      }
     }
   },
   "order": [
@@ -296,6 +516,7 @@
     "app_page_title_FgTdxU",
     "app_image_card_pJQbFm",
     "app_image_card_xDrPcK",
-    "app_image_card_rpBJre"
+    "app_image_card_rpBJre",
+    "app_compliance_YATJGt"
   ]
 }
