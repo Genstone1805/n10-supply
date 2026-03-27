@@ -55,7 +55,7 @@
             "title": "Fast Turnaround",
             "text": "Quotes delivered within 24 hours.",
             "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"28\" height=\"28\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 6v6l4 2\"></path><circle cx=\"12\" cy=\"12\" r=\"10\"></circle></svg>",
-            "icon_color": "#c49f5e"
+            "icon_color": "#c4a058"
           }
         },
         "benefit_4kzQq7": {
@@ -65,7 +65,7 @@
             "title": "Direct Shipping",
             "text": "We ship directly to your job site nationwide.",
             "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"28\" height=\"28\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2\"></path><path d=\"M15 18H9\"></path><path d=\"M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14\"></path><circle cx=\"17\" cy=\"18\" r=\"2\"></circle><circle cx=\"7\" cy=\"18\" r=\"2\"></circle></svg>",
-            "icon_color": "#c49f5e"
+            "icon_color": "#c4a058"
           }
         },
         "benefit_x9RwX3": {
@@ -75,7 +75,7 @@
             "title": "Bulk Pricing",
             "text": "Competitive volume discounts for large projects.",
             "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"28\" height=\"28\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z\"></path><path d=\"M12 22V12\"></path><polyline points=\"3.29 7 12 12 20.71 7\"></polyline><path d=\"m7.5 4.27 9 5.15\"></path></svg>",
-            "icon_color": "#c49f5e"
+            "icon_color": "#c4a058"
           }
         },
         "contact_item_3xnNmH": {
@@ -85,7 +85,7 @@
             "text": "(800) 555-ND10",
             "link": "",
             "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"28\" height=\"28\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384\"></path></svg>",
-            "icon_color": "#c49f5e"
+            "icon_color": "#c4a058"
           }
         },
         "contact_item_a8HrhL": {
@@ -95,7 +95,7 @@
             "text": "sales@nd10supply.com",
             "link": "mailto:sales@nd10supply.com",
             "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"28\" height=\"28\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7\"></path><rect x=\"2\" y=\"4\" width=\"20\" height=\"16\" rx=\"2\"></rect></svg>",
-            "icon_color": "#c49f5e"
+            "icon_color": "#c4a058"
           }
         },
         "contact_item_DL3RxQ": {
@@ -186,22 +186,22 @@
         "input_border_color": "#e5e7eb",
         "input_text_color": "#111827",
         "placeholder_color": "#8c8c8c",
-        "input_focus_border_color": "#f59e0b",
-        "input_focus_ring_color": "rgba(245, 158, 11, 0.25)",
+        "input_focus_border_color": "#c4a058",
+        "input_focus_ring_color": "#f59e0b40",
         "button_bg": "#0f172a",
-        "button_bg_hover": "#1e293b",
+        "button_bg_hover": "#c4a058",
         "button_text_color": "#ffffff",
         "benefits_text_color": "#ffffff",
         "benefits_heading_color": "#ffffff",
         "benefits_body_color": "#8c8c8c",
         "contact_text_color": "#111827",
-        "benefit_icon_bg": "rgba(255,255,255,0.08)",
-        "contact_icon_bg": "transparent",
+        "benefit_icon_bg": "#ffffff14",
+        "contact_icon_bg": "rgba(0,0,0,0)",
         "upload_icon_bg": "#ffffff",
-        "upload_icon_color": "#f59e0b",
+        "upload_icon_color": "#c4a058",
         "upload_title_color": "#111827",
         "upload_helper_color": "#64748b",
-        "upload_hover_border_color": "#f59e0b",
+        "upload_hover_border_color": "#c4a058",
         "success_bg": "#ecfdf5",
         "success_text": "#065f46",
         "success_border": "#a7f3d0",
