@@ -81,7 +81,7 @@
         "column_gap_mobile": 32,
         "reverse_layout": false,
         "text_align": "left",
-        "image": "shopify://shop_images/931-400x200.jpg",
+        "image": "shopify://shop_images/imgi_1_11-bobrick-logo.png",
         "image_alt": "Bobrick",
         "image_ratio": "landscape",
         "image_position": "center center",
@@ -154,6 +154,7 @@
         "feature_HG9Umw",
         "feature_YUCnTi"
       ],
+      "disabled": true,
       "name": "App Image Card",
       "settings": {
         "padding_top": 96,
@@ -236,6 +237,7 @@
         "feature_TzqaRt",
         "feature_3DPpNm"
       ],
+      "disabled": true,
       "name": "App Image Card",
       "settings": {
         "padding_top": 96,
