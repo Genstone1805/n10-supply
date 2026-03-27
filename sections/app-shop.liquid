@@ -597,14 +597,6 @@
           {% endif %}
         </div>
 
-        {% assign has_products = false %}
-        {% for block in section.blocks %}
-          {% if block.type == 'product_card' %}
-            {% assign has_products = true %}
-            {% break %}
-          {% endif %}
-        {% endfor %}
-
                 {% paginate collection.products by section.settings.products_per_page %}
           {% if collection.products_count > 0 %}
             <div class="app-shop__products">
@@ -762,6 +754,39 @@
       "type": "header",
       "content": "Page content"
     },
+    {
+  "type": "range",
+  "id": "products_per_page",
+  "label": "Products per page",
+  "min": 4,
+  "max": 36,
+  "step": 4,
+  "default": 12
+},
+{
+  "type": "text",
+  "id": "primary_button_label",
+  "label": "Primary button label",
+  "default": "View Details"
+},
+{
+  "type": "checkbox",
+  "id": "show_price",
+  "label": "Show price",
+  "default": true
+},
+{
+  "type": "checkbox",
+  "id": "show_vendor",
+  "label": "Show vendor instead of SKU",
+  "default": false
+},
+{
+  "type": "text",
+  "id": "sku_prefix",
+  "label": "SKU prefix",
+  "default": "SKU: "
+},
     {
       "type": "text",
       "id": "page_title",
@@ -1712,57 +1737,6 @@
         }
       ]
     },
-    {
-      "type": "product_card",
-      "name": "Product card",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Product image"
-        },
-        {
-          "type": "text",
-          "id": "product_title",
-          "label": "Product title",
-          "default": "Bobrick B-2892 Surface-Mounted Twin Jumbo-Roll Toilet Tissue Dispenser"
-        },
-        {
-          "type": "text",
-          "id": "sku_prefix",
-          "label": "SKU prefix",
-          "default": "SKU: "
-        },
-        {
-          "type": "text",
-          "id": "sku",
-          "label": "SKU",
-          "default": "B-2892"
-        },
-        {
-          "type": "text",
-          "id": "primary_button_label",
-          "label": "Primary button label",
-          "default": "View Details"
-        },
-        {
-          "type": "url",
-          "id": "product_link",
-          "label": "Product link"
-        },
-        {
-          "type": "url",
-          "id": "secondary_link",
-          "label": "Secondary action link"
-        },
-        {
-          "type": "text",
-          "id": "secondary_aria_label",
-          "label": "Secondary action aria label",
-          "default": "Open product quick action"
-        }
-      ]
-    }
   ],
   "presets": [
     {
@@ -1834,30 +1808,6 @@
           "type": "collection_filter",
           "settings": {
             "label": "Cubicle Collection"
-          }
-        },
-        {
-          "type": "product_card",
-          "settings": {
-            "product_title": "Bobrick B-2892 Surface-Mounted Twin Jumbo-Roll Toilet Tissue Dispenser",
-            "sku": "B-2892",
-            "primary_button_label": "View Details"
-          }
-        },
-        {
-          "type": "product_card",
-          "settings": {
-            "product_title": "Bobrick B-6806 Series Stainless Steel Grab Bar",
-            "sku": "B-6806x18",
-            "primary_button_label": "View Details"
-          }
-        },
-        {
-          "type": "product_card",
-          "settings": {
-            "product_title": "Bobrick B-165 Series Channel-Frame Mirror",
-            "sku": "B-165-2436",
-            "primary_button_label": "View Details"
           }
         }
       ]
