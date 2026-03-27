@@ -113,18 +113,18 @@
         "card_Wkptba": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/757-800x600_1.jpg",
+            "image": "shopify://shop_images/imgi_8_Banner-3.jpg",
             "image_ratio": "video",
             "title": "Fino Collection",
             "text": "Ultra-modern, minimalist design with slim profiles and seamless construction.",
             "button_label": "Explore collection",
-            "link": ""
+            "link": "shopify://collections/frontpage"
           }
         },
         "card_kL4ay3": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/114-800x600.jpg",
+            "image": "shopify://shop_images/imgi_8_01_MatteBlack_header.jpg",
             "image_ratio": "video",
             "title": "Matte Black",
             "text": "Bold, contemporary finish that adds a sophisticated touch to any restroom.",
@@ -135,7 +135,7 @@
         "card_Kefp96": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/439-800x600.jpg",
+            "image": "shopify://shop_images/imgi_8_01_TrimLine_header.jpg",
             "image_ratio": "video",
             "title": "TrimLineSeries™",
             "text": "Clean, architectural lines with concealed flanges for a high-end look.",
@@ -146,7 +146,7 @@
         "card_XkXi3X": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/324-800x600.jpg",
+            "image": "shopify://shop_images/imgi_8_01_ConturaSeries_header.jpg",
             "image_ratio": "video",
             "title": "ConturaSeries®",
             "text": "Elegant, curvilinear design that balances aesthetics with heavy-duty performance.",
@@ -157,10 +157,10 @@
         "card_jYLUeD": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/859-800x600.jpg",
+            "image": "shopify://shop_images/imgi_8_01_ClassicSeries_header.jpg",
             "image_ratio": "video",
             "title": "ClassicSeries®",
-            "text": "The industry standard for durability, reliability, and timeless design.",
+            "text": "Ideal for budget sensitive projects, ClassicSeries is the standard of value and offers the largest selection of models for all Type-304 washroom accessories. Specify ClassicSeries for standard-use buildings, commercial offices, and institutional and industrial environments.",
             "button_label": "Explore collection",
             "link": ""
           }
