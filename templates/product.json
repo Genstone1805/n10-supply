@@ -50,7 +50,7 @@
         "show_breadcrumb": true,
         "breadcrumb_label": "Back to Catalog",
         "breadcrumb_url": "",
-        "breadcrumb_color": "#64748b",
+        "breadcrumb_color": "#a3a3a3",
         "show_gallery": true,
         "show_thumbnails": true,
         "thumbnail_columns": 4,
