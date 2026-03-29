@@ -38,7 +38,7 @@
       <a
         class="inline-flex items-center space-x-2 text-xs uppercase tracking-widest font-bold mb-10 transition-colors"
         href="{{ section.settings.breadcrumb_url | default: routes.collections_url }}"
-        style="color: {{ section.settings.breadcrumb_color }};"
+        style="color: {{ section.settings.breadcrumb_color }}; font-size:{{- section.settings.breadcrumb_size -}}px"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -585,6 +585,7 @@
     { "type": "text", "id": "breadcrumb_label", "label": "Breadcrumb label", "default": "Back to Catalog" },
     { "type": "url", "id": "breadcrumb_url", "label": "Breadcrumb URL" },
     { "type": "color", "id": "breadcrumb_color", "label": "Breadcrumb color", "default": "#64748b" },
+    { "type": "number", "id": "breadcrumb_size", "label": "Breadcrumb Size", "default": 18 },
 
     { "type": "header", "content": "Gallery" },
     { "type": "checkbox", "id": "show_gallery", "label": "Show gallery", "default": true },
