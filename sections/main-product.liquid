@@ -1,253 +1,1102 @@
-<div class="min-h-screen bg-white pb-24">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
-    <a
-      class="inline-flex items-center space-x-2 text-xs uppercase tracking-widest font-bold text-brand-primary/40 hover:text-brand-accent mb-10 transition-colors"
-      href="/shop"
-      data-discover="true"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="14"
-        height="14"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="lucide lucide-chevron-left"
-        aria-hidden="true"
+{% assign current_product = product %}
+
+<section
+  class="product-detail-section min-h-screen bg-white pb-24"
+  style="
+    --pd-max-width: {{ section.settings.max_width }}px;
+    --pd-top-padding: {{ section.settings.padding_top }}px;
+    --pd-bottom-padding: {{ section.settings.padding_bottom }}px;
+    --pd-gallery-gap: {{ section.settings.gallery_gap }}px;
+    --pd-content-gap: {{ section.settings.content_gap }}px;
+    --pd-thumb-columns: {{ section.settings.thumbnail_columns }};
+    --pd-radius-main: {{ section.settings.image_radius }}px;
+    --pd-radius-thumb: {{ section.settings.thumbnail_radius }}px;
+    --pd-card-radius: {{ section.settings.card_radius }}px;
+    --pd-border-color: {{ section.settings.border_color }};
+    --pd-bg-light: {{ section.settings.light_bg }};
+    --pd-heading-color: {{ section.settings.heading_color }};
+    --pd-text-color: {{ section.settings.text_color }};
+    --pd-muted-color: {{ section.settings.muted_color }};
+    --pd-accent-color: {{ section.settings.accent_color }};
+    --pd-button-bg: {{ section.settings.primary_button_bg }};
+    --pd-button-text: {{ section.settings.primary_button_text }};
+    --pd-secondary-button-bg: {{ section.settings.secondary_button_bg }};
+    --pd-secondary-button-text: {{ section.settings.secondary_button_text }};
+    --pd-pill-bg: {{ section.settings.badge_bg }};
+    --pd-pill-text: {{ section.settings.badge_text }};
+  "
+>
+  <div
+    class="{% if section.settings.enable_container %}max-w-7xl mx-auto{% endif %} px-4 sm:px-6 lg:px-8"
+    style="
+      max-width: {% if section.settings.enable_container %}var(--pd-max-width){% else %}100%{% endif %};
+      padding-top: var(--pd-top-padding);
+      padding-bottom: var(--pd-bottom-padding);
+    "
+  >
+    {% if section.settings.show_breadcrumb %}
+      <a
+        class="inline-flex items-center space-x-2 text-xs uppercase tracking-widest font-bold mb-10 transition-colors"
+        href="{{ section.settings.breadcrumb_url | default: routes.collections_url }}"
+        style="color: {{ section.settings.breadcrumb_color }};"
       >
-        <path d="m15 18-6-6 6-6"></path>
-      </svg>
-      <span>Back to Catalog</span></a
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+        <span>{{ section.settings.breadcrumb_label }}</span>
+      </a>
+    {% endif %}
+
+    <div
+      class="grid grid-cols-1 {% if section.settings.desktop_layout == 'two_column' %}lg:grid-cols-2{% else %}lg:grid-cols-1{% endif %}"
+      style="gap: var(--pd-content-gap);"
     >
-    <div class="!grid !grid-cols-1 lg:!grid-cols-2 gap-16">
-      <div class="space-y-4">
-        <div class="aspect-square rounded-3xl overflow-hidden bg-stone-50 border border-black/5">
-          <img
-            alt="Bobrick B-2892 Surface-Mounted Twin Jumbo-Roll Toilet Tissue Dispenser"
-            class="w-full h-full object-cover"
-            referrerpolicy="no-referrer"
-            src="https://picsum.photos/seed/toilet-dispenser/600/600"
+      {% if section.settings.show_gallery %}
+        <div class="space-y-4">
+          <div
+            class="aspect-square overflow-hidden border"
+            style="
+              border-radius: var(--pd-radius-main);
+              background: var(--pd-bg-light);
+              border-color: var(--pd-border-color);
+            "
           >
+            {% if current_product.featured_image %}
+              <img
+                src="{{ current_product.featured_image | image_url: width: section.settings.main_image_width }}"
+                alt="{{ current_product.featured_image.alt | escape | default: current_product.title }}"
+                class="w-full h-full object-cover"
+                loading="eager"
+              >
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
+            {% endif %}
+          </div>
+
+          {% if section.settings.show_thumbnails and current_product.images.size > 1 %}
+            <div
+              class="grid"
+              style="grid-template-columns: repeat(var(--pd-thumb-columns), minmax(0, 1fr)); gap: {{ section.settings.thumbnail_gap }}px;"
+            >
+              {% for image in current_product.images limit: section.settings.thumbnail_limit %}
+                <div
+                  class="aspect-square overflow-hidden border cursor-pointer"
+                  style="
+                    border-radius: var(--pd-radius-thumb);
+                    background: var(--pd-bg-light);
+                    border-color: var(--pd-border-color);
+                    opacity: {% if forloop.first %}1{% else %}{{ section.settings.inactive_thumb_opacity }}{% endif %};
+                  "
+                >
+                  <img
+                    src="{{ image | image_url: width: section.settings.thumbnail_width }}"
+                    alt="{{ image.alt | escape | default: current_product.title }}"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  >
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
         </div>
-        <div class="!grid !grid-cols-4 gap-4">
-          <div
-            class="aspect-square rounded-xl overflow-hidden bg-stone-50 border border-black/5 opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
-          >
-            <img
-              alt="Gallery"
-              class="w-full h-full object-cover"
-              referrerpolicy="no-referrer"
-              src="https://picsum.photos/seed/detail-1/300/300"
-            >
-          </div>
-          <div
-            class="aspect-square rounded-xl overflow-hidden bg-stone-50 border border-black/5 opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
-          >
-            <img
-              alt="Gallery"
-              class="w-full h-full object-cover"
-              referrerpolicy="no-referrer"
-              src="https://picsum.photos/seed/detail-2/300/300"
-            >
-          </div>
-          <div
-            class="aspect-square rounded-xl overflow-hidden bg-stone-50 border border-black/5 opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
-          >
-            <img
-              alt="Gallery"
-              class="w-full h-full object-cover"
-              referrerpolicy="no-referrer"
-              src="https://picsum.photos/seed/detail-3/300/300"
-            >
-          </div>
-          <div
-            class="aspect-square rounded-xl overflow-hidden bg-stone-50 border border-black/5 opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
-          >
-            <img
-              alt="Gallery"
-              class="w-full h-full object-cover"
-              referrerpolicy="no-referrer"
-              src="https://picsum.photos/seed/detail-4/300/300"
-            >
-          </div>
-        </div>
-      </div>
+      {% endif %}
+
       <div>
         <div class="mb-8">
-          <span
-            class="inline-block px-3 py-1 bg-stone-100 text-brand-primary text-[10px] font-bold uppercase tracking-widest mb-4 rounded"
-            >Bobrick • Toilet Partition Accessories</span
-          >
-          <h1 class="text-4xl font-bold mb-4 leading-tight">
-            Bobrick B-2892 Surface-Mounted Twin Jumbo-Roll Toilet Tissue Dispenser
-          </h1>
-          <p class="text-sm text-brand-primary/40 uppercase tracking-widest font-mono">SKU: B-2892</p>
-        </div>
-        <div class="prose prose-stone mb-10">
-          <p class="text-lg text-brand-primary/70 leading-relaxed">
-            Satin-finish stainless steel. Equipped with tumbler lock. Spindles hold two 10" (255mm) diameter rolls with
-            2-1/4" (55mm) diameter core.
-          </p>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-          <div class="p-4 bg-stone-50 rounded-2xl border border-black/5 flex items-start space-x-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-shield text-brand-accent mt-1"
-              aria-hidden="true"
+          {% if section.settings.show_vendor_or_category_badge %}
+            <span
+              class="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-4 rounded"
+              style="
+                background: var(--pd-pill-bg);
+                color: var(--pd-pill-text);
+                border-radius: {{ section.settings.badge_radius }}px;
+              "
             >
-              <path
-                d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z">
-              </path>
-            </svg>
-            <div>
-              <h4 class="font-bold text-sm">ADA Compliant</h4>
-              <p class="text-xs text-brand-primary/50">Meets all commercial accessibility standards.</p>
+              {% if section.settings.badge_source == 'vendor_type' %}
+                {{ current_product.vendor }}
+                {% if current_product.type != blank %}
+                  • {{ current_product.type }}
+                {% endif %}
+              {% elsif section.settings.badge_source == 'vendor' %}
+                {{ current_product.vendor }}
+              {% elsif section.settings.badge_source == 'type' %}
+                {{ current_product.type }}
+              {% elsif section.settings.badge_source == 'product_category' %}
+                {{ current_product.category }}
+              {% else %}
+                {{ section.settings.custom_badge_text }}
+              {% endif %}
+            </span>
+          {% endif %}
+
+          {% if section.settings.show_title %}
+            <h1
+              class="leading-tight"
+              style="
+                color: var(--pd-heading-color);
+                font-size: {{ section.settings.title_size }}px;
+                font-weight: {{ section.settings.title_weight }};
+                margin-bottom: {{ section.settings.title_margin_bottom }}px;
+              "
+            >
+              {{ current_product.title }}
+            </h1>
+          {% endif %}
+
+          {% if section.settings.show_sku %}
+            {% assign first_variant = current_product.selected_or_first_available_variant %}
+            <p
+              class="uppercase tracking-widest font-mono"
+              style="
+                color: var(--pd-muted-color);
+                font-size: {{ section.settings.sku_size }}px;
+              "
+            >
+              {{ section.settings.sku_label }}:
+              {{ first_variant.sku | default: section.settings.sku_fallback }}
+            </p>
+          {% endif %}
+        </div>
+
+        {% if section.settings.show_price %}
+          <div class="mb-6">
+            <div class="flex items-center gap-3 flex-wrap">
+              <span
+                style="
+                  color: var(--pd-heading-color);
+                  font-size: {{ section.settings.price_size }}px;
+                  font-weight: {{ section.settings.price_weight }};
+                "
+              >
+                {{ first_variant.price | money }}
+              </span>
+
+              {% if first_variant.compare_at_price > first_variant.price and section.settings.show_compare_price %}
+                <span
+                  style="
+                    color: var(--pd-muted-color);
+                    font-size: {{ section.settings.compare_price_size }}px;
+                    text-decoration: line-through;
+                  "
+                >
+                  {{ first_variant.compare_at_price | money }}
+                </span>
+              {% endif %}
             </div>
           </div>
-          <div class="p-4 bg-stone-50 rounded-2xl border border-black/5 flex items-start space-x-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-truck text-brand-accent mt-1"
-              aria-hidden="true"
+        {% endif %}
+
+        {% if section.settings.show_description %}
+          <div
+            class="prose prose-stone mb-10"
+            style="
+              color: var(--pd-text-color);
+              font-size: {{ section.settings.description_size }}px;
+            "
+          >
+            {% if section.settings.description_source == 'product_description' %}
+              {{ current_product.description }}
+            {% elsif section.settings.description_source == 'short_description_metafield' %}
+              {{ current_product.metafields.custom.short_description | metafield_tag }}
+            {% else %}
+              {{ current_product.description }}
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if section.settings.show_variant_picker and current_product.has_only_default_variant == false %}
+          <div class="mb-8">
+            {% for option in current_product.options_with_values %}
+              <div class="mb-5">
+                <label
+                  class="block mb-2 font-bold uppercase tracking-widest"
+                  style="
+                    color: var(--pd-heading-color);
+                    font-size: {{ section.settings.option_label_size }}px;
+                  "
+                >
+                  {{ option.name }}
+                </label>
+
+                <div class="flex flex-wrap gap-2">
+                  {% for value in option.values %}
+                    <span
+                      class="inline-flex items-center justify-center border"
+                      style="
+                        padding: {{ section.settings.option_chip_y }}px {{ section.settings.option_chip_x }}px;
+                        border-radius: {{ section.settings.option_chip_radius }}px;
+                        border-color: var(--pd-border-color);
+                        color: var(--pd-heading-color);
+                        background: {{ section.settings.option_chip_bg }};
+                        font-size: {{ section.settings.option_chip_text_size }}px;
+                      "
+                    >
+                      {{ value }}
+                    </span>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if section.settings.show_feature_cards %}
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+            {% for block in section.blocks %}
+              {% if block.type == 'feature_card' %}
+                <div
+                  class="p-4 border flex items-start space-x-3"
+                  style="
+                    background: var(--pd-bg-light);
+                    border-radius: var(--pd-card-radius);
+                    border-color: var(--pd-border-color);
+                  "
+                  {{ block.shopify_attributes }}
+                >
+                  {% if block.settings.icon_svg != blank %}
+                    <div
+                      class="shrink-0"
+                      style="color: var(--pd-accent-color); width: {{ block.settings.icon_size }}px;"
+                    >
+                      {{ block.settings.icon_svg }}
+                    </div>
+                  {% endif %}
+                  <div>
+                    <h4
+                      class="font-bold"
+                      style="
+                        color: var(--pd-heading-color);
+                        font-size: {{ block.settings.title_size }}px;
+                        margin-bottom: 4px;
+                      "
+                    >
+                      {{ block.settings.title }}
+                    </h4>
+                    <p
+                      style="
+                        color: var(--pd-muted-color);
+                        font-size: {{ block.settings.text_size }}px;
+                      "
+                    >
+                      {{ block.settings.text }}
+                    </p>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if section.settings.show_action_buttons %}
+          <div class="flex flex-col sm:flex-row gap-4 mb-12">
+            {% if section.settings.show_primary_button %}
+              <a
+                href="{{ section.settings.primary_button_url | default: current_product.url }}"
+                class="flex-1 font-bold flex items-center justify-center space-x-3 transition-all"
+                style="
+                  padding-top: {{ section.settings.button_y_padding }}px;
+                  padding-bottom: {{ section.settings.button_y_padding }}px;
+                  padding-left: {{ section.settings.button_x_padding }}px;
+                  padding-right: {{ section.settings.button_x_padding }}px;
+                  border-radius: {{ section.settings.button_radius }}px;
+                  background: var(--pd-button-bg);
+                  color: var(--pd-button-text);
+                "
+              >
+                <span>{{ section.settings.primary_button_label }}</span>
+              </a>
+            {% endif %}
+
+            {% if section.settings.show_secondary_button %}
+              {% assign spec_file = current_product.metafields.custom.technical_data_sheet %}
+              <a
+                href="{% if spec_file != blank %}{{ spec_file.value }}{% else %}{{ section.settings.secondary_button_url }}{% endif %}"
+                class="font-bold flex items-center justify-center space-x-3 border"
+                style="
+                  padding-top: {{ section.settings.button_y_padding }}px;
+                  padding-bottom: {{ section.settings.button_y_padding }}px;
+                  padding-left: {{ section.settings.button_x_padding }}px;
+                  padding-right: {{ section.settings.button_x_padding }}px;
+                  border-radius: {{ section.settings.button_radius }}px;
+                  background: var(--pd-secondary-button-bg);
+                  color: var(--pd-secondary-button-text);
+                  border-color: var(--pd-border-color);
+                "
+                {% if section.settings.secondary_button_new_tab %}
+                  target="_blank"
+                {% endif %}
+              >
+                <span>{{ section.settings.secondary_button_label }}</span>
+              </a>
+            {% endif %}
+
+            {% comment %}
+              UNUSED / OPTIONAL:
+              Add a third button here later for BIM file, quote modal, or add-to-cart.
+            {% endcomment %}
+          </div>
+        {% endif %}
+
+        {% if section.settings.show_specifications %}
+          <div class="border-t pt-8" style="border-color: var(--pd-border-color);">
+            <h4
+              class="font-bold uppercase tracking-widest mb-6 flex items-center space-x-2"
+              style="
+                color: var(--pd-heading-color);
+                font-size: {{ section.settings.spec_heading_size }}px;
+              "
             >
-              <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
-              <path d="M15 18H9"></path>
-              <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
-              <circle cx="17" cy="18" r="2"></circle>
-              <circle cx="7" cy="18" r="2"></circle>
-            </svg>
-            <div>
-              <h4 class="font-bold text-sm">In Stock</h4>
-              <p class="text-xs text-brand-primary/50">Ready for immediate nationwide shipping.</p>
+              <span>{{ section.settings.spec_heading }}</span>
+            </h4>
+
+            <div class="space-y-4">
+              {% if section.settings.show_material_row %}
+                {% assign spec_material = current_product.metafields.shopify.material.value %}
+                {% if spec_material != blank %}
+                  <div class="flex justify-between text-sm py-2 border-b" style="border-color: var(--pd-border-color);">
+                    <span style="color: var(--pd-muted-color);">{{ section.settings.material_label }}</span>
+                    <span class="font-medium" style="color: var(--pd-heading-color);">{{ spec_material }}</span>
+                  </div>
+                {% endif %}
+              {% endif %}
+
+              {% if section.settings.show_finish_row %}
+                {% assign spec_finish = current_product.metafields.shopify['color-pattern'].value %}
+                {% if spec_finish != blank %}
+                  <div class="flex justify-between text-sm py-2 border-b" style="border-color: var(--pd-border-color);">
+                    <span style="color: var(--pd-muted-color);">{{ section.settings.finish_label }}</span>
+                    <span class="font-medium" style="color: var(--pd-heading-color);">{{ spec_finish }}</span>
+                  </div>
+                {% endif %}
+              {% endif %}
+
+              {% if section.settings.show_mounting_row %}
+                {% assign spec_mounting = current_product.metafields.shopify['mounting-type'].value %}
+                {% if spec_mounting != blank %}
+                  <div class="flex justify-between text-sm py-2 border-b" style="border-color: var(--pd-border-color);">
+                    <span style="color: var(--pd-muted-color);">{{ section.settings.mounting_label }}</span>
+                    <span class="font-medium" style="color: var(--pd-heading-color);">{{ spec_mounting }}</span>
+                  </div>
+                {% endif %}
+              {% endif %}
+
+              {% if section.settings.show_shape_row %}
+                {% assign spec_shape = current_product.metafields.shopify.shape.value %}
+                {% if spec_shape != blank %}
+                  <div class="flex justify-between text-sm py-2 border-b" style="border-color: var(--pd-border-color);">
+                    <span style="color: var(--pd-muted-color);">{{ section.settings.shape_label }}</span>
+                    <span class="font-medium" style="color: var(--pd-heading-color);">{{ spec_shape }}</span>
+                  </div>
+                {% endif %}
+              {% endif %}
+
+              {% if section.settings.show_location_row %}
+                {% assign spec_location = current_product.metafields.shopify['suitable-location'].value %}
+                {% if spec_location != blank %}
+                  <div class="flex justify-between text-sm py-2 border-b" style="border-color: var(--pd-border-color);">
+                    <span style="color: var(--pd-muted-color);">{{ section.settings.location_label }}</span>
+                    <span class="font-medium" style="color: var(--pd-heading-color);">{{ spec_location }}</span>
+                  </div>
+                {% endif %}
+              {% endif %}
+
+              {% if section.settings.show_custom_spec_1
+                and section.settings.custom_spec_1_label != blank
+                and section.settings.custom_spec_1_value != blank
+              %}
+                <div class="flex justify-between text-sm py-2 border-b" style="border-color: var(--pd-border-color);">
+                  <span style="color: var(--pd-muted-color);">{{ section.settings.custom_spec_1_label }}</span>
+                  <span class="font-medium" style="color: var(--pd-heading-color);">
+                    {{- section.settings.custom_spec_1_value -}}
+                  </span>
+                </div>
+              {% endif %}
+
+              {% if section.settings.show_custom_spec_2
+                and section.settings.custom_spec_2_label != blank
+                and section.settings.custom_spec_2_value != blank
+              %}
+                <div class="flex justify-between text-sm py-2 border-b" style="border-color: var(--pd-border-color);">
+                  <span style="color: var(--pd-muted-color);">{{ section.settings.custom_spec_2_label }}</span>
+                  <span class="font-medium" style="color: var(--pd-heading-color);">
+                    {{- section.settings.custom_spec_2_value -}}
+                  </span>
+                </div>
+              {% endif %}
             </div>
           </div>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-4 mb-12">
-          <button
-            class="flex-1 py-5 rounded-full font-bold flex items-center justify-center space-x-3 transition-all bg-brand-primary text-white hover:bg-brand-primary/90"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-shopping-cart"
-              aria-hidden="true"
+        {% endif %}
+
+        {% if section.settings.show_downloads %}
+          <div class="mt-10">
+            <h4
+              class="font-bold uppercase tracking-widest mb-4"
+              style="
+                color: var(--pd-heading-color);
+                font-size: {{ section.settings.download_heading_size }}px;
+              "
             >
-              <circle cx="8" cy="21" r="1"></circle>
-              <circle cx="19" cy="21" r="1"></circle>
-              <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
-            </svg>
-            <span>Add to Quote Request</span></button
-          ><a
-            href="#"
-            class="px-8 py-5 border border-black/10 rounded-full font-bold flex items-center justify-center space-x-3 hover:bg-stone-50 transition-all"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-file-down"
-              aria-hidden="true"
-            >
-              <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
-              <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
-              <path d="M12 18v-6"></path>
-              <path d="m9 15 3 3 3-3"></path>
-            </svg>
-            <span>Download Spec Sheet</span></a
-          >
-        </div>
-        <div class="border-t border-black/5 pt-8">
-          <h4 class="font-bold text-sm uppercase tracking-widest mb-6 flex items-center space-x-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-info text-brand-accent"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M12 16v-4"></path>
-              <path d="M12 8h.01"></path>
-            </svg>
-            <span>Product Specifications</span>
-          </h4>
-          <div class="space-y-4">
-            <div class="flex justify-between text-sm py-2 border-b border-black/5">
-              <span
-                class="text-brand-primary/50"
-                >Material</span
-              ><span class="font-medium">Type 304 Stainless Steel</span>
-            </div>
-            <div class="flex justify-between text-sm py-2 border-b border-black/5">
-              <span
-                class="text-brand-primary/50"
-                >Finish</span
-              ><span class="font-medium">Satin Finish</span>
-            </div>
-            <div class="flex justify-between text-sm py-2 border-b border-black/5">
-              <span
-                class="text-brand-primary/50"
-                >Mounting</span
-              ><span class="font-medium">Surface Mounted</span>
-            </div>
-            <div class="flex justify-between text-sm py-2 border-b border-black/5">
-              <span
-                class="text-brand-primary/50"
-                >Warranty</span
-              ><span class="font-medium">1 Year Limited</span>
+              {{ section.settings.download_heading }}
+            </h4>
+
+            <div class="flex flex-wrap gap-3">
+              {% assign bim_file = current_product.metafields.custom.bim_file %}
+              {% assign tech_sheet = current_product.metafields.custom.technical_data_sheet %}
+
+              {% if section.settings.show_bim_download and bim_file != blank %}
+                <a
+                  href="{{ bim_file.value }}"
+                  class="inline-flex items-center justify-center border"
+                  style="
+                    padding: {{ section.settings.download_btn_y }}px {{ section.settings.download_btn_x }}px;
+                    border-radius: {{ section.settings.download_btn_radius }}px;
+                    border-color: var(--pd-border-color);
+                    color: var(--pd-heading-color);
+                    background: {{ section.settings.download_btn_bg }};
+                  "
+                  target="_blank"
+                >
+                  {{ section.settings.bim_button_label }}
+                </a>
+              {% endif %}
+
+              {% if section.settings.show_tech_sheet_download and tech_sheet != blank %}
+                <a
+                  href="{{ tech_sheet.value }}"
+                  class="inline-flex items-center justify-center border"
+                  style="
+                    padding: {{ section.settings.download_btn_y }}px {{ section.settings.download_btn_x }}px;
+                    border-radius: {{ section.settings.download_btn_radius }}px;
+                    border-color: var(--pd-border-color);
+                    color: var(--pd-heading-color);
+                    background: {{ section.settings.download_btn_bg }};
+                  "
+                  target="_blank"
+                >
+                  {{ section.settings.tech_sheet_button_label }}
+                </a>
+              {% endif %}
+
+              {% comment %}
+                UNUSED / OPTIONAL:
+                Attachment type metafield can be surfaced here later if you want grouped download buttons by file type.
+              {% endcomment %}
             </div>
           </div>
-        </div>
+        {% endif %}
+
+        {% comment %}
+          UNUSED / OPTIONAL SECTIONS:
+          1. Inventory meter
+          2. Quantity selector
+          3. Add to cart form
+          4. Related products
+          5. Sticky buy bar
+          6. Accordion tabs for description/specs/downloads
+          7. Variant image swap JS
+        {% endcomment %}
       </div>
     </div>
   </div>
-</div>
+</section>
 
 {% schema %}
 {
-  "name": "t:sections.main-product.name",
+  "name": "Advanced Product Detail",
   "tag": "section",
-  "class": "section",
-  "blocks": [],
-  "settings": []
+  "class": "section advanced-product-detail",
+  "settings": [
+    { "type": "header", "content": "Layout" },
+    { "type": "checkbox", "id": "enable_container", "label": "Enable container", "default": true },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Max width",
+      "min": 1000,
+      "max": 1800,
+      "step": 20,
+      "default": 1280,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "label": "Desktop layout",
+      "default": "two_column",
+      "options": [
+        { "value": "two_column", "label": "Two column" },
+        { "value": "single_column", "label": "Single column" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 96,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "label": "Column gap",
+      "min": 12,
+      "max": 120,
+      "step": 4,
+      "default": 64,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "gallery_gap",
+      "label": "Gallery gap",
+      "min": 8,
+      "max": 60,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+
+    { "type": "header", "content": "Breadcrumb" },
+    { "type": "checkbox", "id": "show_breadcrumb", "label": "Show breadcrumb/back link", "default": true },
+    { "type": "text", "id": "breadcrumb_label", "label": "Breadcrumb label", "default": "Back to Catalog" },
+    { "type": "url", "id": "breadcrumb_url", "label": "Breadcrumb URL" },
+    { "type": "color", "id": "breadcrumb_color", "label": "Breadcrumb color", "default": "#64748b" },
+
+    { "type": "header", "content": "Gallery" },
+    { "type": "checkbox", "id": "show_gallery", "label": "Show gallery", "default": true },
+    { "type": "checkbox", "id": "show_thumbnails", "label": "Show thumbnails", "default": true },
+    {
+      "type": "range",
+      "id": "thumbnail_columns",
+      "label": "Thumbnail columns",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "thumbnail_gap",
+      "label": "Thumbnail gap",
+      "min": 4,
+      "max": 30,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "thumbnail_limit",
+      "label": "Thumbnail limit",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "main_image_width",
+      "label": "Main image render width",
+      "min": 600,
+      "max": 2400,
+      "step": 100,
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "thumbnail_width",
+      "label": "Thumbnail render width",
+      "min": 150,
+      "max": 1000,
+      "step": 50,
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "inactive_thumb_opacity",
+      "label": "Inactive thumbnail opacity",
+      "min": 0.2,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.6
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "label": "Main image radius",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "thumbnail_radius",
+      "label": "Thumbnail radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "default": 12,
+      "unit": "px"
+    },
+
+    { "type": "header", "content": "Content" },
+    { "type": "checkbox", "id": "show_vendor_or_category_badge", "label": "Show badge", "default": true },
+    {
+      "type": "select",
+      "id": "badge_source",
+      "label": "Badge source",
+      "default": "vendor_type",
+      "options": [
+        { "value": "vendor_type", "label": "Vendor + type" },
+        { "value": "vendor", "label": "Vendor only" },
+        { "value": "type", "label": "Type only" },
+        { "value": "product_category", "label": "Product category" },
+        { "value": "custom", "label": "Custom text" }
+      ]
+    },
+    { "type": "text", "id": "custom_badge_text", "label": "Custom badge text", "default": "Premium Product" },
+    {
+      "type": "range",
+      "id": "badge_radius",
+      "label": "Badge radius",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 6,
+      "unit": "px"
+    },
+
+    { "type": "checkbox", "id": "show_title", "label": "Show title", "default": true },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 20,
+      "max": 72,
+      "step": 2,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Title weight",
+      "default": "700",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "title_margin_bottom",
+      "label": "Title bottom margin",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+
+    { "type": "checkbox", "id": "show_sku", "label": "Show SKU", "default": true },
+    { "type": "text", "id": "sku_label", "label": "SKU label", "default": "SKU" },
+    { "type": "text", "id": "sku_fallback", "label": "SKU fallback", "default": "N/A" },
+    {
+      "type": "range",
+      "id": "sku_size",
+      "label": "SKU text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "default": 13,
+      "unit": "px"
+    },
+
+    { "type": "checkbox", "id": "show_price", "label": "Show price", "default": true },
+    { "type": "checkbox", "id": "show_compare_price", "label": "Show compare at price", "default": true },
+    {
+      "type": "range",
+      "id": "price_size",
+      "label": "Price size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "price_weight",
+      "label": "Price weight",
+      "default": "700",
+      "options": [
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "compare_price_size",
+      "label": "Compare price size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+
+    { "type": "checkbox", "id": "show_description", "label": "Show description", "default": true },
+    {
+      "type": "select",
+      "id": "description_source",
+      "label": "Description source",
+      "default": "product_description",
+      "options": [
+        { "value": "product_description", "label": "Product description" },
+        { "value": "short_description_metafield", "label": "Short description metafield" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description text size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+
+    { "type": "checkbox", "id": "show_variant_picker", "label": "Show variant picker", "default": true },
+    {
+      "type": "range",
+      "id": "option_label_size",
+      "label": "Option label size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "option_chip_text_size",
+      "label": "Option chip text size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "option_chip_x",
+      "label": "Option chip horizontal padding",
+      "min": 8,
+      "max": 28,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "option_chip_y",
+      "label": "Option chip vertical padding",
+      "min": 6,
+      "max": 20,
+      "step": 1,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "option_chip_radius",
+      "label": "Option chip radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "px"
+    },
+    { "type": "color", "id": "option_chip_bg", "label": "Option chip background", "default": "#ffffff" },
+
+    { "type": "header", "content": "Feature cards" },
+    { "type": "checkbox", "id": "show_feature_cards", "label": "Show feature cards", "default": true },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+
+    { "type": "header", "content": "Buttons" },
+    { "type": "checkbox", "id": "show_action_buttons", "label": "Show action buttons", "default": true },
+    { "type": "checkbox", "id": "show_primary_button", "label": "Show primary button", "default": true },
+    {
+      "type": "text",
+      "id": "primary_button_label",
+      "label": "Primary button label",
+      "default": "Add to Quote Request"
+    },
+    { "type": "url", "id": "primary_button_url", "label": "Primary button URL" },
+    { "type": "checkbox", "id": "show_secondary_button", "label": "Show secondary button", "default": true },
+    {
+      "type": "text",
+      "id": "secondary_button_label",
+      "label": "Secondary button label",
+      "default": "Download Spec Sheet"
+    },
+    { "type": "url", "id": "secondary_button_url", "label": "Secondary button fallback URL" },
+    {
+      "type": "checkbox",
+      "id": "secondary_button_new_tab",
+      "label": "Open secondary button in new tab",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "button_x_padding",
+      "label": "Button horizontal padding",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_y_padding",
+      "label": "Button vertical padding",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "label": "Button radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "px"
+    },
+
+    { "type": "header", "content": "Specifications" },
+    { "type": "checkbox", "id": "show_specifications", "label": "Show specifications", "default": true },
+    { "type": "text", "id": "spec_heading", "label": "Specifications heading", "default": "Product Specifications" },
+    {
+      "type": "range",
+      "id": "spec_heading_size",
+      "label": "Specifications heading size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "default": 13,
+      "unit": "px"
+    },
+
+    { "type": "checkbox", "id": "show_material_row", "label": "Show material row", "default": true },
+    { "type": "text", "id": "material_label", "label": "Material label", "default": "Material" },
+
+    { "type": "checkbox", "id": "show_finish_row", "label": "Show finish row", "default": true },
+    { "type": "text", "id": "finish_label", "label": "Finish label", "default": "Finish" },
+
+    { "type": "checkbox", "id": "show_mounting_row", "label": "Show mounting row", "default": true },
+    { "type": "text", "id": "mounting_label", "label": "Mounting label", "default": "Mounting" },
+
+    { "type": "checkbox", "id": "show_shape_row", "label": "Show shape row", "default": false },
+    { "type": "text", "id": "shape_label", "label": "Shape label", "default": "Shape" },
+
+    { "type": "checkbox", "id": "show_location_row", "label": "Show suitable location row", "default": false },
+    { "type": "text", "id": "location_label", "label": "Suitable location label", "default": "Suitable Location" },
+
+    { "type": "checkbox", "id": "show_custom_spec_1", "label": "Show custom specification 1", "default": false },
+    { "type": "text", "id": "custom_spec_1_label", "label": "Custom spec 1 label", "default": "Warranty" },
+    { "type": "text", "id": "custom_spec_1_value", "label": "Custom spec 1 value", "default": "1 Year Limited" },
+
+    { "type": "checkbox", "id": "show_custom_spec_2", "label": "Show custom specification 2", "default": false },
+    { "type": "text", "id": "custom_spec_2_label", "label": "Custom spec 2 label", "default": "Code" },
+    { "type": "text", "id": "custom_spec_2_value", "label": "Custom spec 2 value", "default": "Commercial Grade" },
+
+    { "type": "header", "content": "Downloads" },
+    { "type": "checkbox", "id": "show_downloads", "label": "Show downloads", "default": true },
+    { "type": "text", "id": "download_heading", "label": "Download heading", "default": "Downloads" },
+    {
+      "type": "range",
+      "id": "download_heading_size",
+      "label": "Download heading size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "default": 13,
+      "unit": "px"
+    },
+    { "type": "checkbox", "id": "show_bim_download", "label": "Show BIM download", "default": true },
+    { "type": "text", "id": "bim_button_label", "label": "BIM button label", "default": "Download BIM File" },
+    {
+      "type": "checkbox",
+      "id": "show_tech_sheet_download",
+      "label": "Show technical data sheet download",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tech_sheet_button_label",
+      "label": "Tech sheet button label",
+      "default": "Download Technical Data Sheet"
+    },
+    {
+      "type": "range",
+      "id": "download_btn_x",
+      "label": "Download button horizontal padding",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "download_btn_y",
+      "label": "Download button vertical padding",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "download_btn_radius",
+      "label": "Download button radius",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 10,
+      "unit": "px"
+    },
+    { "type": "color", "id": "download_btn_bg", "label": "Download button background", "default": "#ffffff" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "light_bg", "label": "Light background", "default": "#f5f5f4" },
+    { "type": "color", "id": "border_color", "label": "Border color", "default": "#e7e5e4" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#0f172a" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#334155" },
+    { "type": "color", "id": "muted_color", "label": "Muted text color", "default": "#64748b" },
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#c2410c" },
+    { "type": "color", "id": "badge_bg", "label": "Badge background", "default": "#f5f5f4" },
+    { "type": "color", "id": "badge_text", "label": "Badge text", "default": "#0f172a" },
+    { "type": "color", "id": "primary_button_bg", "label": "Primary button background", "default": "#0f172a" },
+    { "type": "color", "id": "primary_button_text", "label": "Primary button text", "default": "#ffffff" },
+    { "type": "color", "id": "secondary_button_bg", "label": "Secondary button background", "default": "#ffffff" },
+    { "type": "color", "id": "secondary_button_text", "label": "Secondary button text", "default": "#0f172a" }
+  ],
+  "blocks": [
+    {
+      "type": "feature_card",
+      "name": "Feature card",
+      "settings": [
+        { "type": "textarea", "id": "icon_svg", "label": "SVG icon code" },
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "Icon size",
+          "min": 12,
+          "max": 48,
+          "step": 2,
+          "default": 20,
+          "unit": "px"
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "ADA Compliant" },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Meets all commercial accessibility standards."
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Title size",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "default": 14,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Text size",
+          "min": 10,
+          "max": 20,
+          "step": 1,
+          "default": 12,
+          "unit": "px"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Advanced Product Detail",
+      "blocks": [
+        {
+          "type": "feature_card",
+          "settings": {
+            "title": "ADA Compliant",
+            "text": "Meets all commercial accessibility standards.",
+            "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\"></path></svg>"
+          }
+        },
+        {
+          "type": "feature_card",
+          "settings": {
+            "title": "In Stock",
+            "text": "Ready for immediate nationwide shipping.",
+            "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2\"></path><path d=\"M15 18H9\"></path><path d=\"M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14\"></path><circle cx=\"17\" cy=\"18\" r=\"2\"></circle><circle cx=\"7\" cy=\"18\" r=\"2\"></circle></svg>"
+          }
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}
