@@ -1,0 +1,529 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "app_page_title_FgTdxU": {
+      "type": "app-page-title",
+      "name": "App Page Title",
+      "settings": {
+        "kicker": "",
+        "page_title": "Our Trusted Brands",
+        "page_desc": "<p>We partner with the world's leading manufacturers of Division 10 specialties to ensure your project meets the highest standards of quality and compliance.</p>",
+        "text_alignment": "center",
+        "container_width": "wide",
+        "bg_color": "#fafaf9",
+        "heading_color": "#000000",
+        "desc_color": "#000000",
+        "kicker_color": "#000000",
+        "show_border": true,
+        "border_color": "#0000000d",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56,
+        "heading_size": 48,
+        "heading_size_mobile": 34,
+        "heading_weight": "700",
+        "heading_max_width": 900,
+        "desc_size": 18,
+        "desc_size_mobile": 16,
+        "desc_max_width": 700
+      }
+    },
+    "app_image_card_pJQbFm": {
+      "type": "app-image-card",
+      "blocks": {
+        "feature_kF8BFY": {
+          "type": "feature",
+          "settings": {
+            "feature_text": "Restroom Accessories"
+          }
+        },
+        "feature_y4ML7P": {
+          "type": "feature",
+          "settings": {
+            "feature_text": "Toilet Partitions"
+          }
+        },
+        "feature_YbkixP": {
+          "type": "feature",
+          "settings": {
+            "feature_text": "Hand Dryers"
+          }
+        }
+      },
+      "block_order": [
+        "feature_kF8BFY",
+        "feature_y4ML7P",
+        "feature_YbkixP"
+      ],
+      "name": "App Image Card",
+      "settings": {
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "container_width": 1280,
+        "column_gap": 64,
+        "column_gap_mobile": 32,
+        "reverse_layout": false,
+        "text_align": "left",
+        "image": "shopify://shop_images/bobrick.webp",
+        "image_alt": "Bobrick",
+        "image_ratio": "landscape",
+        "image_position": "center center",
+        "image_radius": 24,
+        "image_bg": "#ffffff",
+        "image_border_color": "#e7e5e4",
+        "image_border_width": 1,
+        "show_badge": true,
+        "show_badge_icon": true,
+        "badge_text": "Authorized Distributor",
+        "badge_font_size": 15,
+        "badge_letter_spacing": 0.3,
+        "badge_icon_size": 24,
+        "badge_text_color": "#a3a3a3",
+        "badge_icon_color": "#c4a058",
+        "title": "Bobrick",
+        "title_size": 48,
+        "title_line_height": "1.2",
+        "title_color": "#000000",
+        "description": "The industry leader in commercial restroom accessories. Bobrick provides high-quality, durable, and ADA-compliant solutions for every type of commercial building.",
+        "description_size": 20,
+        "description_line_height": "1.7",
+        "description_color": "#475569",
+        "show_feature_icon": true,
+        "feature_icon_size": 23,
+        "feature_icon_color": "#00bd7e",
+        "feature_text_size": 16,
+        "feature_text_color": "#000000",
+        "show_button": true,
+        "button_text": "View Bobrick Catalog",
+        "button_link": "shopify://collections/bobrick",
+        "button_new_tab": false,
+        "show_button_icon": true,
+        "button_icon_size": 18,
+        "button_font_size": 18,
+        "button_padding_x": 32,
+        "button_padding_y": 16,
+        "button_radius": 100,
+        "button_bg": "#0f172a",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#0f172a",
+        "button_border_width": 0,
+        "section_bg": "#ffffff"
+      }
+    },
+    "app_image_card_xDrPcK": {
+      "type": "app-image-card",
+      "blocks": {
+        "feature_Eq4zFQ": {
+          "type": "feature",
+          "settings": {
+            "feature_text": "Washfountains"
+          }
+        },
+        "feature_HG9Umw": {
+          "type": "feature",
+          "settings": {
+            "feature_text": "Emergency Showers"
+          }
+        },
+        "feature_YUCnTi": {
+          "type": "feature",
+          "settings": {
+            "feature_text": "Lockers"
+          }
+        }
+      },
+      "block_order": [
+        "feature_Eq4zFQ",
+        "feature_HG9Umw",
+        "feature_YUCnTi"
+      ],
+      "disabled": true,
+      "name": "App Image Card",
+      "settings": {
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "container_width": 1280,
+        "column_gap": 64,
+        "column_gap_mobile": 32,
+        "reverse_layout": true,
+        "text_align": "left",
+        "image": "shopify://shop_images/833-400x200.jpg",
+        "image_alt": "Bradley",
+        "image_ratio": "landscape",
+        "image_position": "center center",
+        "image_radius": 24,
+        "image_bg": "#ffffff",
+        "image_border_color": "#e7e5e4",
+        "image_border_width": 1,
+        "show_badge": true,
+        "show_badge_icon": true,
+        "badge_text": "Authorized Distributor",
+        "badge_font_size": 15,
+        "badge_letter_spacing": 0.3,
+        "badge_icon_size": 24,
+        "badge_text_color": "#a3a3a3",
+        "badge_icon_color": "#f59e0b",
+        "title": "Bobrick",
+        "title_size": 48,
+        "title_line_height": "1.2",
+        "title_color": "#000000",
+        "description": "Known for innovative washroom solutions and emergency safety equipment. Bradley products are engineered for performance and sustainability.",
+        "description_size": 20,
+        "description_line_height": "1.7",
+        "description_color": "#475569",
+        "show_feature_icon": true,
+        "feature_icon_size": 23,
+        "feature_icon_color": "#10b981",
+        "feature_text_size": 16,
+        "feature_text_color": "#000000",
+        "show_button": true,
+        "button_text": "View Bobrick Catalog",
+        "button_link": "",
+        "button_new_tab": false,
+        "show_button_icon": true,
+        "button_icon_size": 18,
+        "button_font_size": 18,
+        "button_padding_x": 32,
+        "button_padding_y": 16,
+        "button_radius": 100,
+        "button_bg": "#0f172a",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#0f172a",
+        "button_border_width": 0,
+        "section_bg": "#ffffff"
+      }
+    },
+    "app_image_card_rpBJre": {
+      "type": "app-image-card",
+      "blocks": {
+        "feature_jUYpac": {
+          "type": "feature",
+          "settings": {
+            "feature_text": "Soap Dispensers"
+          }
+        },
+        "feature_TzqaRt": {
+          "type": "feature",
+          "settings": {
+            "feature_text": "Hand Dryers"
+          }
+        },
+        "feature_3DPpNm": {
+          "type": "feature",
+          "settings": {
+            "feature_text": "Baby Changing Stations"
+          }
+        }
+      },
+      "block_order": [
+        "feature_jUYpac",
+        "feature_TzqaRt",
+        "feature_3DPpNm"
+      ],
+      "disabled": true,
+      "name": "App Image Card",
+      "settings": {
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "container_width": 1280,
+        "column_gap": 64,
+        "column_gap_mobile": 32,
+        "reverse_layout": false,
+        "text_align": "left",
+        "image": "shopify://shop_images/931-400x200.jpg",
+        "image_alt": "Asi",
+        "image_ratio": "landscape",
+        "image_position": "center center",
+        "image_radius": 24,
+        "image_bg": "#ffffff",
+        "image_border_color": "#e7e5e4",
+        "image_border_width": 1,
+        "show_badge": true,
+        "show_badge_icon": true,
+        "badge_text": "Authorized Distributor",
+        "badge_font_size": 15,
+        "badge_letter_spacing": 0.3,
+        "badge_icon_size": 24,
+        "badge_text_color": "#a3a3a3",
+        "badge_icon_color": "#f59e0b",
+        "title": "Bobrick",
+        "title_size": 48,
+        "title_line_height": "1.2",
+        "title_color": "#000000",
+        "description": "American Specialties, Inc. offers the most comprehensive collection of washroom accessories in the industry, focusing on design and functionality.",
+        "description_size": 20,
+        "description_line_height": "1.7",
+        "description_color": "#475569",
+        "show_feature_icon": true,
+        "feature_icon_size": 23,
+        "feature_icon_color": "#10b981",
+        "feature_text_size": 16,
+        "feature_text_color": "#000000",
+        "show_button": true,
+        "button_text": "View Bobrick Catalog",
+        "button_link": "",
+        "button_new_tab": false,
+        "show_button_icon": true,
+        "button_icon_size": 18,
+        "button_font_size": 18,
+        "button_padding_x": 32,
+        "button_padding_y": 16,
+        "button_radius": 100,
+        "button_bg": "#0f172a",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#0f172a",
+        "button_border_width": 0,
+        "section_bg": "#ffffff"
+      }
+    },
+    "app_compliance_YATJGt": {
+      "type": "app-compliance",
+      "blocks": {
+        "feature_item_BLeBhY": {
+          "type": "feature_item",
+          "settings": {
+            "text": "ANSI A117.1 Standards",
+            "custom_icon_svg": "",
+            "icon_color": "#c4a058",
+            "icon_width": 20,
+            "icon_height": 20,
+            "icon_stroke_width": 2,
+            "icon_opacity": 100,
+            "icon_gap": 12,
+            "text_color": "#ffffff",
+            "text_size": 19,
+            "text_weight": "600",
+            "text_letter_spacing": 0,
+            "text_line_height": 1.4,
+            "text_uppercase": false,
+            "item_alignment": "left",
+            "item_bg_rgb": "#ffffff",
+            "item_bg_opacity": 0,
+            "item_border_rgb": "#ffffff",
+            "item_border_opacity": 0,
+            "item_border_width": 0,
+            "item_radius": 0,
+            "item_padding_top": 0,
+            "item_padding_right": 0,
+            "item_padding_bottom": 0,
+            "item_padding_left": 0,
+            "item_margin_bottom": 0
+          }
+        },
+        "feature_item_CJWGM9": {
+          "type": "feature_item",
+          "settings": {
+            "text": "LEED v4.1 Contribution",
+            "custom_icon_svg": "",
+            "icon_color": "#c4a058",
+            "icon_width": 20,
+            "icon_height": 20,
+            "icon_stroke_width": 2,
+            "icon_opacity": 100,
+            "icon_gap": 12,
+            "text_color": "#ffffff",
+            "text_size": 20,
+            "text_weight": "600",
+            "text_letter_spacing": 0,
+            "text_line_height": 1.4,
+            "text_uppercase": false,
+            "item_alignment": "left",
+            "item_bg_rgb": "#ffffff",
+            "item_bg_opacity": 0,
+            "item_border_rgb": "#ffffff",
+            "item_border_opacity": 0,
+            "item_border_width": 0,
+            "item_radius": 0,
+            "item_padding_top": 0,
+            "item_padding_right": 0,
+            "item_padding_bottom": 0,
+            "item_padding_left": 0,
+            "item_margin_bottom": 0
+          }
+        },
+        "feature_item_i8zg7b": {
+          "type": "feature_item",
+          "settings": {
+            "text": "BIM/Revit Support Available",
+            "custom_icon_svg": "",
+            "icon_color": "#c4a058",
+            "icon_width": 20,
+            "icon_height": 20,
+            "icon_stroke_width": 2,
+            "icon_opacity": 100,
+            "icon_gap": 12,
+            "text_color": "#ffffff",
+            "text_size": 20,
+            "text_weight": "600",
+            "text_letter_spacing": 0,
+            "text_line_height": 1.4,
+            "text_uppercase": false,
+            "item_alignment": "left",
+            "item_bg_rgb": "#ffffff",
+            "item_bg_opacity": 0,
+            "item_border_rgb": "#ffffff",
+            "item_border_opacity": 0,
+            "item_border_width": 0,
+            "item_radius": 0,
+            "item_padding_top": 0,
+            "item_padding_right": 0,
+            "item_padding_bottom": 0,
+            "item_padding_left": 0,
+            "item_margin_bottom": 0
+          }
+        },
+        "badge_item_DwncWj": {
+          "type": "badge_item",
+          "settings": {
+            "text": "ADA Compliant",
+            "text_color": "#c4a058",
+            "text_size": 18,
+            "text_weight": "700",
+            "text_letter_spacing": 2,
+            "text_line_height": 1.3,
+            "text_uppercase": true,
+            "badge_bg_rgb": "#262626",
+            "badge_bg_opacity": 100,
+            "badge_border_rgb": "#ffffff",
+            "badge_border_opacity": 0,
+            "badge_border_width": 0,
+            "badge_radius": 16,
+            "badge_padding": 32,
+            "badge_opacity": 100,
+            "badge_min_height": 180,
+            "badge_aspect_ratio": "1 / 1"
+          }
+        },
+        "badge_item_Tc4ezn": {
+          "type": "badge_item",
+          "settings": {
+            "text": "Sustainable Materials",
+            "text_color": "#c4a058",
+            "text_size": 18,
+            "text_weight": "700",
+            "text_letter_spacing": 2,
+            "text_line_height": 1.3,
+            "text_uppercase": true,
+            "badge_bg_rgb": "#262626",
+            "badge_bg_opacity": 100,
+            "badge_border_rgb": "#ffffff",
+            "badge_border_opacity": 0,
+            "badge_border_width": 0,
+            "badge_radius": 16,
+            "badge_padding": 32,
+            "badge_opacity": 100,
+            "badge_min_height": 180,
+            "badge_aspect_ratio": "1 / 1"
+          }
+        },
+        "badge_item_A8hBkA": {
+          "type": "badge_item",
+          "settings": {
+            "text": "Commercial Grade",
+            "text_color": "#c4a058",
+            "text_size": 18,
+            "text_weight": "700",
+            "text_letter_spacing": 2,
+            "text_line_height": 1.3,
+            "text_uppercase": true,
+            "badge_bg_rgb": "#262626",
+            "badge_bg_opacity": 100,
+            "badge_border_rgb": "#ffffff",
+            "badge_border_opacity": 0,
+            "badge_border_width": 0,
+            "badge_radius": 16,
+            "badge_padding": 32,
+            "badge_opacity": 100,
+            "badge_min_height": 180,
+            "badge_aspect_ratio": "1 / 1"
+          }
+        },
+        "badge_item_agqwJV": {
+          "type": "badge_item",
+          "settings": {
+            "text": "BIM Ready",
+            "text_color": "#c4a058",
+            "text_size": 18,
+            "text_weight": "700",
+            "text_letter_spacing": 2,
+            "text_line_height": 1.3,
+            "text_uppercase": true,
+            "badge_bg_rgb": "#262626",
+            "badge_bg_opacity": 100,
+            "badge_border_rgb": "#ffffff",
+            "badge_border_opacity": 0,
+            "badge_border_width": 0,
+            "badge_radius": 16,
+            "badge_padding": 32,
+            "badge_opacity": 100,
+            "badge_min_height": 180,
+            "badge_aspect_ratio": "1 / 1"
+          }
+        }
+      },
+      "block_order": [
+        "feature_item_BLeBhY",
+        "feature_item_CJWGM9",
+        "feature_item_i8zg7b",
+        "badge_item_DwncWj",
+        "badge_item_Tc4ezn",
+        "badge_item_A8hBkA",
+        "badge_item_agqwJV"
+      ],
+      "name": "App Compliance",
+      "settings": {
+        "heading": "Committed to Compliance",
+        "bg": "#1a1a1a",
+        "mt": 0,
+        "mb": 100,
+        "max_con_w": 1280,
+        "description": "All products sourced through ND10 Supply are guaranteed to meet or exceed current ADA (Americans with Disabilities Act) and local building code requirements. We provide full submittal packages and technical data for every order.",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "heading_color": "#ffffff",
+        "heading_size": 40,
+        "heading_weight": "900",
+        "heading_letter_spacing": 0,
+        "heading_line_height": 1.2,
+        "heading_align": "left",
+        "heading_uppercase": false,
+        "heading_margin_bottom": 24,
+        "description_color": "#a3a3a3",
+        "description_size": 20,
+        "description_weight": "400",
+        "description_letter_spacing": 0,
+        "description_line_height": 1.7,
+        "description_align": "left",
+        "description_margin_bottom": 32,
+        "description_max_width": 700,
+        "feature_list_gap": 16,
+        "badge_grid_gap": 16
+      }
+    }
+  },
+  "order": [
+    "main",
+    "app_page_title_FgTdxU",
+    "app_image_card_pJQbFm",
+    "app_image_card_xDrPcK",
+    "app_image_card_rpBJre",
+    "app_compliance_YATJGt"
+  ]
+}

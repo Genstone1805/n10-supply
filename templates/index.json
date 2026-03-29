@@ -1,210 +1,380 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "apps_hero_MXVEnJ": {
+      "type": "apps-hero",
+      "name": "App Hero",
+      "settings": {
+        "background_image": "shopify://shop_images/imgi_15_Mask-group.jpg",
+        "section_height": "80vh",
+        "content_width": 120,
+        "bg_color": "#0f172a",
+        "image_opacity": 100,
+        "overlay_opacity": 55,
+        "overlay_solid": "#0f172a",
+        "overlay_angle": 90,
+        "overlay_start": "#0f172a",
+        "overlay_middle": "#0f172a",
+        "overlay_end": "rgba(0,0,0,0)",
+        "overlay_stop_1": 0,
+        "overlay_stop_2": 45,
+        "overlay_stop_3": 100,
+        "kicker_text": "Division 10 Specialists",
+        "kicker_bg": "#c4a058",
+        "kicker_text_color": "#0f172a",
+        "heading": "Commercial Construction",
+        "heading_accent": "Supplies Nationwide.",
+        "heading_color": "#ffffff",
+        "heading_accent_color": "#c4a058",
+        "heading_size_mobile": 48,
+        "heading_size_desktop": 72,
+        "description": "<p>ND10 Supply provides general contractors with high-quality restroom accessories, grab bars, and mirrors from top manufacturers like Bobrick, Bradley, and ASI.</p>",
+        "description_color": "#ffffffb3",
+        "description_size": 20,
+        "primary_button_text": "Browse Product Catalog",
+        "primary_button_link": "shopify://collections/all",
+        "show_primary_icon": true,
+        "primary_button_bg": "#ffffff",
+        "primary_button_text_color": "#0f172a",
+        "secondary_button_text": "Request a Quote",
+        "secondary_button_link": "shopify://pages/request-a-quote",
+        "secondary_button_bg": "rgba(0,0,0,0)",
+        "secondary_button_text_color": "#ffffff",
+        "secondary_button_border": "#ffffff4d"
+      }
+    },
+    "apps_icon_xPfRNq": {
+      "type": "apps-icon",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "icon_item_ybVWgG": {
+          "type": "icon_item",
           "settings": {
-            "heading": "Image banner",
-            "heading_size": "h0"
+            "icon": "package",
+            "value": "150+",
+            "label": "Bobrick Products"
           }
         },
-        "text": {
-          "type": "text",
+        "icon_item_RhdNFN": {
+          "type": "icon_item",
           "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
+            "icon": "truck",
+            "value": "Nationwide",
+            "label": "Fast Shipping"
           }
         },
-        "button": {
-          "type": "buttons",
+        "icon_item_q7rKCp": {
+          "type": "icon_item",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "icon": "shield-check",
+            "value": "ADA",
+            "label": "Compliant Materials"
+          }
+        },
+        "icon_item_ddRCbT": {
+          "type": "icon_item",
+          "settings": {
+            "icon": "file-text",
+            "value": "RFQ",
+            "label": "Quick Turnaround"
           }
         }
       },
       "block_order": [
-        "heading",
-        "text",
-        "button"
+        "icon_item_ybVWgG",
+        "icon_item_RhdNFN",
+        "icon_item_q7rKCp",
+        "icon_item_ddRCbT"
       ],
+      "name": "App Icon",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "max_width": 1280,
+        "bg_color": "#ffffff",
+        "border_color": "#f2f2f2",
+        "icon_color": "#c4a058",
+        "value_color": "#111111",
+        "label_color": "#111111",
+        "icon_size": 32,
+        "value_size": 24,
+        "label_size": 12,
+        "label_opacity": 50
       }
     },
-    "rich_text": {
-      "type": "rich-text",
+    "app_grid_Uhdcyt": {
+      "type": "app-grid",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "card_Wkptba": {
+          "type": "card",
           "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
+            "image": "shopify://shop_images/imgi_8_Banner-3.jpg",
+            "image_ratio": "video",
+            "title": "Fino Collection",
+            "text": "Crafted with high-quality satin-finish stainless steel, seamless construction, well-defined edges and concealed hardware.",
+            "button_label": "Explore collection",
+            "link": "shopify://collections/frontpage"
           }
         },
-        "text": {
-          "type": "text",
+        "card_kL4ay3": {
+          "type": "card",
           "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
+            "image": "shopify://shop_images/imgi_8_01_MatteBlack_header.jpg",
+            "image_ratio": "video",
+            "title": "Matte Black",
+            "text": "Matte Black powder-coated stainless-steel accessories reveal glamorous possibilities, with high-end design, labor-saving function and sustainable operation.",
+            "button_label": "Explore collection",
+            "link": "shopify://collections/matte-black"
+          }
+        },
+        "card_Kefp96": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/imgi_8_01_TrimLine_header.jpg",
+            "image_ratio": "video",
+            "title": "TrimLineSeries™",
+            "text": "Specify these accessories for contemporary environments, from prestige buildings and hospitality environments to healthcare and retail properties.",
+            "button_label": "Explore collection",
+            "link": "shopify://collections/trimlineseries™"
+          }
+        },
+        "card_XkXi3X": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/imgi_8_01_ConturaSeries_header.jpg",
+            "image_ratio": "video",
+            "title": "ConturaSeries®",
+            "text": "For prestige projects, ConturaSeries accessories feature gentle 27° curvilinear design and consistent styling with flush tumbler locks.",
+            "button_label": "Explore collection",
+            "link": "shopify://collections/conturaseries®"
+          }
+        },
+        "card_jYLUeD": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/imgi_8_01_ClassicSeries_header.jpg",
+            "image_ratio": "video",
+            "title": "ClassicSeries®",
+            "text": "Ideal for budget sensitive projects, ClassicSeries is the standard of value and offers the largest selection of models for all Type-304 washroom accessories.",
+            "button_label": "Explore collection",
+            "link": "shopify://collections/classicseries®"
+          }
+        },
+        "card_WEgJGe": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/imgi_8_Cubicle-Collection_c14ef356-357e-4878-a09a-ba50ce963872.jpg",
+            "image_ratio": "video",
+            "title": "Cubicle Collection",
+            "text": "Add convenience and style to your cubicle interiors. Featuring contemporary styling for coordinating elegance, all Cubicle Collection models share common elements such as threaded escutcheons and post diameters.",
+            "button_label": "Explore collection",
+            "link": "shopify://collections/cubicle-collection"
           }
         }
       },
       "block_order": [
-        "heading",
-        "text"
+        "card_Wkptba",
+        "card_kL4ay3",
+        "card_Kefp96",
+        "card_XkXi3X",
+        "card_jYLUeD",
+        "card_WEgJGe"
       ],
+      "name": "Home Grid 1",
       "settings": {
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 0
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "show_view_all": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "columns_mobile": "2",
-        "padding_top": 28,
-        "padding_bottom": 36
-      }
-    },
-    "collage": {
-      "type": "collage",
-      "blocks": {
-        "collection-0": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "product": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "second_image": false
-          }
-        },
-        "collection-1": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        }
-      },
-      "block_order": [
-        "collection-0",
-        "product",
-        "collection-1"
-      ],
-      "settings": {
-        "heading": "Multimedia collage",
-        "heading_size": "h2",
-        "desktop_layout": "left",
-        "mobile_layout": "collage",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "video": {
-      "type": "video",
-      "settings": {
-        "heading": "",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "heading_size": "h1",
-        "description": "",
+        "heading": "Bobrick Signature Collections",
+        "description": "<p>Elevate your commercial restroom design with Bobrick's curated collections, offering cohesive aesthetics and industry-leading performance.</p>",
+        "header_alignment": "left",
+        "description_width": 700,
+        "header_spacing": 64,
         "full_width": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "max_width": 1280,
+        "columns_desktop": 3,
+        "columns_tablet": 2,
+        "columns_mobile": 1,
+        "grid_gap": 32,
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "bg_color": "#1a1a1a",
+        "text_color": "#ffffff",
+        "muted_text_color": "#9fb0bc",
+        "accent_color": "#d4a44c",
+        "card_bg": "#262626",
+        "card_border": "#ffffff1a",
+        "card_hover_bg": "#ffffff1a",
+        "border_width": 1,
+        "card_radius": 24,
+        "card_padding": 32,
+        "card_shadow": false,
+        "heading_size": 30,
+        "heading_size_mobile": 26,
+        "body_size": 16,
+        "card_title_size": 20,
+        "card_text_size": 14,
+        "button_text_size": 14,
+        "show_placeholder_images": true,
+        "image_radius": 18,
+        "enable_image_zoom": true,
+        "image_zoom_scale": 1,
+        "show_arrow": true,
+        "arrow_size": 20,
+        "show_button_text": false,
+        "show_button_arrow": true
       }
     },
-    "multicolumn": {
-      "type": "multicolumn",
+    "app_featured_nkgH7R": {
+      "type": "app-featured",
       "blocks": {
-        "column1": {
-          "type": "column",
+        "product_card_ftYhfa": {
+          "type": "product_card",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "image": "shopify://shop_images/B-9541.MBLK_right_40f8bbc4-f5e0-4eee-8d0e-0f49ef774a1b.jpg",
+            "image_ratio": "square",
+            "badge": "Bobrick",
+            "title": "Bobrick  B-9541.MBLK -  Surface-Mounted Coat Hook with Bumper, Satin Finish Steel",
+            "sku_prefix": "SKU:",
+            "sku": "B-9541.MBLK",
+            "button_label": "View Details",
+            "link": "shopify://products/bobrick-b-9541-mblk-surface-mounted-coat-hook-with-bumper-satin-finish-steel"
           }
         },
-        "column2": {
-          "type": "column",
+        "product_card_KkRDfQ": {
+          "type": "product_card",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "image": "shopify://shop_images/BOB-B-3013_CA_d1b4cc5c-bad3-4403-abc6-ef260ea4fac2.jpg",
+            "image_ratio": "square",
+            "badge": "Bobrick",
+            "title": "Bobrick B-3013 - Recessed Seat-Cover Dispenser, Satin Finish",
+            "sku_prefix": "SKU:",
+            "sku": "B-3013",
+            "button_label": "View Details",
+            "link": "shopify://products/bobrick-b-3013-recessed-seat-cover-dispenser-satin-finish"
           }
         },
-        "column3": {
-          "type": "column",
+        "product_card_UUq6CA": {
+          "type": "product_card",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "image": "shopify://shop_images/BOB-B-30919.MBLK_CA_WC_aab7d2f1-65cd-4d84-a9c7-20f9deaa4b6d.jpg",
+            "image_ratio": "square",
+            "badge": "Bobrick",
+            "title": "Bobrick B-30919.MBLK -Surface-Mounted Horizontal Toilet Tissue / Seat-Cover Dispenser / Waste Disposal, Left Side",
+            "sku_prefix": "SKU:",
+            "sku": "B-30919.MBLK",
+            "button_label": "View Details",
+            "link": "shopify://products/bobrick-b-30919-mblk"
+          }
+        },
+        "product_card_DgiiYq": {
+          "type": "product_card",
+          "settings": {
+            "image": "shopify://shop_images/B-38032_Zoom_37b089ed-43d1-433f-9735-8d98d13b46f6.jpg",
+            "image_ratio": "square",
+            "badge": "Bobrick",
+            "title": "Bobrick B-38032 - Semi-Recessed Paper Towel Dispenser and Waste Receptacle, Satin Finish, 6.3-Gallon Waste",
+            "sku_prefix": "SKU:",
+            "sku": "B-38032",
+            "button_label": "View Details",
+            "link": "shopify://products/bobrick-b-38032-semi-recessed-paper-towel-dispenser-and-waste-receptacle-satin-finish-6-3-gallon-waste"
           }
         }
       },
       "block_order": [
-        "column1",
-        "column2",
-        "column3"
+        "product_card_ftYhfa",
+        "product_card_KkRDfQ",
+        "product_card_UUq6CA",
+        "product_card_DgiiYq"
       ],
+      "name": "Home Featured Product",
       "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "swipe_on_mobile": false,
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "heading": "Featured Bobrick Products",
+        "description": "<p>Industry standard restroom accessories for commercial projects. High-grade stainless steel construction for maximum durability.</p>",
+        "header_alignment": "center",
+        "description_width": 670,
+        "header_spacing": 64,
+        "max_width": 1280,
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "grid_gap": 32,
+        "columns_desktop": 4,
+        "columns_tablet": 2,
+        "columns_mobile": 1,
+        "bg_color": "#ffffff",
+        "heading_color": "#1f2937",
+        "text_color": "#6b7280",
+        "card_bg": "#f5f5f4",
+        "badge_bg": "#ffffff",
+        "badge_text": "#111111",
+        "border_color": "#e5e7eb",
+        "button_bg": "#ffffff",
+        "button_text": "#111111",
+        "button_hover_bg": "#1f2937",
+        "button_hover_text": "#ffffff",
+        "heading_size": 43,
+        "heading_size_mobile": 24,
+        "description_size": 21,
+        "title_size": 19,
+        "sku_size": 12,
+        "badge_size": 12,
+        "button_size": 16,
+        "card_radius": 24,
+        "enable_hover_zoom": true,
+        "zoom_scale": 1,
+        "show_badge": true
+      }
+    },
+    "app_cta_mDCCFm": {
+      "type": "app-cta",
+      "name": "App CTA",
+      "settings": {
+        "heading": "Need a Custom Quote for Your Project?",
+        "description": "<p>Our team specializes in large-scale commercial bids. Send us your hardware schedule or product list and we'll provide competitive pricing within 24 hours.</p>",
+        "button_label": "Request a Project Quote",
+        "button_link": "shopify://pages/request-a-quote",
+        "content_width": 1280,
+        "text_width": 670,
+        "text_alignment": "center",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "heading_margin_bottom": 24,
+        "text_margin_bottom": 40,
+        "section_bg": "#c49f5e",
+        "heading_color": "#000000",
+        "text_color": "#000000",
+        "heading_size_desktop": 48,
+        "heading_size_mobile": 28,
+        "text_size": 20,
+        "text_size_mobile": 16,
+        "button_text_size": 18,
+        "button_text_size_mobile": 16,
+        "button_bg": "#16212b",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#16212b",
+        "button_hover_bg": "#0f1720",
+        "button_hover_text_color": "#ffffff",
+        "button_hover_border_color": "#0f1720",
+        "button_padding_x": 40,
+        "button_padding_y": 20,
+        "button_radius": 100,
+        "button_border_width": 1,
+        "button_gap": 12,
+        "button_hover_scale": 1,
+        "enable_shadow": true,
+        "show_icon": true,
+        "icon_size": 20,
+        "icon_stroke_width": 2
       }
     }
   },
   "order": [
-    "image_banner",
-    "rich_text",
-    "featured_collection",
-    "collage",
-    "video",
-    "multicolumn"
+    "apps_hero_MXVEnJ",
+    "apps_icon_xPfRNq",
+    "app_grid_Uhdcyt",
+    "app_featured_nkgH7R",
+    "app_cta_mDCCFm"
   ]
 }

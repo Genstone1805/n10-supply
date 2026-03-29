@@ -1,5 +1,5 @@
-<section class="py-24 bg-brand-primary text-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section class="py-24 bg-brand-primary text-white sec-spacing">
+  <div class="max-con-w mx-auto px-4 sm:px-6 lg:px-8">
     <div class="!grid !grid-cols-1 md:!grid-cols-2 gap-16 items-center">
       <div>
         {% if section.settings.heading != blank %}
@@ -175,6 +175,21 @@
   </div>
 </section>
 
+<style>
+  .max-con-w{
+    width:100%;
+    max-width:{{- section.settings.max_con_w -}}px
+  }
+  .bg-brand-primary{
+    background-color:{{section.settings.bg }}
+  }
+  .sec-spacing{
+    margin-top:{{-section.settings.mt -}}px;
+    margin-bottom:{{-section.settings.mb-}}px
+  }
+
+</style>
+
 {% schema %}
 {
   "name": "App Compliance",
@@ -190,6 +205,36 @@
       "id": "heading",
       "label": "Heading",
       "default": "Committed to Compliance"
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "range",
+      "id": "mt",
+      "label": "Margin Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default":0
+    },
+    {
+      "type": "range",
+      "id": "mb",
+      "label": "Margin Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default":0
+    },
+    {
+      "type": "number",
+      "id": "max_con_w",
+      "label": "Maximum Width",
+      "default": 1280
     },
     {
       "type": "textarea",

@@ -597,68 +597,70 @@
           {% endif %}
         </div>
 
-        {% assign has_products = false %}
-        {% for block in section.blocks %}
-          {% if block.type == 'product_card' %}
-            {% assign has_products = true %}
-            {% break %}
-          {% endif %}
-        {% endfor %}
+                {% paginate collection.products by section.settings.products_per_page %}
+          {% if collection.products_count > 0 %}
+            <div class="app-shop__products">
+              {% for product in collection.products %}
+                {% assign current_variant = product.selected_or_first_available_variant %}
 
-        {% if has_products %}
-          <div class="app-shop__products">
-            {% for block in section.blocks %}
-              {% if block.type == 'product_card' %}
-                <article class="app-shop__card" {{ block.shopify_attributes }}>
-                  <a
-                    class="app-shop__image-link"
-                    href="{% if block.settings.product_link != blank %}{{ block.settings.product_link }}{% else %}#{% endif %}"
-                  >
-                    {% if block.settings.image != blank %}
+                <article class="app-shop__card">
+                  <a class="app-shop__image-link" href="{{ product.url }}">
+                    {% if product.featured_image != blank %}
                       {{
-                        block.settings.image
+                        product.featured_image
                         | image_url: width: 900
                         | image_tag:
                           class: 'app-shop__product-image',
                           loading: 'lazy',
-                          alt: block.settings.product_title
+                          alt: product.title
                       }}
                     {% else %}
-                      <div class="app-shop__placeholder">Add product image</div>
+                      <div class="app-shop__placeholder">No product image</div>
                     {% endif %}
                   </a>
 
                   <div class="app-shop__content">
-                    {% if block.settings.product_title != blank %}
-                      <h3 class="app-shop__product-title">
-                        <a href="{% if block.settings.product_link != blank %}{{ block.settings.product_link }}{% else %}#{% endif %}">
-                          {{ block.settings.product_title }}
-                        </a>
-                      </h3>
-                    {% endif %}
+                    <h3 class="app-shop__product-title">
+                      <a href="{{ product.url }}">
+                        {{ product.title }}
+                      </a>
+                    </h3>
 
-                    {% if block.settings.sku != blank and section.settings.show_sku %}
+                    {% if section.settings.show_vendor %}
+                      <p class="app-shop__sku">{{ product.vendor }}</p>
+                    {% elsif section.settings.show_sku and current_variant.sku != blank %}
                       <p class="app-shop__sku">
-                        {{ block.settings.sku_prefix -}}
-                        {{- block.settings.sku }}
+                        {{ section.settings.sku_prefix }}{{ current_variant.sku }}
                       </p>
                     {% endif %}
 
+                    {% if section.settings.show_price %}
+                      <div class="app-shop__price-wrap" style="margin-bottom: 16px;">
+                        {% if product.compare_at_price_max > product.price %}
+                          <p style="margin:0; font-weight:700;">
+                            {{ product.price | money }}
+                          </p>
+                          <p style="margin:4px 0 0; color: var(--muted); text-decoration: line-through;">
+                            {{ product.compare_at_price_max | money }}
+                          </p>
+                        {% else %}
+                          <p style="margin:0; font-weight:700;">
+                            {{ product.price | money }}
+                          </p>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+
                     <div class="app-shop__actions">
-                      {% if block.settings.primary_button_label != blank %}
-                        <a
-                          class="app-shop__primary-btn"
-                          href="{% if block.settings.product_link != blank %}{{ block.settings.product_link }}{% else %}#{% endif %}"
-                        >
-                          {{ block.settings.primary_button_label }}
-                        </a>
-                      {% endif %}
+                      <a class="app-shop__primary-btn" href="{{ product.url }}">
+                        {{ section.settings.primary_button_label }}
+                      </a>
 
                       {% if section.settings.show_icon_button %}
                         <a
                           class="app-shop__secondary-btn"
-                          href="{% if block.settings.secondary_link != blank %}{{ block.settings.secondary_link }}{% elsif block.settings.product_link != blank %}{{ block.settings.product_link }}{% else %}#{% endif %}"
-                          aria-label="{{ block.settings.secondary_aria_label | default: 'Secondary action' }}"
+                          href="{{ product.url }}"
+                          aria-label="View {{ product.title }}"
                         >
                           {% case section.settings.icon_button_icon %}
                             {% when 'plus' %}
@@ -710,17 +712,133 @@
                     </div>
                   </div>
                 </article>
-              {% endif %}
-            {% endfor %}
-          </div>
+              {% endfor %}
+            </div>
+
+            {% if paginate.pages > 1 %}
+  <nav class="app-shop__pagination" aria-label="Pagination">
+    {% if paginate.previous %}
+      <a class="app-shop__pagination-btn app-shop__pagination-prev" href="{{ paginate.previous.url }}">
+        Previous
+      </a>
+    {% endif %}
+
+    <div class="app-shop__pagination-list">
+      {% for part in paginate.parts %}
+        {% if part.is_link %}
+          <a class="app-shop__pagination-btn" href="{{ part.url }}">
+            {{ part.title }}
+          </a>
         {% else %}
-          <div class="app-shop__empty">Add product card blocks to build this catalog.</div>
+          {% if part.title == paginate.current_page %}
+            <span class="app-shop__pagination-btn is-active" aria-current="page">
+              {{ part.title }}
+            </span>
+          {% else %}
+            <span class="app-shop__pagination-dots">
+              {{ part.title }}
+            </span>
+          {% endif %}
         {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if paginate.next %}
+      <a class="app-shop__pagination-btn app-shop__pagination-next" href="{{ paginate.next.url }}">
+        Next
+      </a>
+    {% endif %}
+  </nav>
+{% endif %}
+          {% else %}
+            <div class="app-shop__empty">No products found in this collection.</div>
+          {% endif %}
+        {% endpaginate %}
       </main>
     </div>
   </div>
 </section>
 
+<style>
+  #{{ section_id }} .app-shop__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+#{{ section_id }} .app-shop__pagination-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#{{ section_id }} .app-shop__pagination-btn,
+#{{ section_id }} .app-shop__pagination-dots {
+  min-width: 44px;
+  height: 44px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+#{{ section_id }} .app-shop__pagination-btn:hover {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  border-color: var(--primary);
+}
+
+#{{ section_id }} .app-shop__pagination-btn.is-active {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  border-color: var(--primary);
+}
+
+#{{ section_id }} .app-shop__pagination-dots {
+  border: 0;
+  background: transparent;
+  min-width: auto;
+  padding: 0 4px;
+  color: var(--muted);
+}
+
+#{{ section_id }} .app-shop__pagination-prev,
+#{{ section_id }} .app-shop__pagination-next {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+@media (max-width: 640px) {
+  #{{ section_id }} .app-shop__pagination {
+    gap: 10px;
+  }
+
+  #{{ section_id }} .app-shop__pagination-list {
+    width: 100%;
+    order: 3;
+  }
+
+  #{{ section_id }} .app-shop__pagination-prev,
+  #{{ section_id }} .app-shop__pagination-next {
+    min-width: calc(50% - 6px);
+  }
+}
+</style>
 {% schema %}
 {
   "name": "App Shop",
@@ -730,6 +848,39 @@
       "type": "header",
       "content": "Page content"
     },
+    {
+  "type": "range",
+  "id": "products_per_page",
+  "label": "Products per page",
+  "min": 4,
+  "max": 36,
+  "step": 4,
+  "default": 12
+},
+{
+  "type": "text",
+  "id": "primary_button_label",
+  "label": "Primary button label",
+  "default": "View Details"
+},
+{
+  "type": "checkbox",
+  "id": "show_price",
+  "label": "Show price",
+  "default": true
+},
+{
+  "type": "checkbox",
+  "id": "show_vendor",
+  "label": "Show vendor instead of SKU",
+  "default": false
+},
+{
+  "type": "text",
+  "id": "sku_prefix",
+  "label": "SKU prefix",
+  "default": "SKU: "
+},
     {
       "type": "text",
       "id": "page_title",
@@ -1680,57 +1831,6 @@
         }
       ]
     },
-    {
-      "type": "product_card",
-      "name": "Product card",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Product image"
-        },
-        {
-          "type": "text",
-          "id": "product_title",
-          "label": "Product title",
-          "default": "Bobrick B-2892 Surface-Mounted Twin Jumbo-Roll Toilet Tissue Dispenser"
-        },
-        {
-          "type": "text",
-          "id": "sku_prefix",
-          "label": "SKU prefix",
-          "default": "SKU: "
-        },
-        {
-          "type": "text",
-          "id": "sku",
-          "label": "SKU",
-          "default": "B-2892"
-        },
-        {
-          "type": "text",
-          "id": "primary_button_label",
-          "label": "Primary button label",
-          "default": "View Details"
-        },
-        {
-          "type": "url",
-          "id": "product_link",
-          "label": "Product link"
-        },
-        {
-          "type": "url",
-          "id": "secondary_link",
-          "label": "Secondary action link"
-        },
-        {
-          "type": "text",
-          "id": "secondary_aria_label",
-          "label": "Secondary action aria label",
-          "default": "Open product quick action"
-        }
-      ]
-    }
   ],
   "presets": [
     {
@@ -1802,30 +1902,6 @@
           "type": "collection_filter",
           "settings": {
             "label": "Cubicle Collection"
-          }
-        },
-        {
-          "type": "product_card",
-          "settings": {
-            "product_title": "Bobrick B-2892 Surface-Mounted Twin Jumbo-Roll Toilet Tissue Dispenser",
-            "sku": "B-2892",
-            "primary_button_label": "View Details"
-          }
-        },
-        {
-          "type": "product_card",
-          "settings": {
-            "product_title": "Bobrick B-6806 Series Stainless Steel Grab Bar",
-            "sku": "B-6806x18",
-            "primary_button_label": "View Details"
-          }
-        },
-        {
-          "type": "product_card",
-          "settings": {
-            "product_title": "Bobrick B-165 Series Channel-Frame Mirror",
-            "sku": "B-165-2436",
-            "primary_button_label": "View Details"
           }
         }
       ]
