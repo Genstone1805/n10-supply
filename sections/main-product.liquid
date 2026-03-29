@@ -59,7 +59,7 @@
     {% endif %}
 
     <div
-      class="grid grid-cols-1 {% if section.settings.desktop_layout == 'two_column' %}lg:grid-cols-2{% else %}lg:grid-cols-1{% endif %}"
+      class="!grid !grid-cols-1 {% if section.settings.desktop_layout == 'two_column' %}lg:!grid-cols-2{% else %}lg:!grid-cols-1{% endif %}"
       style="gap: var(--pd-content-gap);"
     >
       {% if section.settings.show_gallery %}
@@ -86,7 +86,7 @@
 
           {% if section.settings.show_thumbnails and current_product.images.size > 1 %}
             <div
-              class="grid"
+              class="!grid"
               style="grid-template-columns: repeat(var(--pd-thumb-columns), minmax(0, 1fr)); gap: {{ section.settings.thumbnail_gap }}px;"
             >
               {% for image in current_product.images limit: section.settings.thumbnail_limit %}
@@ -252,7 +252,7 @@
         {% endif %}
 
         {% if section.settings.show_feature_cards %}
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+          <div class="!grid !grid-cols-1 sm:!grid-cols-2 gap-4 mb-10">
             {% for block in section.blocks %}
               {% if block.type == 'feature_card' %}
                 <div
