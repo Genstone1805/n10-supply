@@ -412,6 +412,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      padding: 0;
       border-radius: 999px;
       border: 1px solid {{ section.settings.icon_button_border }};
       background: {{ section.settings.icon_button_bg }};
@@ -419,12 +420,27 @@
       text-decoration: none;
       transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
       flex: 0 0 auto;
+      cursor: pointer;
+      appearance: none;
+      font: inherit;
     }
 
     #{{ section_id }} .app-shop__secondary-btn:hover {
       background: {{ section.settings.icon_button_hover_bg }};
       color: {{ section.settings.icon_button_hover_color }};
       border-color: {{ section.settings.icon_button_hover_border }};
+    }
+
+    #{{ section_id }} .app-shop__secondary-btn:disabled,
+    #{{ section_id }} .app-shop__secondary-btn.is-loading {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    #{{ section_id }} .app-shop__secondary-btn.is-added {
+      background: var(--primary);
+      color: var(--primary-contrast);
+      border-color: var(--primary);
     }
 
     #{{ section_id }} .app-shop__secondary-btn svg {
@@ -735,57 +751,79 @@
                       </a>
 
                       {% if section.settings.show_icon_button %}
-                        <a
-                          class="app-shop__secondary-btn"
-                          href="{{ product.url }}"
-                          aria-label="View {{ product.title }}"
-                        >
-                          {% case section.settings.icon_button_icon %}
-                            {% when 'plus' %}
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="{{ section.settings.icon_stroke_width }}"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                              >
-                                <path d="M5 12h14"></path>
-                                <path d="M12 5v14"></path>
-                              </svg>
-                            {% when 'cart' %}
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="{{ section.settings.icon_stroke_width }}"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                              >
-                                <circle cx="8" cy="21" r="1"></circle>
-                                <circle cx="19" cy="21" r="1"></circle>
-                                <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
-                              </svg>
-                            {% when 'arrow' %}
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="{{ section.settings.icon_stroke_width }}"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                              >
-                                <path d="M5 12h14"></path>
-                                <path d="m12 5 7 7-7 7"></path>
-                              </svg>
-                          {% endcase %}
-                        </a>
+                        {% if section.settings.icon_button_icon == 'plus' %}
+                          <button
+                            class="app-shop__secondary-btn"
+                            type="button"
+                            data-add-to-cart
+                            data-variant-id="{{ current_variant.id }}"
+                            data-product-title="{{ product.title | escape }}"
+                            aria-label="Add {{ product.title | escape }} to cart"
+                            {% unless current_variant.available %}
+                              disabled
+                              aria-disabled="true"
+                            {% endunless %}
+                          >
+                            <span class="visually-hidden">
+                              {% if current_variant.available %}
+                                Add {{ product.title }} to cart
+                              {% else %}
+                                {{ product.title }} is unavailable
+                              {% endif %}
+                            </span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="{{ section.settings.icon_stroke_width }}"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              aria-hidden="true"
+                            >
+                              <path d="M5 12h14"></path>
+                              <path d="M12 5v14"></path>
+                            </svg>
+                          </button>
+                        {% else %}
+                          <a
+                            class="app-shop__secondary-btn"
+                            href="{{ product.url }}"
+                            aria-label="View {{ product.title }}"
+                          >
+                            {% case section.settings.icon_button_icon %}
+                              {% when 'cart' %}
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="{{ section.settings.icon_stroke_width }}"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  aria-hidden="true"
+                                >
+                                  <circle cx="8" cy="21" r="1"></circle>
+                                  <circle cx="19" cy="21" r="1"></circle>
+                                  <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                                </svg>
+                              {% when 'arrow' %}
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="{{ section.settings.icon_stroke_width }}"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  aria-hidden="true"
+                                >
+                                  <path d="M5 12h14"></path>
+                                  <path d="m12 5 7 7-7 7"></path>
+                                </svg>
+                            {% endcase %}
+                          </a>
+                        {% endif %}
                       {% endif %}
                     </div>
                   </div>
@@ -925,13 +963,12 @@
     if (!section) return;
 
     var searchInput = section.querySelector('[data-shop-search]');
-    if (!searchInput) return;
-
     var productGrid = section.querySelector('[data-products-grid]');
     var productCards = Array.prototype.slice.call(section.querySelectorAll('[data-product-card]'));
     var countEl = section.querySelector('[data-shop-count]');
     var emptyState = section.querySelector('[data-search-empty]');
     var pagination = section.querySelector('[data-products-pagination]');
+    var addToCartButtons = Array.prototype.slice.call(section.querySelectorAll('[data-add-to-cart]'));
     var baseCount = countEl
       ? parseInt(countEl.getAttribute('data-base-count'), 10) || productCards.length
       : productCards.length;
@@ -941,6 +978,8 @@
     }
 
     function applySearch() {
+      if (!searchInput) return;
+
       var normalizedQuery = normalizeValue(searchInput.value);
       var searchTerms = normalizedQuery ? normalizedQuery.split(' ') : [];
       var visibleCount = 0;
@@ -977,8 +1016,93 @@
       }
     }
 
-    searchInput.addEventListener('input', applySearch);
-    applySearch();
+    if (searchInput) {
+      searchInput.addEventListener('input', applySearch);
+      applySearch();
+    }
+
+    addToCartButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        if (button.disabled) return;
+
+        var variantId = button.getAttribute('data-variant-id');
+        var cartDrawer = document.querySelector('cart-drawer');
+        var formData = new FormData();
+
+        if (!variantId) return;
+
+        formData.append('id', variantId);
+        formData.append('quantity', '1');
+
+        if (cartDrawer && typeof cartDrawer.getSectionsToRender === 'function') {
+          cartDrawer.getSectionsToRender().forEach(function (sectionToRender) {
+            formData.append('sections', sectionToRender.id);
+          });
+          formData.append('sections_url', window.location.pathname);
+
+          if (typeof cartDrawer.setActiveElement === 'function') {
+            cartDrawer.setActiveElement(button);
+          }
+        }
+
+        button.disabled = true;
+        button.classList.add('is-loading');
+
+        fetch(window.routes.cart_add_url || '/cart/add.js', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+          },
+          body: formData,
+        })
+          .then(function (response) {
+            return response.json().then(function (data) {
+              return {
+                ok: response.ok,
+                data: data,
+              };
+            });
+          })
+          .then(function (result) {
+            if (!result.ok || result.data.status) {
+              throw new Error(result.data.description || result.data.message || 'Failed to add product to cart');
+            }
+
+            if (cartDrawer && result.data.sections && typeof cartDrawer.renderContents === 'function') {
+              if (cartDrawer.classList.contains('is-empty')) {
+                cartDrawer.classList.remove('is-empty');
+              }
+
+              cartDrawer.renderContents(result.data);
+            }
+
+            button.classList.add('is-added');
+
+            document.documentElement.dispatchEvent(
+              new CustomEvent('cart:updated', {
+                detail: {
+                  cartData: result.data,
+                },
+              })
+            );
+
+            window.setTimeout(function () {
+              button.classList.remove('is-added');
+            }, 1200);
+          })
+          .catch(function (error) {
+            console.error(error);
+          })
+          .finally(function () {
+            button.classList.remove('is-loading');
+
+            if (button.getAttribute('aria-disabled') !== 'true') {
+              button.disabled = false;
+            }
+          });
+      });
+    });
   });
 </script>
 {% schema %}
