@@ -188,13 +188,43 @@
           </h3>
         {% endif %}
 
-        <form
-          class="space-y-6"
-          action="{{ section.settings.form_action }}"
-          method="{{ section.settings.form_method }}"
-        >
+        {% form 'contact', class: 'space-y-6' %}
+          {% assign contact_name_key = section.settings.name_field_name | strip | default: 'name' %}
+          {% assign contact_subject_key = section.settings.subject_field_name | strip | default: 'subject' %}
+
+          <input type="hidden" name="return_to" value="{{ request.path }}">
+
+          {% if form.posted_successfully? %}
+            <div
+              style="
+                padding: 16px 20px;
+                border-radius: {{ section.settings.input_radius }}px;
+                background: #ecfdf5;
+                color: #065f46;
+                border: 1px solid #a7f3d0;
+              "
+            >
+              {{ section.settings.success_message }}
+            </div>
+          {% endif %}
+
+          {% if form.errors %}
+            <div
+              style="
+                padding: 16px 20px;
+                border-radius: {{ section.settings.input_radius }}px;
+                background: #fef2f2;
+                color: #991b1b;
+                border: 1px solid #fecaca;
+              "
+            >
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+
           <div class="space-y0">
             <label
+              for="ContactForm-Name-{{ section.id }}"
               class="text-xs font-bold uppercase tracking-widest text-brand-primary/50"
               style="
                 color: {{ section.settings.label_color }};
@@ -208,13 +238,16 @@
               {{ section.settings.name_label }}
             </label>
             <input
-              name="{{ section.settings.name_field_name }}"
+              id="ContactForm-Name-{{ section.id }}"
+              name="contact[{{ contact_name_key }}]"
+              value="{% if form[contact_name_key] %}{{ form[contact_name_key] | escape }}{% endif %}"
               {% if section.settings.name_required %}
                 required
               {% endif %}
               class="w-full px-6 py-4 bg-white border border-black/5 rounded0xl focus:outline-none focus:ring0 focus:ring-brand-accent/50 transition-all"
               placeholder="{{ section.settings.name_placeholder }}"
               type="text"
+              autocomplete="name"
               style="
                 color: {{ section.settings.input_text_color }};
                 background: rgba({{ section.settings.input_bg_color.red }}, {{ section.settings.input_bg_color.green }}, {{ section.settings.input_bg_color.blue }}, {{ input_bg_alpha }});
@@ -235,6 +268,7 @@
 
           <div class="space-y0">
             <label
+              for="ContactForm-Email-{{ section.id }}"
               class="text-xs font-bold uppercase tracking-widest text-brand-primary/50"
               style="
                 color: {{ section.settings.label_color }};
@@ -248,13 +282,18 @@
               {{ section.settings.email_label }}
             </label>
             <input
-              name="{{ section.settings.email_field_name }}"
+              id="ContactForm-Email-{{ section.id }}"
+              name="contact[email]"
+              value="{% if form.email %}{{ form.email | escape }}{% endif %}"
               {% if section.settings.email_required %}
                 required
               {% endif %}
               class="w-full px-6 py-4 bg-white border border-black/5 rounded0xl focus:outline-none focus:ring0 focus:ring-brand-accent/50 transition-all"
               placeholder="{{ section.settings.email_placeholder }}"
               type="email"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
               style="
                 color: {{ section.settings.input_text_color }};
                 background: rgba({{ section.settings.input_bg_color.red }}, {{ section.settings.input_bg_color.green }}, {{ section.settings.input_bg_color.blue }}, {{ input_bg_alpha }});
@@ -275,6 +314,7 @@
 
           <div class="space-y0">
             <label
+              for="ContactForm-Subject-{{ section.id }}"
               class="text-xs font-bold uppercase tracking-widest text-brand-primary/50"
               style="
                 color: {{ section.settings.label_color }};
@@ -288,7 +328,8 @@
               {{ section.settings.subject_label }}
             </label>
             <select
-              name="{{ section.settings.subject_field_name }}"
+              id="ContactForm-Subject-{{ section.id }}"
+              name="contact[{{ contact_subject_key }}]"
               class="w-full px-6 py-4 bg-white border border-black/5 rounded0xl focus:outline-none focus:ring0 focus:ring-brand-accent/50 transition-all"
               style="
                 color: {{ section.settings.input_text_color }};
@@ -308,7 +349,12 @@
             >
               {% for block in section.blocks %}
                 {% if block.type == 'subject_option' %}
-                  <option value="{{ block.settings.option_value | escape }}">
+                  <option
+                    value="{{ block.settings.option_value | escape }}"
+                    {% if form[contact_subject_key] == block.settings.option_value %}
+                      selected
+                    {% endif %}
+                  >
                     {{ block.settings.option_label }}
                   </option>
                 {% endif %}
@@ -318,6 +364,7 @@
 
           <div class="space-y0">
             <label
+              for="ContactForm-Message-{{ section.id }}"
               class="text-xs font-bold uppercase tracking-widest text-brand-primary/50"
               style="
                 color: {{ section.settings.label_color }};
@@ -331,7 +378,8 @@
               {{ section.settings.message_label }}
             </label>
             <textarea
-              name="{{ section.settings.message_field_name }}"
+              id="ContactForm-Message-{{ section.id }}"
+              name="contact[body]"
               {% if section.settings.message_required %}
                 required
               {% endif %}
@@ -353,7 +401,7 @@
                 font-weight: {{ section.settings.input_text_weight }};
                 line-height: {{ section.settings.input_text_line_height }};
               "
-            ></textarea>
+            >{% if form.body %}{{ form.body | escape }}{% endif %}</textarea>
           </div>
 
           {% if section.settings.show_button %}
@@ -391,7 +439,7 @@
               {% endif %}
             </button>
           {% endif %}
-        </form>
+        {% endform %}
       </div>
     </div>
   </div>
@@ -811,21 +859,9 @@
     },
     {
       "type": "text",
-      "id": "email_field_name",
-      "label": "Email field name",
-      "default": "email"
-    },
-    {
-      "type": "text",
       "id": "subject_field_name",
       "label": "Subject field name",
       "default": "subject"
-    },
-    {
-      "type": "text",
-      "id": "message_field_name",
-      "label": "Message field name",
-      "default": "message"
     },
     {
       "type": "text",
@@ -990,23 +1026,13 @@
 
     {
       "type": "header",
-      "content": "Form behavior"
+      "content": "Messages"
     },
     {
       "type": "text",
-      "id": "form_action",
-      "label": "Form action URL",
-      "default": "#"
-    },
-    {
-      "type": "select",
-      "id": "form_method",
-      "label": "Form method",
-      "default": "post",
-      "options": [
-        { "value": "post", "label": "POST" },
-        { "value": "get", "label": "GET" }
-      ]
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks for reaching out. We received your message and will get back to you shortly."
     },
 
     {
