@@ -52,14 +52,6 @@
             "active": false
           }
         },
-        "collection_filter_B8ErgN": {
-          "type": "collection_filter",
-          "settings": {
-            "label": "All Collections",
-            "link": "",
-            "active": true
-          }
-        },
         "collection_filter_MFQhbz": {
           "type": "collection_filter",
           "settings": {
@@ -146,7 +138,6 @@
         "brand_filter_qT7YrX",
         "brand_filter_9mU33e",
         "brand_filter_iDA9Hd",
-        "collection_filter_B8ErgN",
         "collection_filter_MFQhbz",
         "collection_filter_mJNjgj",
         "collection_filter_AgiiMM",
