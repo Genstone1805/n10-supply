@@ -8,6 +8,7 @@
     --pd-bottom-padding: {{ section.settings.padding_bottom }}px;
     --pd-gallery-gap: {{ section.settings.gallery_gap }}px;
     --pd-content-gap: {{ section.settings.content_gap }}px;
+    --pd-sticky-offset: calc(var(--header-height, 0px) + 2rem);
     --pd-thumb-columns: {{ section.settings.thumbnail_columns }};
     --pd-radius-main: {{ section.settings.image_radius }}px;
     --pd-radius-thumb: {{ section.settings.thumbnail_radius }}px;
@@ -59,10 +60,11 @@
     {% endif %}
 
     <div
-      class="!grid !grid-cols-1 {% if section.settings.desktop_layout == 'two_column' %}lg:!grid-cols-2{% else %}lg:!grid-cols-1{% endif %}"
+      class="product-detail-layout !grid !grid-cols-1 {% if section.settings.desktop_layout == 'two_column' %}product-detail-layout--two-column lg:!grid-cols-2{% else %}lg:!grid-cols-1{% endif %}"
       style="gap: var(--pd-content-gap);"
     >
       {% if section.settings.show_gallery %}
+        <div class="product-detail-media-column">
         {% comment %}
           <div class="space-y-4">
             <div
@@ -379,9 +381,10 @@
             {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
           </div>
         {% endif %}
+        </div>
       {% endif %}
 
-      <div>
+      <div class="product-detail-content-column">
         <div class="mb-8">
           {% if section.settings.show_vendor_or_category_badge %}
             <span
@@ -641,6 +644,26 @@
 </section>
 
 <style>
+  .product-detail-layout {
+    align-items: start;
+  }
+
+  .product-detail-media-column,
+  .product-detail-content-column {
+    min-width: 0;
+  }
+
+  .product-detail-media-column {
+    align-self: start;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .product-detail-layout--two-column .product-detail-media-column {
+      position: sticky;
+      top: var(--pd-sticky-offset);
+    }
+  }
+
   [data-product-gallery] [data-gallery-thumb] {
     padding: 0;
     outline: none;
