@@ -502,12 +502,17 @@
 
         {% assign bim_file = current_product.metafields.custom.bim_file %}
         {% assign tech_sheet = current_product.metafields.custom.technical_data_sheet %}
+        {% assign add_to_cart_variant = current_product.selected_or_first_available_variant %}
 
-        <div class="flex flex-col sm:flex-row gap-4 mb-12">
+        <div class="product-detail-actions mb-12">
           <button
             type="button"
-            class="flex-1 font-bold flex items-center justify-center space-x-3 transition-all js-ajax-add-to-cart"
-            data-variant-id="{{ current_variant.id }}"
+            class="product-detail-actions__primary font-bold flex items-center justify-center space-x-3 transition-all js-ajax-add-to-cart"
+            data-variant-id="{{ add_to_cart_variant.id }}"
+            {% unless add_to_cart_variant.available %}
+              disabled
+              aria-disabled="true"
+            {% endunless %}
             style="
               padding-top: {{ section.settings.button_y_padding }}px;
               padding-bottom: {{ section.settings.button_y_padding }}px;
@@ -518,56 +523,66 @@
               color: var(--pd-button-text);
             "
           >
-            <span class="js-add-to-cart-text">Add to cart</span>
+            <span class="js-add-to-cart-text">
+              {% if add_to_cart_variant.available %}
+                Add to cart
+              {% else %}
+                Unavailable
+              {% endif %}
+            </span>
           </button>
 
-          {% if bim_file != blank %}
-            <a
-              href="{{ bim_file.value }}"
-              download="Product-Ibm-File.pdf"
-              class="font-bold flex items-center justify-center space-x-3 border"
-              style="
-                padding-top: {{ section.settings.button_y_padding }}px;
-                padding-bottom: {{ section.settings.button_y_padding }}px;
-                padding-left: {{ section.settings.button_x_padding }}px;
-                padding-right: {{ section.settings.button_x_padding }}px;
-                border-radius: {{ section.settings.button_radius }}px;
-                background: var(--pd-secondary-button-bg);
-                color: var(--pd-secondary-button-text);
-                border-color: var(--pd-border-color);
-              "
-              {% if section.settings.secondary_button_new_tab %}
-                target="_blank"
+          {% if bim_file != blank or tech_sheet != blank %}
+            <div class="product-detail-actions__downloads">
+              {% if bim_file != blank %}
+                <a
+                  href="{{ bim_file.value }}"
+                  download="Product-Ibm-File.pdf"
+                  class="product-detail-actions__download font-bold flex items-center justify-center space-x-3 border"
+                  style="
+                    padding-top: {{ section.settings.button_y_padding }}px;
+                    padding-bottom: {{ section.settings.button_y_padding }}px;
+                    padding-left: {{ section.settings.button_x_padding }}px;
+                    padding-right: {{ section.settings.button_x_padding }}px;
+                    border-radius: {{ section.settings.button_radius }}px;
+                    background: var(--pd-secondary-button-bg);
+                    color: var(--pd-secondary-button-text);
+                    border-color: var(--pd-border-color);
+                  "
+                  {% if section.settings.secondary_button_new_tab %}
+                    target="_blank"
+                  {% endif %}
+                  rel="noopener noreferrer"
+                >
+                  <span>Download BIM File</span>
+                </a>
               {% endif %}
-              rel="noopener noreferrer"
-            >
-              <span>Download BIM File</span>
-            </a>
-          {% endif %}
 
-          {% if tech_sheet != blank %}
-            <a
-              href="{{ tech_sheet.value }}"
-              download="Product-Tech-Sheet.pdf"
-              class="font-bold flex items-center justify-center space-x-3 border"
-              style="
-                padding-top: {{ section.settings.button_y_padding }}px;
-                padding-bottom: {{ section.settings.button_y_padding }}px;
-                padding-left: {{ section.settings.button_x_padding }}px;
-                padding-right: {{ section.settings.button_x_padding }}px;
-                border-radius: {{ section.settings.button_radius }}px;
-                background: var(--pd-secondary-button-bg);
-                color: var(--pd-secondary-button-text);
-                border-color: var(--pd-border-color);
-              "
-              download
-              {% if section.settings.secondary_button_new_tab %}
-                target="_blank"
+              {% if tech_sheet != blank %}
+                <a
+                  href="{{ tech_sheet.value }}"
+                  download="Product-Tech-Sheet.pdf"
+                  class="product-detail-actions__download font-bold flex items-center justify-center space-x-3 border"
+                  style="
+                    padding-top: {{ section.settings.button_y_padding }}px;
+                    padding-bottom: {{ section.settings.button_y_padding }}px;
+                    padding-left: {{ section.settings.button_x_padding }}px;
+                    padding-right: {{ section.settings.button_x_padding }}px;
+                    border-radius: {{ section.settings.button_radius }}px;
+                    background: var(--pd-secondary-button-bg);
+                    color: var(--pd-secondary-button-text);
+                    border-color: var(--pd-border-color);
+                  "
+                  download
+                  {% if section.settings.secondary_button_new_tab %}
+                    target="_blank"
+                  {% endif %}
+                  rel="noopener noreferrer"
+                >
+                  <span>Download Technical Data Sheet</span>
+                </a>
               {% endif %}
-              rel="noopener noreferrer"
-            >
-              <span>Download Technical Data Sheet</span>
-            </a>
+            </div>
           {% endif %}
         </div>
       </div>
@@ -580,6 +595,32 @@
     align-items: start;
   }
 
+  .product-detail-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .product-detail-actions__primary,
+  .product-detail-actions__download {
+    width: 100%;
+  }
+
+  .product-detail-actions__primary {
+    border: 0;
+  }
+
+  .product-detail-actions__primary:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  .product-detail-actions__downloads {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
   .product-detail-media-column,
   .product-detail-content-column {
     min-width: 0;
@@ -589,10 +630,36 @@
     align-self: start;
   }
 
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    .product-detail-actions__downloads {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   @media screen and (min-width: 1024px) {
     .product-detail-layout--two-column .product-detail-media-column {
       position: sticky;
       top: var(--pd-sticky-offset);
+    }
+
+    .product-detail-actions {
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    .product-detail-actions__primary {
+      flex: 1 1 0;
+    }
+
+    .product-detail-actions__downloads {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .product-detail-actions__download {
+      width: auto;
     }
   }
 
@@ -624,57 +691,90 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const addToCartBtn = document.querySelector('.js-ajax-add-to-cart');
+    const addToCartButtons = document.querySelectorAll('.js-ajax-add-to-cart');
 
-    if (!addToCartBtn) return;
+    if (!addToCartButtons.length) return;
 
-    addToCartBtn.addEventListener('click', async function () {
-      const variantId = this.dataset.variantId;
-      const buttonText = this.querySelector('.js-add-to-cart-text');
-      const originalText = buttonText ? buttonText.textContent : 'Add to cart';
+    addToCartButtons.forEach((button) => {
+      button.addEventListener('click', async function () {
+        const variantId = this.dataset.variantId;
+        const buttonText = this.querySelector('.js-add-to-cart-text');
+        const originalText = buttonText ? buttonText.textContent : 'Add to cart';
+        const cartDrawer = document.querySelector('cart-drawer');
 
-      try {
-        this.disabled = true;
-        if (buttonText) buttonText.textContent = 'Adding...';
-
-        const response = await fetch('/cart/add.js', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({
-            id: variantId,
-            quantity: 1,
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to add product to cart');
+        if (!variantId) {
+          console.error('Missing variant ID for add to cart.');
+          if (buttonText) buttonText.textContent = 'Unavailable';
+          return;
         }
 
-        const data = await response.json();
+        try {
+          this.disabled = true;
+          if (buttonText) buttonText.textContent = 'Adding...';
 
-        if (buttonText) buttonText.textContent = 'Added';
+          const formData = new FormData();
+          formData.append('id', variantId);
+          formData.append('quantity', '1');
 
-        document.documentElement.dispatchEvent(
-          new CustomEvent('cart:updated', {
-            detail: { product: data },
-          })
-        );
+          if (cartDrawer && typeof cartDrawer.getSectionsToRender === 'function') {
+            cartDrawer.getSectionsToRender().forEach((sectionToRender) => {
+              formData.append('sections', sectionToRender.id);
+            });
+            formData.append('sections_url', window.location.pathname);
 
-        setTimeout(() => {
-          if (buttonText) buttonText.textContent = originalText;
-          this.disabled = false;
-        }, 1200);
-      } catch (error) {
-        console.error(error);
-        if (buttonText) buttonText.textContent = 'Error';
-        setTimeout(() => {
-          if (buttonText) buttonText.textContent = originalText;
-          this.disabled = false;
-        }, 1500);
-      }
+            if (typeof cartDrawer.setActiveElement === 'function') {
+              cartDrawer.setActiveElement(this);
+            }
+          }
+
+          const response = await fetch(window.routes?.cart_add_url || '/cart/add.js', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'X-Requested-With': 'XMLHttpRequest',
+            },
+            body: formData,
+          });
+
+          const data = await response.json();
+
+          if (!response.ok || data.status) {
+            throw new Error(data.description || data.message || 'Failed to add product to cart');
+          }
+
+          if (cartDrawer && data.sections && typeof cartDrawer.renderContents === 'function') {
+            if (cartDrawer.classList.contains('is-empty')) {
+              cartDrawer.classList.remove('is-empty');
+            }
+
+            cartDrawer.renderContents(data);
+          }
+
+          if (buttonText) buttonText.textContent = 'Added';
+
+          document.documentElement.dispatchEvent(
+            new CustomEvent('cart:updated', {
+              detail: { cartData: data },
+            })
+          );
+
+          setTimeout(() => {
+            if (buttonText) buttonText.textContent = originalText;
+            if (this.getAttribute('aria-disabled') !== 'true') {
+              this.disabled = false;
+            }
+          }, 1200);
+        } catch (error) {
+          console.error(error);
+          if (buttonText) buttonText.textContent = 'Error';
+          setTimeout(() => {
+            if (buttonText) buttonText.textContent = originalText;
+            if (this.getAttribute('aria-disabled') !== 'true') {
+              this.disabled = false;
+            }
+          }, 1500);
+        }
+      });
     });
   });
 </script>
