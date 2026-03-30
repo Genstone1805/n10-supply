@@ -284,9 +284,21 @@
                   </div>
                 {% endif %}
               {% endfor %}
+            {% elsif section.settings.hulk_form_id != blank %}
+              <div class="quote-app-form__embed">
+                <div class="pxFormGenerator" id="{{ section.settings.hulk_form_id | escape }}">
+                  <iframe
+                    src="https://formbuilder.hulkapps.com/corepage/customform?id={{ section.settings.hulk_form_id | url_encode }}&referrer_url={{ canonical_url | url_encode }}"
+                    id="frame_{{ section.settings.hulk_form_id | escape }}"
+                    frameborder="0"
+                    width="100%"
+                    title="{{ section.settings.hulk_form_title | escape }}"
+                  ></iframe>
+                </div>
+              </div>
             {% else %}
               <div class="quote-app-placeholder">
-                Add the Hulk Form Builder app block to this section to render the quote form here.
+                Add the Hulk Form Builder app block to this section, or enter a Hulk form ID in the section settings.
               </div>
             {% endif %}
           </div>
@@ -470,6 +482,23 @@
       "id": "form_subtitle",
       "label": "Form subtitle",
       "default": "Fill in the details below and our team will get back to you."
+    },
+    {
+      "type": "header",
+      "content": "Hulk form fallback"
+    },
+    {
+      "type": "text",
+      "id": "hulk_form_id",
+      "label": "Hulk form ID",
+      "info": "Used when no Hulk app block is attached to this section.",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "hulk_form_title",
+      "label": "Hulk form iframe title",
+      "default": "Request a Quote Form"
     },
 
     {
