@@ -87,8 +87,8 @@
         "collection_filter_bMXU8Q": {
           "type": "collection_filter",
           "settings": {
-            "label": "ConturaSeries®",
-            "link": "",
+            "label": "Waste Receptacles",
+            "link": "shopify://collections/waste-receptacles",
             "active": false
           }
         },
