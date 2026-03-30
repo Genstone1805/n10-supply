@@ -298,6 +298,9 @@
           </div>
         {% endif %}
 
+        {% assign bim_file = current_product.metafields.custom.bim_file %}
+{% assign tech_sheet = current_product.metafields.custom.technical_data_sheet %}
+
           <div class="flex flex-col sm:flex-row gap-4 mb-12">
   <button
     type="button"
