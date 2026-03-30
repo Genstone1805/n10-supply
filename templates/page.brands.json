@@ -110,89 +110,7 @@
         "feature_icon_color": "#00bd7e",
         "feature_text_size": 16,
         "feature_text_color": "#000000",
-        "show_button": true,
-        "button_text": "View Bobrick Catalog",
-        "button_link": "shopify://collections/bobrick",
-        "button_new_tab": false,
-        "show_button_icon": true,
-        "button_icon_size": 18,
-        "button_font_size": 18,
-        "button_padding_x": 32,
-        "button_padding_y": 16,
-        "button_radius": 100,
-        "button_bg": "#0f172a",
-        "button_text_color": "#ffffff",
-        "button_border_color": "#0f172a",
-        "button_border_width": 0,
-        "section_bg": "#ffffff"
-      }
-    },
-    "app_image_card_ttkbXc": {
-      "type": "app-image-card",
-      "blocks": {
-        "feature_6czTEg": {
-          "type": "feature",
-          "settings": {
-            "feature_text": "Restroom Accessories"
-          }
-        },
-        "feature_mp9mcW": {
-          "type": "feature",
-          "settings": {
-            "feature_text": "Toilet Partitions"
-          }
-        },
-        "feature_f7mp8j": {
-          "type": "feature",
-          "settings": {
-            "feature_text": "Hand Dryers"
-          }
-        }
-      },
-      "block_order": [
-        "feature_6czTEg",
-        "feature_mp9mcW",
-        "feature_f7mp8j"
-      ],
-      "name": "App Image Card",
-      "settings": {
-        "padding_top": 96,
-        "padding_bottom": 96,
-        "container_width": 1280,
-        "column_gap": 64,
-        "column_gap_mobile": 32,
-        "reverse_layout": false,
-        "text_align": "left",
-        "image": "shopify://shop_images/bobrick.webp",
-        "image_alt": "Bobrick",
-        "image_ratio": "landscape",
-        "image_position": "center center",
-        "image_radius": 24,
-        "image_bg": "#ffffff",
-        "image_border_color": "#e7e5e4",
-        "image_border_width": 1,
-        "show_badge": true,
-        "show_badge_icon": true,
-        "badge_text": "Authorized Distributor",
-        "badge_font_size": 15,
-        "badge_letter_spacing": 0.3,
-        "badge_icon_size": 24,
-        "badge_text_color": "#a3a3a3",
-        "badge_icon_color": "#c4a058",
-        "title": "Bobrick",
-        "title_size": 48,
-        "title_line_height": "1.2",
-        "title_color": "#000000",
-        "description": "The industry leader in commercial restroom accessories. Bobrick provides high-quality, durable, and ADA-compliant solutions for every type of commercial building.",
-        "description_size": 20,
-        "description_line_height": "1.7",
-        "description_color": "#475569",
-        "show_feature_icon": true,
-        "feature_icon_size": 23,
-        "feature_icon_color": "#00bd7e",
-        "feature_text_size": 16,
-        "feature_text_color": "#000000",
-        "show_button": true,
+        "show_button": false,
         "button_text": "View Bobrick Catalog",
         "button_link": "shopify://collections/bobrick",
         "button_new_tab": false,
@@ -245,8 +163,8 @@
         "column_gap_mobile": 32,
         "reverse_layout": false,
         "text_align": "left",
-        "image": "shopify://shop_images/bobrick.webp",
-        "image_alt": "Bobrick",
+        "image": "shopify://shop_images/931-400x200.jpg",
+        "image_alt": "Bradley",
         "image_ratio": "landscape",
         "image_position": "center center",
         "image_radius": 24,
@@ -274,89 +192,7 @@
         "feature_icon_color": "#00bd7e",
         "feature_text_size": 16,
         "feature_text_color": "#000000",
-        "show_button": true,
-        "button_text": "View Bobrick Catalog",
-        "button_link": "shopify://collections/bobrick",
-        "button_new_tab": false,
-        "show_button_icon": true,
-        "button_icon_size": 18,
-        "button_font_size": 18,
-        "button_padding_x": 32,
-        "button_padding_y": 16,
-        "button_radius": 100,
-        "button_bg": "#0f172a",
-        "button_text_color": "#ffffff",
-        "button_border_color": "#0f172a",
-        "button_border_width": 0,
-        "section_bg": "#ffffff"
-      }
-    },
-    "app_image_card_ErtnDV": {
-      "type": "app-image-card",
-      "blocks": {
-        "feature_bk7tVy": {
-          "type": "feature",
-          "settings": {
-            "feature_text": "Restroom Accessories"
-          }
-        },
-        "feature_RHK3TP": {
-          "type": "feature",
-          "settings": {
-            "feature_text": "Toilet Partitions"
-          }
-        },
-        "feature_4ajFjw": {
-          "type": "feature",
-          "settings": {
-            "feature_text": "Hand Dryers"
-          }
-        }
-      },
-      "block_order": [
-        "feature_bk7tVy",
-        "feature_RHK3TP",
-        "feature_4ajFjw"
-      ],
-      "name": "App Image Card",
-      "settings": {
-        "padding_top": 96,
-        "padding_bottom": 96,
-        "container_width": 1280,
-        "column_gap": 64,
-        "column_gap_mobile": 32,
-        "reverse_layout": false,
-        "text_align": "left",
-        "image": "shopify://shop_images/bobrick.webp",
-        "image_alt": "Bobrick",
-        "image_ratio": "landscape",
-        "image_position": "center center",
-        "image_radius": 24,
-        "image_bg": "#ffffff",
-        "image_border_color": "#e7e5e4",
-        "image_border_width": 1,
-        "show_badge": true,
-        "show_badge_icon": true,
-        "badge_text": "Authorized Distributor",
-        "badge_font_size": 15,
-        "badge_letter_spacing": 0.3,
-        "badge_icon_size": 24,
-        "badge_text_color": "#a3a3a3",
-        "badge_icon_color": "#c4a058",
-        "title": "Bobrick",
-        "title_size": 48,
-        "title_line_height": "1.2",
-        "title_color": "#000000",
-        "description": "The industry leader in commercial restroom accessories. Bobrick provides high-quality, durable, and ADA-compliant solutions for every type of commercial building.",
-        "description_size": 20,
-        "description_line_height": "1.7",
-        "description_color": "#475569",
-        "show_feature_icon": true,
-        "feature_icon_size": 23,
-        "feature_icon_color": "#00bd7e",
-        "feature_text_size": 16,
-        "feature_text_color": "#000000",
-        "show_button": true,
+        "show_button": false,
         "button_text": "View Bobrick Catalog",
         "button_link": "shopify://collections/bobrick",
         "button_new_tab": false,
@@ -768,9 +604,7 @@
     "main",
     "app_page_title_FgTdxU",
     "app_image_card_pJQbFm",
-    "app_image_card_ttkbXc",
     "app_image_card_LDgr8C",
-    "app_image_card_ErtnDV",
     "app_image_card_xDrPcK",
     "app_image_card_rpBJre",
     "app_compliance_YATJGt"
