@@ -107,36 +107,6 @@
             "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"28\" height=\"28\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0\"></path><circle cx=\"12\" cy=\"10\" r=\"3\"></circle></svg>",
             "icon_color": "#c49f5e"
           }
-        },
-        "hulk_form_builder_form_block_RtLyKP": {
-          "type": "shopify://apps/hulk-form-builder/blocks/form-block/b6b8dd14-356b-4725-a4ed-77232212b3c3",
-          "settings": {
-            "form_uuid": "s4rrDy-R1UWQvNSHeBb3Sg",
-            "form_settings": true,
-            "font_color": "#111827",
-            "size": 15,
-            "input_background_color": "#fafaf9",
-            "input_background_color_focus": "#fafaf9",
-            "input_border_radius": 18,
-            "input_border_color": "#e5e7eb",
-            "input_border_color_focus": "#c4a058",
-            "input_font_color": "#111827",
-            "input_size": 18,
-            "border_color": "#e7e5e4",
-            "border_radius": 0,
-            "border": 0,
-            "fill_color": "#ffffff",
-            "padding": 0,
-            "form_width": 1280,
-            "btn_text": "Submit Quote Request",
-            "sub_btn_txt_color": "#ffffff",
-            "sub_btn_bg_color": "#1a1a1a",
-            "sub_btn_font_size": 18,
-            "sub_btn_bdr_color": "#1a1a1a",
-            "sub_btn_bdr_rad": 100,
-            "sub_btn_bdr_width": 0,
-            "fonts": "Helvetica Neue"
-          }
         }
       },
       "block_order": [
@@ -145,8 +115,7 @@
         "benefit_x9RwX3",
         "contact_item_3xnNmH",
         "contact_item_a8HrhL",
-        "contact_item_DL3RxQ",
-        "hulk_form_builder_form_block_RtLyKP"
+        "contact_item_DL3RxQ"
       ],
       "name": "App Quote Form",
       "settings": {
@@ -282,11 +251,53 @@
         "input_focus_ring_width": 2,
         "button_alignment": "center"
       }
+    },
+    "17748853454ef2879d": {
+      "type": "apps",
+      "blocks": {
+        "hulk_form_builder_form_block_wgg8MW": {
+          "type": "shopify://apps/hulk-form-builder/blocks/form-block/b6b8dd14-356b-4725-a4ed-77232212b3c3",
+          "settings": {
+            "form_uuid": "s4rrDy-R1UWQvNSHeBb3Sg",
+            "form_settings": false,
+            "font_color": "#000000",
+            "size": 14,
+            "input_background_color": "#FFF",
+            "input_background_color_focus": "#F4DADA",
+            "input_border_radius": 1,
+            "input_border_color": "#ebe9e9",
+            "input_border_color_focus": "#2D2727",
+            "input_font_color": "#3D3131",
+            "input_size": 14,
+            "border_color": "#121212",
+            "border_radius": 2,
+            "border": 1,
+            "fill_color": "#EBE9E9",
+            "padding": 35,
+            "form_width": 600,
+            "btn_text": "Submit",
+            "sub_btn_txt_color": "#F3F3F3",
+            "sub_btn_bg_color": "#3F3333",
+            "sub_btn_font_size": 14,
+            "sub_btn_bdr_color": "#FFFFFF",
+            "sub_btn_bdr_rad": 3,
+            "sub_btn_bdr_width": 1,
+            "fonts": "Times New Roman"
+          }
+        }
+      },
+      "block_order": [
+        "hulk_form_builder_form_block_wgg8MW"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
     "main",
     "app_page_title_D4TEpz",
-    "app_quote_form_h8ATN7"
+    "app_quote_form_h8ATN7",
+    "17748853454ef2879d"
   ]
 }
