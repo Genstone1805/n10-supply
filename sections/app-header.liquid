@@ -296,7 +296,11 @@
           {% if section.settings.show_cta and section.settings.cta_label != blank %}
             <a
               class="app-header__cta"
-              href="{% if section.settings.cta_link != blank %}{{ section.settings.cta_link }}{% else %}#{% endif %}"
+              href="{{ routes.cart_url }}"
+              data-cart-trigger
+              {% if settings.cart_type == 'drawer' %}
+                aria-haspopup="dialog"
+              {% endif %}
             >
               {% if section.settings.show_cta_icon %}
                 <svg
@@ -314,7 +318,10 @@
                   <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
                 </svg>
               {% endif %}
-              <span>{{ section.settings.cta_label }}</span>
+              <span>
+                {{ section.settings.cta_label }}
+                (<span data-cart-count>{{ cart.item_count }}</span>)
+              </span>
             </a>
           {% endif %}
         </div>
@@ -376,25 +383,30 @@
             <div class="app-header__mobile-cta">
               <a
                 class="app-header__cta"
-                href="{% if section.settings.cta_link != blank %}{{ section.settings.cta_link }}{% else %}#{% endif %}"
-              >
-                {% if section.settings.show_cta_icon %}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <circle cx="8" cy="21" r="1"></circle>
-                    <circle cx="19" cy="21" r="1"></circle>
-                    <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
-                  </svg>
+                href="{{ routes.cart_url }}"
+                data-cart-trigger
+                {% if settings.cart_type == 'drawer' %}
+                  aria-haspopup="dialog"
                 {% endif %}
-                <span>{{ section.settings.cta_label }}</span>
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="8" cy="21" r="1"></circle>
+                  <circle cx="19" cy="21" r="1"></circle>
+                  <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                </svg>
+                <span>
+                  {{ section.settings.cta_label }}
+                  (<span data-cart-count>{{ cart.item_count }}</span>)
+                </span>
               </a>
             </div>
           {% endif %}
@@ -404,20 +416,93 @@
   </nav>
 
   <script>
-    (function () {
+    document.addEventListener('DOMContentLoaded', function () {
       var header = document.getElementById('{{ section_id }}');
       if (!header) return;
 
       var toggle = header.querySelector('[data-mobile-toggle]');
       var panel = header.querySelector('[data-mobile-panel]');
+      var cartTriggers = header.querySelectorAll('[data-cart-trigger]');
+      var cartCountEls = header.querySelectorAll('[data-cart-count]');
 
-      if (!toggle || !panel) return;
+      if (toggle && panel) {
+        toggle.addEventListener('click', function () {
+          var isOpen = panel.classList.toggle('is-open');
+          toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+      }
 
-      toggle.addEventListener('click', function () {
-        var isOpen = panel.classList.toggle('is-open');
-        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      function setCartCount(count) {
+        cartCountEls.forEach(function (countEl) {
+          countEl.textContent = count;
+        });
+      }
+
+      function refreshCartCount() {
+        return fetch(window.routes.cart_url + '.js', {
+          headers: {
+            Accept: 'application/json',
+          },
+        })
+          .then(function (response) {
+            if (!response.ok) throw new Error('Unable to load cart');
+            return response.json();
+          })
+          .then(function (cartData) {
+            setCartCount(cartData.item_count || 0);
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+      }
+
+      function openCartDrawer(trigger) {
+        var cartDrawer = document.querySelector('cart-drawer');
+
+        if ('{{ settings.cart_type }}' !== 'drawer' || !cartDrawer || typeof cartDrawer.open !== 'function') {
+          return false;
+        }
+
+        cartDrawer.open(trigger);
+
+        if (panel && panel.classList.contains('is-open')) {
+          panel.classList.remove('is-open');
+          if (toggle) {
+            toggle.setAttribute('aria-expanded', 'false');
+          }
+        }
+
+        return true;
+      }
+
+      cartTriggers.forEach(function (trigger) {
+        trigger.addEventListener('click', function (event) {
+          if (openCartDrawer(trigger)) {
+            event.preventDefault();
+          }
+        });
       });
-    })();
+
+      if (typeof subscribe === 'function' && typeof PUB_SUB_EVENTS !== 'undefined') {
+        subscribe(PUB_SUB_EVENTS.cartUpdate, function (event) {
+          if (event && event.cartData && typeof event.cartData.item_count === 'number') {
+            setCartCount(event.cartData.item_count);
+            return;
+          }
+
+          return refreshCartCount();
+        });
+      }
+
+      document.documentElement.addEventListener('cart:updated', function (event) {
+        if (event.detail && event.detail.cartData && typeof event.detail.cartData.item_count === 'number') {
+          setCartCount(event.detail.cartData.item_count);
+          return;
+        }
+
+        refreshCartCount();
+      });
+    });
   </script>
 </header>
 
