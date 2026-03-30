@@ -196,10 +196,45 @@
       gap: {{ section.settings.form_grid_gap_mobile }}px;
     }
 
+    #{{ section_id }} .quote-app-form,
+    #{{ section_id }} .quote-app-form .shopify-app-block,
+    #{{ section_id }} .quote-app-form .pxFormGenerator {
+      width: 100%;
+      max-width: none;
+    }
+
+    #{{ section_id }} .quote-app-form iframe {
+      display: block;
+      width: 100%;
+      min-height: 780px;
+      border: 0;
+      background: transparent;
+    }
+
+    #{{ section_id }} .quote-app-note {
+      color: {{ section.settings.note_text_color }};
+      font-size: {{ section.settings.note_text_size }}px;
+      margin-bottom: {{ section.settings.form_fields_spacing }}px;
+    }
+
+    #{{ section_id }} .quote-app-placeholder {
+      padding: 24px;
+      border: 1px dashed {{ section.settings.input_border_color }};
+      border-radius: {{ section.settings.input_radius }}px;
+      color: {{ section.settings.placeholder_color }};
+      text-align: center;
+    }
+
     @media (min-width: 768px) {
       #{{ section_id }} .quote-field-grid-2 {
         grid-template-columns: 1fr 1fr;
         gap: {{ section.settings.form_grid_gap_desktop }}px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      #{{ section_id }} .quote-app-form iframe {
+        min-height: 920px;
       }
     }
   </style>
@@ -223,229 +258,38 @@
             <h3 class="quote-heading font-bold">{{ section.settings.form_title }}</h3>
           {% endif %}
 
-          {% if section.settings.form_subtitle != blank %}
-            <div class="quote-subheading">{{ section.settings.form_subtitle }}</div>
-          {% endif %}
+        {% if section.settings.form_subtitle != blank %}
+          <div class="quote-subheading">{{ section.settings.form_subtitle }}</div>
+        {% endif %}
 
-          {% form 'contact', class: 'quote-form-space', enctype: 'multipart/form-data' %}
-            {% if form.posted_successfully? %}
-              <div
-                style="
-                  padding: 16px 20px;
-                  border-radius: {{ section.settings.input_radius }}px;
-                  background: {{ section.settings.success_bg }};
-                  color: {{ section.settings.success_text }};
-                  border: 1px solid {{ section.settings.success_border }};
-                "
-              >
-                {{ section.settings.success_message }}
-              </div>
+          {% assign has_quote_app_block = false %}
+          {% for block in section.blocks %}
+            {% if block.type == '@app' %}
+              {% assign has_quote_app_block = true %}
             {% endif %}
+          {% endfor %}
 
-            {% if form.errors %}
-              <div
-                style="
-                  padding: 16px 20px;
-                  border-radius: {{ section.settings.input_radius }}px;
-                  background: {{ section.settings.error_bg }};
-                  color: {{ section.settings.error_text }};
-                  border: 1px solid {{ section.settings.error_border }};
-                "
-              >
-                {{ form.errors | default_errors }}
-              </div>
-            {% endif %}
-
-            <div class="quote-field-grid-2">
-              {% if section.settings.show_full_name %}
-                <div class="space-y-2">
-                  <label class="quote-label font-bold uppercase" for="QuoteForm-Name-{{ section.id }}">
-                    {{ section.settings.full_name_label }}
-                  </label>
-                  <input
-                    id="QuoteForm-Name-{{ section.id }}"
-                    class="quote-input w-full"
-                    type="text"
-                    name="contact[{{ section.settings.full_name_field_name }}]"
-                    value="{% if form[section.settings.full_name_field_name] %}{{ form[section.settings.full_name_field_name] }}{% endif %}"
-                    placeholder="{{ section.settings.full_name_placeholder }}"
-                    {% if section.settings.full_name_required %}
-                      required
-                    {% endif %}
-                  >
-                </div>
-              {% endif %}
-
-              {% if section.settings.show_company_name %}
-                <div class="space-y-2">
-                  <label class="quote-label font-bold uppercase" for="QuoteForm-Company-{{ section.id }}">
-                    {{ section.settings.company_name_label }}
-                  </label>
-                  <input
-                    id="QuoteForm-Company-{{ section.id }}"
-                    class="quote-input w-full"
-                    type="text"
-                    name="contact[{{ section.settings.company_name_field_name }}]"
-                    value="{% if form[section.settings.company_name_field_name] %}{{ form[section.settings.company_name_field_name] }}{% endif %}"
-                    placeholder="{{ section.settings.company_name_placeholder }}"
-                    {% if section.settings.company_name_required %}
-                      required
-                    {% endif %}
-                  >
-                </div>
-              {% endif %}
-            </div>
-
-            <div class="quote-field-grid-2">
-              {% if section.settings.show_email %}
-                <div class="space-y-2">
-                  <label class="quote-label font-bold uppercase" for="QuoteForm-Email-{{ section.id }}">
-                    {{ section.settings.email_label }}
-                  </label>
-                  <input
-                    id="QuoteForm-Email-{{ section.id }}"
-                    class="quote-input w-full"
-                    type="email"
-                    name="contact[email]"
-                    autocorrect="off"
-                    autocapitalize="off"
-                    value="{% if form.email %}{{ form.email }}{% endif %}"
-                    placeholder="{{ section.settings.email_placeholder }}"
-                    {% if section.settings.email_required %}
-                      required
-                    {% endif %}
-                  >
-                </div>
-              {% endif %}
-
-              {% if section.settings.show_phone %}
-                <div class="space-y-2">
-                  <label class="quote-label font-bold uppercase" for="QuoteForm-Phone-{{ section.id }}">
-                    {{ section.settings.phone_label }}
-                  </label>
-                  <input
-                    id="QuoteForm-Phone-{{ section.id }}"
-                    class="quote-input w-full"
-                    type="tel"
-                    name="contact[{{ section.settings.phone_field_name }}]"
-                    value="{% if form[section.settings.phone_field_name] %}{{ form[section.settings.phone_field_name] }}{% endif %}"
-                    placeholder="{{ section.settings.phone_placeholder }}"
-                    {% if section.settings.phone_required %}
-                      required
-                    {% endif %}
-                  >
-                </div>
-              {% endif %}
-            </div>
-
-            {% if section.settings.show_project_name %}
-              <div class="space-y-2">
-                <label class="quote-label font-bold uppercase" for="QuoteForm-Project-{{ section.id }}">
-                  {{ section.settings.project_label }}
-                </label>
-                <input
-                  id="QuoteForm-Project-{{ section.id }}"
-                  class="quote-input w-full"
-                  type="text"
-                  name="contact[{{ section.settings.project_field_name }}]"
-                  value="{% if form[section.settings.project_field_name] %}{{ form[section.settings.project_field_name] }}{% endif %}"
-                  placeholder="{{ section.settings.project_placeholder }}"
-                  {% if section.settings.project_required %}
-                    required
-                  {% endif %}
-                >
-              </div>
-            {% endif %}
-
-            {% if section.settings.show_requirements %}
-              <div class="space-y-2">
-                <label class="quote-label font-bold uppercase" for="QuoteForm-Requirements-{{ section.id }}">
-                  {{ section.settings.requirements_label }}
-                </label>
-                <textarea
-                  id="QuoteForm-Requirements-{{ section.id }}"
-                  class="quote-textarea w-full resize-none"
-                  rows="{{ section.settings.requirements_rows }}"
-                  name="contact[body]"
-                  placeholder="{{ section.settings.requirements_placeholder }}"
-                  {% if section.settings.requirements_required %}
-                    required
-                  {% endif %}
-                >{% if form.body %}{{ form.body }}{% endif %}</textarea>
-              </div>
-            {% endif %}
-
-            {% if section.settings.show_upload_ui %}
-              <div class="space-y-2">
-                <label class="quote-label font-bold uppercase" for="QuoteForm-Upload-{{ section.id }}">
-                  {{ section.settings.upload_label }}
-                </label>
-
-                <div class="quote-upload-wrap relative group">
-                  <input type="hidden" name="contact[attachment_names]" value="" data-quote-upload-hidden>
-                  <input
-                    id="QuoteForm-Upload-{{ section.id }}"
-                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                    type="file"
-                    name="contact[attachment]"
-                    data-quote-upload-input
-                    {% if section.settings.allow_multiple_files %}
-                      multiple
-                    {% endif %}
-                    accept="{{ section.settings.upload_accept }}"
-                    {% if section.settings.upload_required %}
-                      required
-                    {% endif %}
-                  >
-                  <div class="quote-file-ui w-full flex flex-col items-center justify-center text-center px-6 py-8 space-y-2">
-                    {% if section.settings.show_upload_icon %}
-                      <div
-                        style="
-                          padding: 12px;
-                          border-radius: 999px;
-                          background: {{ section.settings.upload_icon_bg }};
-                          color: {{ section.settings.upload_icon_color }};
-                        "
-                      >
-                        {{ section.settings.upload_icon_svg }}
-                      </div>
-                    {% endif %}
-
-                    {% if section.settings.upload_title != blank %}
-                      <p class="quote-upload-title font-medium">{{ section.settings.upload_title }}</p>
-                    {% endif %}
-
-                    {% if section.settings.upload_helper_text != blank %}
-                      <p class="quote-helper">{{ section.settings.upload_helper_text }}</p>
-                    {% endif %}
-
-                    <p class="quote-upload-status" data-quote-upload-status aria-live="polite"></p>
-                  </div>
-                </div>
-              </div>
-            {% endif %}
-
+          <div class="quote-app-form">
             {% if section.settings.enable_note_above_button and section.settings.note_above_button != blank %}
-              <div
-                style="
-                  color: {{ section.settings.note_text_color }};
-                  font-size: {{ section.settings.note_text_size }}px;
-                "
-              >
+              <div class="quote-app-note">
                 {{ section.settings.note_above_button }}
               </div>
             {% endif %}
 
-            <button
-              type="submit"
-              class="quote-submit-btn w-full font-bold flex items-center gap-3 transition-all"
-            >
-              <span>{{ section.settings.button_text }}</span>
-              {% if section.settings.show_button_icon %}
-                <span style="display:inline-flex; line-height:0;">{{ section.settings.button_icon_svg }}</span>
-              {% endif %}
-            </button>
-          {% endform %}
+            {% if has_quote_app_block %}
+              {% for block in section.blocks %}
+                {% if block.type == '@app' %}
+                  <div class="quote-app-form__embed" {{ block.shopify_attributes }}>
+                    {% render block %}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              <div class="quote-app-placeholder">
+                Add the Hulk Form Builder app block to this section to render the quote form here.
+              </div>
+            {% endif %}
+          </div>
         </div>
       </div>
 
@@ -532,34 +376,46 @@
       const section = document.getElementById({{ section_id | json }});
       if (!section) return;
 
-      const uploadInput = section.querySelector('[data-quote-upload-input]');
-      const uploadStatus = section.querySelector('[data-quote-upload-status]');
-      const uploadHidden = section.querySelector('[data-quote-upload-hidden]');
-      const uploadWrap = section.querySelector('.quote-upload-wrap');
+      const generators = section.querySelectorAll('.pxFormGenerator');
+      if (!generators.length) return;
 
-      if (!uploadInput || !uploadStatus || !uploadHidden || !uploadWrap) return;
+      window.FbThemeAppExtSettingsHash = window.FbThemeAppExtSettingsHash || {};
 
-      const updateUploadState = () => {
-        const selectedFiles = Array.from(uploadInput.files || []);
+      generators.forEach((generator) => {
+        const formUuid = generator.id;
+        if (!formUuid) return;
 
-        if (!selectedFiles.length) {
-          uploadWrap.classList.remove('is-selected');
-          uploadHidden.value = '';
-          uploadStatus.textContent = '';
-          return;
-        }
+        const existingSettings = window.FbThemeAppExtSettingsHash[formUuid] || {};
 
-        const fileNames = selectedFiles.map((file) => file.name);
-        uploadWrap.classList.add('is-selected');
-        uploadHidden.value = fileNames.join(', ');
-        uploadStatus.textContent =
-          selectedFiles.length === 1
-            ? `Selected file: ${fileNames[0]}`
-            : `Selected files: ${fileNames.join(', ')}`;
-      };
-
-      uploadInput.addEventListener('change', updateUploadState);
-      updateUploadState();
+        window.FbThemeAppExtSettingsHash[formUuid] = {
+          ...existingSettings,
+          padding: '0',
+          fill_color: {{ section.settings.form_card_bg | json }},
+          form_settings: 'true',
+          btn_text: {{ section.settings.button_text | json }},
+          font_color: {{ section.settings.input_text_color | json }},
+          size: {{ section.settings.label_font_size | json }},
+          border_color: {{ section.settings.form_card_border | json }},
+          border_radius: '0',
+          border: '0',
+          form_uuid: formUuid,
+          input_background_color: {{ section.settings.input_bg | json }},
+          input_border_radius: {{ section.settings.input_radius | json }},
+          input_border_color: {{ section.settings.input_border_color | json }},
+          input_font_color: {{ section.settings.input_text_color | json }},
+          input_size: {{ section.settings.input_font_size | json }},
+          form_width: {{ section.settings.max_width | json }},
+          sub_btn_txt_color: {{ section.settings.button_text_color | json }},
+          sub_btn_bg_color: {{ section.settings.button_bg | json }},
+          sub_btn_font_size: {{ section.settings.button_font_size | json }},
+          sub_btn_bdr_color: {{ section.settings.button_bg | json }},
+          sub_btn_bdr_rad: {{ section.settings.button_radius | json }},
+          sub_btn_bdr_width: '0',
+          fonts: {{ settings.type_body_font.family | json }},
+          input_border_color_focus: {{ section.settings.input_focus_border_color | json }},
+          input_background_color_focus: {{ section.settings.input_bg | json }}
+        };
+      });
     })();
   </script>
 
@@ -1555,6 +1411,9 @@
     }
   ],
   "blocks": [
+    {
+      "type": "@app"
+    },
     {
       "type": "benefit",
       "name": "Benefit item",
