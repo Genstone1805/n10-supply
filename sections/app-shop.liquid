@@ -1,5 +1,20 @@
 {% liquid
   assign section_id = 'app-shop-' | append: section.id
+  assign current_path = request.path | split: '?' | first
+  assign is_all_products = false
+  assign active_page_title = section.settings.page_title | default: 'Products'
+  assign active_products_count = 0
+
+  if collection
+    assign active_products_count = collection.products_count
+
+    if collection.handle == 'all' or current_path == routes.all_products_collection_url
+      assign is_all_products = true
+      assign active_page_title = 'Products'
+    elsif collection.title != blank
+      assign active_page_title = collection.title
+    endif
+  endif
 %}
 
 <section id="{{ section_id }}" class="app-shop-section">
@@ -453,9 +468,9 @@
           </svg>
         {% endif %}
 
-        {% if section.settings.breadcrumb_current_label != blank %}
+        {% if active_page_title != blank %}
           <span style="font-weight:700; color: {{ section.settings.breadcrumb_current_color }};">
-            {{- section.settings.breadcrumb_current_label -}}
+            {{- active_page_title -}}
           </span>
         {% endif %}
       </div>
@@ -489,10 +504,35 @@
                 <ul class="app-shop__filter-list">
                   {% for block in section.blocks %}
                     {% if block.type == 'brand_filter' %}
+                      {% liquid
+                        assign filter_label_key = block.settings.label | strip | downcase
+                        assign fallback_collection = collections[block.settings.label | handleize]
+                        assign filter_url = block.settings.link
+
+                        if filter_url == blank and fallback_collection != blank
+                          assign filter_url = fallback_collection.url
+                        endif
+
+                        if filter_url == blank and filter_label_key == 'all brands'
+                          assign filter_url = routes.all_products_collection_url
+                        endif
+
+                        assign filter_path = filter_url | replace: request.origin, '' | replace: shop.url, '' | split: '?' | first
+                        assign is_active_filter = false
+
+                        if filter_path != blank and filter_path == current_path
+                          assign is_active_filter = true
+                        elsif is_all_products and filter_label_key == 'all brands'
+                          assign is_active_filter = true
+                        endif
+                      %}
                       <li {{ block.shopify_attributes }}>
                         <a
-                          href="{% if block.settings.link != blank %}{{ block.settings.link }}{% else %}#{% endif %}"
-                          class="app-shop__filter-button {% if block.settings.active %}is-active{% endif %}"
+                          href="{{ filter_url | default: '#' }}"
+                          class="app-shop__filter-button{% if is_active_filter %} is-active{% endif %}"
+                          {% if is_active_filter %}
+                            aria-current="page"
+                          {% endif %}
                         >
                           {{ block.settings.label }}
                         </a>
@@ -528,10 +568,35 @@
                 <ul class="app-shop__filter-list">
                   {% for block in section.blocks %}
                     {% if block.type == 'collection_filter' %}
+                      {% liquid
+                        assign filter_label_key = block.settings.label | strip | downcase
+                        assign fallback_collection = collections[block.settings.label | handleize]
+                        assign filter_url = block.settings.link
+
+                        if filter_url == blank and fallback_collection != blank
+                          assign filter_url = fallback_collection.url
+                        endif
+
+                        if filter_url == blank and filter_label_key == 'all collections'
+                          assign filter_url = routes.all_products_collection_url
+                        endif
+
+                        assign filter_path = filter_url | replace: request.origin, '' | replace: shop.url, '' | split: '?' | first
+                        assign is_active_filter = false
+
+                        if filter_path != blank and filter_path == current_path
+                          assign is_active_filter = true
+                        elsif is_all_products and filter_label_key == 'all collections'
+                          assign is_active_filter = true
+                        endif
+                      %}
                       <li {{ block.shopify_attributes }}>
                         <a
-                          href="{% if block.settings.link != blank %}{{ block.settings.link }}{% else %}#{% endif %}"
-                          class="app-shop__filter-button {% if block.settings.active %}is-active{% endif %}"
+                          href="{{ filter_url | default: '#' }}"
+                          class="app-shop__filter-button{% if is_active_filter %} is-active{% endif %}"
+                          {% if is_active_filter %}
+                            aria-current="page"
+                          {% endif %}
                         >
                           {{ block.settings.label }}
                         </a>
@@ -564,9 +629,11 @@
       <main class="app-shop__main">
         <div class="app-shop__topbar">
           <h1 class="app-shop__title">
-            {{ section.settings.page_title }}
+            <span data-shop-title>{{ active_page_title }}</span>
             {% if section.settings.show_item_count %}
-              <span class="app-shop__count">({{ section.settings.item_count_text }})</span>
+              <span class="app-shop__count" data-shop-count data-base-count="{{ active_products_count }}">
+                ({{ active_products_count }})
+              </span>
             {% endif %}
           </h1>
 
@@ -592,18 +659,29 @@
                 class="app-shop__search"
                 placeholder="{{ section.settings.search_placeholder }}"
                 value="{{ section.settings.search_value }}"
+                data-shop-search
+                aria-label="{{ section.settings.search_placeholder | escape }}"
               >
             </div>
           {% endif %}
         </div>
 
-                {% paginate collection.products by section.settings.products_per_page %}
+        {% paginate collection.products by section.settings.products_per_page %}
           {% if collection.products_count > 0 %}
-            <div class="app-shop__products">
+            <div class="app-shop__products" data-products-grid>
               {% for product in collection.products %}
                 {% assign current_variant = product.selected_or_first_available_variant %}
+                {% capture product_search_text %}
+                  {{ product.title }}
+                  {{ product.vendor }}
+                  {{ current_variant.sku }}
+                {% endcapture %}
 
-                <article class="app-shop__card">
+                <article
+                  class="app-shop__card"
+                  data-product-card
+                  data-product-search-text="{{ product_search_text | strip | escape }}"
+                >
                   <a class="app-shop__image-link" href="{{ product.url }}">
                     {% if product.featured_image != blank %}
                       {{
@@ -715,8 +793,10 @@
               {% endfor %}
             </div>
 
+            <div class="app-shop__empty" data-search-empty hidden>No products match your search.</div>
+
             {% if paginate.pages > 1 %}
-  <nav class="app-shop__pagination" aria-label="Pagination">
+  <nav class="app-shop__pagination" aria-label="Pagination" data-products-pagination>
     {% if paginate.previous %}
       <a class="app-shop__pagination-btn app-shop__pagination-prev" href="{{ paginate.previous.url }}">
         Previous
@@ -839,6 +919,64 @@
   }
 }
 </style>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var section = document.getElementById('{{ section_id }}');
+    if (!section) return;
+
+    var searchInput = section.querySelector('[data-shop-search]');
+    if (!searchInput) return;
+
+    var productGrid = section.querySelector('[data-products-grid]');
+    var productCards = Array.prototype.slice.call(section.querySelectorAll('[data-product-card]'));
+    var countEl = section.querySelector('[data-shop-count]');
+    var emptyState = section.querySelector('[data-search-empty]');
+    var pagination = section.querySelector('[data-products-pagination]');
+    var baseCount = countEl ? parseInt(countEl.getAttribute('data-base-count'), 10) || productCards.length : productCards.length;
+
+    function normalizeValue(value) {
+      return (value || '').toString().toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+    function applySearch() {
+      var normalizedQuery = normalizeValue(searchInput.value);
+      var searchTerms = normalizedQuery ? normalizedQuery.split(' ') : [];
+      var visibleCount = 0;
+
+      productCards.forEach(function (card) {
+        var searchText = normalizeValue(card.getAttribute('data-product-search-text'));
+        var matches = !searchTerms.length || searchTerms.every(function (term) {
+          return searchText.indexOf(term) !== -1;
+        });
+
+        card.hidden = !matches;
+
+        if (matches) {
+          visibleCount += 1;
+        }
+      });
+
+      if (countEl) {
+        countEl.textContent = '(' + (searchTerms.length ? visibleCount : baseCount) + ')';
+      }
+
+      if (productGrid) {
+        productGrid.hidden = searchTerms.length > 0 && visibleCount === 0;
+      }
+
+      if (emptyState) {
+        emptyState.hidden = !(searchTerms.length > 0 && visibleCount === 0);
+      }
+
+      if (pagination) {
+        pagination.hidden = searchTerms.length > 0;
+      }
+    }
+
+    searchInput.addEventListener('input', applySearch);
+    applySearch();
+  });
+</script>
 {% schema %}
 {
   "name": "App Shop",
