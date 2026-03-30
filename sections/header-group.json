@@ -55,6 +55,13 @@
             "link": "shopify://pages/brands"
           }
         },
+        "nav_link_cxWTFE": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Washroom Accessories",
+            "link": "shopify://pages/washroom-accessories"
+          }
+        },
         "nav_link_NdpcDy": {
           "type": "nav_link",
           "settings": {
@@ -74,6 +81,7 @@
         "nav_link_CGHAFa",
         "nav_link_TA3pFz",
         "nav_link_fd9W3z",
+        "nav_link_cxWTFE",
         "nav_link_NdpcDy",
         "nav_link_RxwEjD"
       ],
