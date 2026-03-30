@@ -98,6 +98,10 @@
       border-color: {{ section.settings.upload_hover_border_color }};
     }
 
+    #{{ section_id }} .quote-upload-wrap.is-selected .quote-file-ui {
+      border-color: {{ section.settings.upload_hover_border_color }};
+    }
+
     #{{ section_id }} .quote-submit-btn {
       background: {{ section.settings.button_bg }};
       color: {{ section.settings.button_text_color }};
@@ -167,6 +171,16 @@
       font-size: {{ section.settings.upload_helper_size }}px;
     }
 
+    #{{ section_id }} .quote-upload-status {
+      color: {{ section.settings.upload_title_color }};
+      font-size: {{ section.settings.upload_helper_size }}px;
+      word-break: break-word;
+    }
+
+    #{{ section_id }} .quote-upload-status:empty {
+      display: none;
+    }
+
     #{{ section_id }} .quote-upload-title {
       color: {{ section.settings.upload_title_color }};
       font-size: {{ section.settings.upload_title_size }}px;
@@ -213,7 +227,7 @@
             <div class="quote-subheading">{{ section.settings.form_subtitle }}</div>
           {% endif %}
 
-          {% form 'contact', class: 'quote-form-space' %}
+          {% form 'contact', class: 'quote-form-space', enctype: 'multipart/form-data' %}
             {% if form.posted_successfully? %}
               <div
                 style="
@@ -363,14 +377,18 @@
 
             {% if section.settings.show_upload_ui %}
               <div class="space-y-2">
-                <label class="quote-label font-bold uppercase">
+                <label class="quote-label font-bold uppercase" for="QuoteForm-Upload-{{ section.id }}">
                   {{ section.settings.upload_label }}
                 </label>
 
                 <div class="quote-upload-wrap relative group">
+                  <input type="hidden" name="contact[attachment_names]" value="" data-quote-upload-hidden>
                   <input
+                    id="QuoteForm-Upload-{{ section.id }}"
                     class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                     type="file"
+                    name="contact[attachment]"
+                    data-quote-upload-input
                     {% if section.settings.allow_multiple_files %}
                       multiple
                     {% endif %}
@@ -400,6 +418,8 @@
                     {% if section.settings.upload_helper_text != blank %}
                       <p class="quote-helper">{{ section.settings.upload_helper_text }}</p>
                     {% endif %}
+
+                    <p class="quote-upload-status" data-quote-upload-status aria-live="polite"></p>
                   </div>
                 </div>
               </div>
@@ -506,6 +526,42 @@
       max-width:{{section.settings.max_width }}px
     }
   </style>
+
+  <script>
+    (() => {
+      const section = document.getElementById({{ section_id | json }});
+      if (!section) return;
+
+      const uploadInput = section.querySelector('[data-quote-upload-input]');
+      const uploadStatus = section.querySelector('[data-quote-upload-status]');
+      const uploadHidden = section.querySelector('[data-quote-upload-hidden]');
+      const uploadWrap = section.querySelector('.quote-upload-wrap');
+
+      if (!uploadInput || !uploadStatus || !uploadHidden || !uploadWrap) return;
+
+      const updateUploadState = () => {
+        const selectedFiles = Array.from(uploadInput.files || []);
+
+        if (!selectedFiles.length) {
+          uploadWrap.classList.remove('is-selected');
+          uploadHidden.value = '';
+          uploadStatus.textContent = '';
+          return;
+        }
+
+        const fileNames = selectedFiles.map((file) => file.name);
+        uploadWrap.classList.add('is-selected');
+        uploadHidden.value = fileNames.join(', ');
+        uploadStatus.textContent =
+          selectedFiles.length === 1
+            ? `Selected file: ${fileNames[0]}`
+            : `Selected files: ${fileNames.join(', ')}`;
+      };
+
+      uploadInput.addEventListener('change', updateUploadState);
+      updateUploadState();
+    })();
+  </script>
 
   {% schema %}
 {
