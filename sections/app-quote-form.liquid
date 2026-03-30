@@ -216,167 +216,165 @@
       </div>
     {% endif %}
 
-    <div class="quote-grid">
-      <div>
-        <div class="quote-main-card">
-          {% if section.settings.form_title != blank %}
-            <h3 class="quote-heading font-bold">{{ section.settings.form_title }}</h3>
-          {% endif %}
+    <div>
+      <div class="quote-main-card">
+        {% if section.settings.form_title != blank %}
+          <h3 class="quote-heading font-bold">{{ section.settings.form_title }}</h3>
+        {% endif %}
 
-          {% if section.settings.form_subtitle != blank %}
-            <div class="quote-subheading">{{ section.settings.form_subtitle }}</div>
-          {% endif %}
+        {% if section.settings.form_subtitle != blank %}
+          <div class="quote-subheading">{{ section.settings.form_subtitle }}</div>
+        {% endif %}
 
-          <section id="shopify-section-template--21259826135292__17748853454ef2879d" class="shopify-section section">
-            <div class="page-width scroll-trigger animate--slide-in">
-              <div
-                id="shopify-block-AZHFrQ0RDTExwaktWe__hulk_form_builder_form_block_RtLyKP"
-                class="shopify-block shopify-app-block"
-              >
-                <div style="margin:0 auto;" class="pxFormGenerator" id="s4rrDy-R1UWQvNSHeBb3Sg">
-                  <iframe
-                    src="https://formbuilder.hulkapps.com/corepage/customform?id=s4rrDy-R1UWQvNSHeBb3Sg&amp;referrer_url=https%3A%2F%2Fnd10supply.com%2Fpages%2Frequest-a-quote"
-                    id="frame_s4rrDy-R1UWQvNSHeBb3Sg"
-                    frameborder="0"
-                    width="100%"
-                    title="Request a Quote Form"
-                    style="height: 783px;"
-                  ></iframe>
-                </div>
-
-                <script>
-                  if (!window._fbFormMessageListenerAttached) {
-                    window._fbFormMessageListenerAttached = true;
-
-                    window.addEventListener('message', function (event) {
-                      const { type, payload } = event.data || {};
-
-                      if (!window.Shopify?.analytics || !type) return;
-
-                      const now = new Date().toISOString();
-
-                      if (type === 'form_viewed') {
-                        Shopify.analytics.publish('form_viewed', {
-                          ...payload,
-                          app_id: '1496853', // Replace with your app ID
-                        });
-                      }
-
-                      if (type === 'form_submitted') {
-                        Shopify.analytics.publish('form_submitted', {
-                          ...payload,
-                          app_id: '1496853', // Replace with your app ID
-                        });
-                        Shopify.analytics.visitor(payload, {
-                          appId: '1496853',
-                        });
-                      }
-                    });
-                  }
-
-                  var fb_theme_app_ext_settings = {
-                    padding: '35',
-                    fill_color: '#EBE9E9',
-                    form_settings: 'true',
-                    btn_text: 'Submit',
-                    font_color: '#000000',
-                    size: '14',
-                    border_color: '#121212',
-                    border_radius: '2',
-                    border: '1',
-                    form_uuid: 's4rrDy-R1UWQvNSHeBb3Sg',
-                    input_background_color: '#FFF',
-                    input_border_radius: '1',
-                    input_border_color: '#ebe9e9',
-                    input_font_color: '#3D3131',
-                    input_size: '14',
-                    form_width: '600',
-                    sub_btn_txt_color: '#F3F3F3',
-                    sub_btn_bg_color: '#3F3333',
-                    sub_btn_font_size: '14',
-                    sub_btn_bdr_color: '#FFFFFF',
-                    sub_btn_bdr_rad: '3',
-                    sub_btn_bdr_width: '1',
-                    fonts: 'Times New Roman',
-                    input_border_color_focus: '#2D2727',
-                    input_background_color_focus: '#F4DADA',
-                  };
-                  window.FbThemeAppExtSettingsHash['s4rrDy-R1UWQvNSHeBb3Sg'] = fb_theme_app_ext_settings;
-                </script>
+        <section id="shopify-section-template--21259826135292__17748853454ef2879d" class="shopify-section section">
+          <div class="page-width scroll-trigger animate--slide-in">
+            <div
+              id="shopify-block-AZHFrQ0RDTExwaktWe__hulk_form_builder_form_block_RtLyKP"
+              class="shopify-block shopify-app-block"
+            >
+              <div style="margin:0 auto;" class="pxFormGenerator" id="s4rrDy-R1UWQvNSHeBb3Sg">
+                <iframe
+                  src="https://formbuilder.hulkapps.com/corepage/customform?id=s4rrDy-R1UWQvNSHeBb3Sg&amp;referrer_url=https%3A%2F%2Fnd10supply.com%2Fpages%2Frequest-a-quote"
+                  id="frame_s4rrDy-R1UWQvNSHeBb3Sg"
+                  frameborder="0"
+                  width="100%"
+                  title="Request a Quote Form"
+                  style="height: 783px;"
+                ></iframe>
               </div>
+
+              <script>
+                if (!window._fbFormMessageListenerAttached) {
+                  window._fbFormMessageListenerAttached = true;
+
+                  window.addEventListener('message', function (event) {
+                    const { type, payload } = event.data || {};
+
+                    if (!window.Shopify?.analytics || !type) return;
+
+                    const now = new Date().toISOString();
+
+                    if (type === 'form_viewed') {
+                      Shopify.analytics.publish('form_viewed', {
+                        ...payload,
+                        app_id: '1496853', // Replace with your app ID
+                      });
+                    }
+
+                    if (type === 'form_submitted') {
+                      Shopify.analytics.publish('form_submitted', {
+                        ...payload,
+                        app_id: '1496853', // Replace with your app ID
+                      });
+                      Shopify.analytics.visitor(payload, {
+                        appId: '1496853',
+                      });
+                    }
+                  });
+                }
+
+                var fb_theme_app_ext_settings = {
+                  padding: '35',
+                  fill_color: '#EBE9E9',
+                  form_settings: 'true',
+                  btn_text: 'Submit',
+                  font_color: '#000000',
+                  size: '14',
+                  border_color: '#121212',
+                  border_radius: '2',
+                  border: '1',
+                  form_uuid: 's4rrDy-R1UWQvNSHeBb3Sg',
+                  input_background_color: '#FFF',
+                  input_border_radius: '1',
+                  input_border_color: '#ebe9e9',
+                  input_font_color: '#3D3131',
+                  input_size: '14',
+                  form_width: '600',
+                  sub_btn_txt_color: '#F3F3F3',
+                  sub_btn_bg_color: '#3F3333',
+                  sub_btn_font_size: '14',
+                  sub_btn_bdr_color: '#FFFFFF',
+                  sub_btn_bdr_rad: '3',
+                  sub_btn_bdr_width: '1',
+                  fonts: 'Times New Roman',
+                  input_border_color_focus: '#2D2727',
+                  input_background_color_focus: '#F4DADA',
+                };
+                window.FbThemeAppExtSettingsHash['s4rrDy-R1UWQvNSHeBb3Sg'] = fb_theme_app_ext_settings;
+              </script>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
       </div>
+    </div>
 
-      <div class="quote-stack-cards">
-        {% if section.settings.show_benefits_card %}
-          <div class="quote-benefits-card">
-            {% if section.settings.benefits_title != blank %}
-              <h3 class="quote-benefit-title font-bold mb-6">{{ section.settings.benefits_title }}</h3>
-            {% endif %}
+    <div class="quote-stack-cards">
+      {% if section.settings.show_benefits_card %}
+        <div class="quote-benefits-card">
+          {% if section.settings.benefits_title != blank %}
+            <h3 class="quote-benefit-title font-bold mb-6">{{ section.settings.benefits_title }}</h3>
+          {% endif %}
 
-            <div class="quote-divider-space">
-              {% for block in section.blocks %}
-                {% if block.type == 'benefit' %}
-                  <div class="flex items-start space-x-4" {{ block.shopify_attributes }}>
-                    {% if block.settings.show_icon %}
-                      <div class="quote-icon-box-benefits p-2">
-                        <span style="display:inline-flex; color: {{ block.settings.icon_color }};">
-                          {{ block.settings.icon_svg }}
-                        </span>
-                      </div>
-                    {% endif %}
-                    <div>
-                      {% if block.settings.title != blank %}
-                        <h4 class="quote-benefit-item-title font-bold">{{ block.settings.title }}</h4>
-                      {% endif %}
-                      {% if block.settings.text != blank %}
-                        <p class="quote-benefit-item-text mt-1">{{ block.settings.text }}</p>
-                      {% endif %}
+          <div class="quote-divider-space">
+            {% for block in section.blocks %}
+              {% if block.type == 'benefit' %}
+                <div class="flex items-start space-x-4" {{ block.shopify_attributes }}>
+                  {% if block.settings.show_icon %}
+                    <div class="quote-icon-box-benefits p-2">
+                      <span style="display:inline-flex; color: {{ block.settings.icon_color }};">
+                        {{ block.settings.icon_svg }}
+                      </span>
                     </div>
-                  </div>
-                {% endif %}
-              {% endfor %}
-            </div>
-          </div>
-        {% endif %}
-
-        {% if section.settings.show_contact_card %}
-          <div class="quote-contact-card">
-            {% if section.settings.contact_title != blank %}
-              <h3 class="quote-contact-title font-bold mb-6">{{ section.settings.contact_title }}</h3>
-            {% endif %}
-
-            <div class="quote-divider-space">
-              {% for block in section.blocks %}
-                {% if block.type == 'contact_item' %}
-                  <div class="flex items-center space-x-4" {{ block.shopify_attributes }}>
-                    {% if block.settings.show_icon %}
-                      <div class="quote-icon-box-contact p-2">
-                        <span style="display:inline-flex; color: {{ block.settings.icon_color }};">
-                          {{ block.settings.icon_svg }}
-                        </span>
-                      </div>
+                  {% endif %}
+                  <div>
+                    {% if block.settings.title != blank %}
+                      <h4 class="quote-benefit-item-title font-bold">{{ block.settings.title }}</h4>
                     {% endif %}
-                    {% if block.settings.link != blank %}
-                      <a
-                        href="{{ block.settings.link }}"
-                        class="quote-contact-item-text font-medium"
-                        style="text-decoration:none;"
-                      >
-                        {{ block.settings.text }}
-                      </a>
-                    {% else %}
-                      <span class="quote-contact-item-text font-medium">{{ block.settings.text }}</span>
+                    {% if block.settings.text != blank %}
+                      <p class="quote-benefit-item-text mt-1">{{ block.settings.text }}</p>
                     {% endif %}
                   </div>
-                {% endif %}
-              {% endfor %}
-            </div>
+                </div>
+              {% endif %}
+            {% endfor %}
           </div>
-        {% endif %}
-      </div>
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_contact_card %}
+        <div class="quote-contact-card">
+          {% if section.settings.contact_title != blank %}
+            <h3 class="quote-contact-title font-bold mb-6">{{ section.settings.contact_title }}</h3>
+          {% endif %}
+
+          <div class="quote-divider-space">
+            {% for block in section.blocks %}
+              {% if block.type == 'contact_item' %}
+                <div class="flex items-center space-x-4" {{ block.shopify_attributes }}>
+                  {% if block.settings.show_icon %}
+                    <div class="quote-icon-box-contact p-2">
+                      <span style="display:inline-flex; color: {{ block.settings.icon_color }};">
+                        {{ block.settings.icon_svg }}
+                      </span>
+                    </div>
+                  {% endif %}
+                  {% if block.settings.link != blank %}
+                    <a
+                      href="{{ block.settings.link }}"
+                      class="quote-contact-item-text font-medium"
+                      style="text-decoration:none;"
+                    >
+                      {{ block.settings.text }}
+                    </a>
+                  {% else %}
+                    <span class="quote-contact-item-text font-medium">{{ block.settings.text }}</span>
+                  {% endif %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
     </div>
   </div>
 
@@ -386,42 +384,6 @@
       max-width:{{section.settings.max_width }}px
     }
   </style>
-
-  <script>
-    (() => {
-      const section = document.getElementById({{ section_id | json }});
-      if (!section) return;
-
-      const uploadInput = section.querySelector('[data-quote-upload-input]');
-      const uploadStatus = section.querySelector('[data-quote-upload-status]');
-      const uploadHidden = section.querySelector('[data-quote-upload-hidden]');
-      const uploadWrap = section.querySelector('.quote-upload-wrap');
-
-      if (!uploadInput || !uploadStatus || !uploadHidden || !uploadWrap) return;
-
-      const updateUploadState = () => {
-        const selectedFiles = Array.from(uploadInput.files || []);
-
-        if (!selectedFiles.length) {
-          uploadWrap.classList.remove('is-selected');
-          uploadHidden.value = '';
-          uploadStatus.textContent = '';
-          return;
-        }
-
-        const fileNames = selectedFiles.map((file) => file.name);
-        uploadWrap.classList.add('is-selected');
-        uploadHidden.value = fileNames.join(', ');
-        uploadStatus.textContent =
-          selectedFiles.length === 1
-            ? `Selected file: ${fileNames[0]}`
-            : `Selected files: ${fileNames.join(', ')}`;
-      };
-
-      uploadInput.addEventListener('change', updateUploadState);
-      updateUploadState();
-    })();
-  </script>
 
   {% schema %}
 {
