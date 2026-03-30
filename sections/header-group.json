@@ -38,7 +38,7 @@
           "type": "nav_link",
           "settings": {
             "label": "Home",
-            "link": ""
+            "link": "/"
           }
         },
         "nav_link_TA3pFz": {
@@ -98,7 +98,7 @@
         "container_width": 1280,
         "desktop_nav_gap": 32,
         "show_cta": true,
-        "cta_label": "Quote Cart",
+        "cta_label": "Cart",
         "cta_link": "",
         "show_cta_icon": true,
         "button_padding_x": 16,
