@@ -217,42 +217,54 @@
 
     <div class="featured-grid">
       {% for block in section.blocks %}
+        {% assign selected_product = block.settings.product %}
+        {% assign featured_variant = blank %}
+        {% assign featured_badge = blank %}
+
+        {% if selected_product != blank %}
+          {% assign featured_variant = selected_product.selected_or_first_available_variant %}
+          {% assign featured_badge = selected_product.vendor %}
+          {% if featured_badge == blank %}
+            {% assign featured_badge = selected_product.type %}
+          {% endif %}
+          {% if featured_badge == blank and selected_product.tags.size > 0 %}
+            {% assign featured_badge = selected_product.tags.first %}
+          {% endif %}
+        {% endif %}
+
         <div class="featured-card" {{ block.shopify_attributes }}>
           <div class="featured-media {{ block.settings.image_ratio }}">
-            {% if block.settings.image != blank %}
+            {% if selected_product != blank and selected_product.featured_image != blank %}
               {{
-                block.settings.image
+                selected_product.featured_image
                 | image_url: width: 900
-                | image_tag: class: 'featured-image', loading: 'lazy', alt: block.settings.title
+                | image_tag: class: 'featured-image', loading: 'lazy', alt: selected_product.title
               }}
             {% else %}
-              <div class="featured-placeholder">Add product image</div>
+              <div class="featured-placeholder">Select a product</div>
             {% endif %}
 
-            {% if block.settings.badge != blank and section.settings.show_badge %}
+            {% if featured_badge != blank and section.settings.show_badge %}
               <div class="featured-badge-wrap">
-                <span class="featured-badge">{{ block.settings.badge }}</span>
+                <span class="featured-badge">{{ featured_badge }}</span>
               </div>
             {% endif %}
           </div>
 
-          {% if block.settings.title != blank %}
-            <h3 class="featured-title">{{ block.settings.title }}</h3>
+          {% if selected_product != blank %}
+            <h3 class="featured-title">{{ selected_product.title }}</h3>
           {% endif %}
 
-          {% if block.settings.sku != blank %}
+          {% if featured_variant != blank and featured_variant.sku != blank %}
             <p class="featured-sku">
-              {{ block.settings.sku_prefix -}}
-              {{- block.settings.sku }}
+              {{ section.settings.sku_prefix -}}
+              {{- featured_variant.sku }}
             </p>
           {% endif %}
 
-          {% if block.settings.button_label != blank %}
-            <a
-              class="featured-button"
-              href="{% if block.settings.link != blank %}{{ block.settings.link }}{% else %}#{% endif %}"
-            >
-              {{ block.settings.button_label }}
+          {% if selected_product != blank and section.settings.button_label != blank %}
+            <a class="featured-button" href="{{ selected_product.url }}">
+              {{ section.settings.button_label }}
             </a>
           {% endif %}
         </div>
@@ -553,6 +565,18 @@
       "id": "show_badge",
       "label": "Show badge",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "sku_prefix",
+      "label": "SKU prefix",
+      "default": "SKU: "
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "View Details"
     }
   ],
   "blocks": [
@@ -561,9 +585,9 @@
       "name": "Product card",
       "settings": [
         {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Product image"
+          "type": "product",
+          "id": "product",
+          "label": "Product"
         },
         {
           "type": "select",
@@ -575,41 +599,6 @@
             { "value": "landscape", "label": "Landscape" },
             { "value": "portrait", "label": "Portrait" }
           ]
-        },
-        {
-          "type": "text",
-          "id": "badge",
-          "label": "Badge text",
-          "default": "Bobrick"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Product title",
-          "default": "Bobrick B-2892 Surface-Mounted Twin Jumbo-Roll Toilet Tissue Dispenser"
-        },
-        {
-          "type": "text",
-          "id": "sku_prefix",
-          "label": "SKU prefix",
-          "default": "SKU: "
-        },
-        {
-          "type": "text",
-          "id": "sku",
-          "label": "SKU",
-          "default": "B-2892"
-        },
-        {
-          "type": "text",
-          "id": "button_label",
-          "label": "Button label",
-          "default": "View Details"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Product link"
         }
       ]
     }
@@ -622,44 +611,24 @@
         {
           "type": "product_card",
           "settings": {
-            "badge": "Bobrick",
-            "title": "Bobrick B-2892 Surface-Mounted Twin Jumbo-Roll Toilet Tissue Dispenser",
-            "sku_prefix": "SKU: ",
-            "sku": "B-2892",
-            "button_label": "View Details",
             "image_ratio": "square"
           }
         },
         {
           "type": "product_card",
           "settings": {
-            "badge": "Bobrick",
-            "title": "Bobrick B-6806 Series Stainless Steel Grab Bar",
-            "sku_prefix": "SKU: ",
-            "sku": "B-6806x18",
-            "button_label": "View Details",
             "image_ratio": "square"
           }
         },
         {
           "type": "product_card",
           "settings": {
-            "badge": "Bobrick",
-            "title": "Bobrick B-165 Series Channel-Frame Mirror",
-            "sku_prefix": "SKU: ",
-            "sku": "B-165-2436",
-            "button_label": "View Details",
             "image_ratio": "square"
           }
         },
         {
           "type": "product_card",
           "settings": {
-            "badge": "Bobrick",
-            "title": "Bobrick B-262 Surface-Mounted Paper Towel Dispenser",
-            "sku_prefix": "SKU: ",
-            "sku": "B-262",
-            "button_label": "View Details",
             "image_ratio": "square"
           }
         }
