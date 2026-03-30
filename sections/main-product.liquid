@@ -299,63 +299,70 @@
         {% endif %}
 
           <div class="flex flex-col sm:flex-row gap-4 mb-12">
-              <button
-                class="flex-1 font-bold flex items-center justify-center space-x-3 transition-all"
-                style="
-                  padding-top: {{ section.settings.button_y_padding }}px;
-                  padding-bottom: {{ section.settings.button_y_padding }}px;
-                  padding-left: {{ section.settings.button_x_padding }}px;
-                  padding-right: {{ section.settings.button_x_padding }}px;
-                  border-radius: {{ section.settings.button_radius }}px;
-                  background: var(--pd-button-bg);
-                  color: var(--pd-button-text);
-                "
-              >
-                <span>Add to cart</span>
-              </button>
+  <button
+    type="button"
+    class="flex-1 font-bold flex items-center justify-center space-x-3 transition-all js-ajax-add-to-cart"
+    data-variant-id="{{ current_variant.id }}"
+    style="
+      padding-top: {{ section.settings.button_y_padding }}px;
+      padding-bottom: {{ section.settings.button_y_padding }}px;
+      padding-left: {{ section.settings.button_x_padding }}px;
+      padding-right: {{ section.settings.button_x_padding }}px;
+      border-radius: {{ section.settings.button_radius }}px;
+      background: var(--pd-button-bg);
+      color: var(--pd-button-text);
+    "
+  >
+    <span class="js-add-to-cart-text">Add to cart</span>
+  </button>
 
-              {% assign spec_file = current_product.metafields.custom.technical_data_sheet %}
-              <a
-                href="{{  current_product.metafields.custom.technical_data_sheet }}"
-                class="font-bold flex items-center justify-center space-x-3 border"
-                style="
-                  padding-top: {{ section.settings.button_y_padding }}px;
-                  padding-bottom: {{ section.settings.button_y_padding }}px;
-                  padding-left: {{ section.settings.button_x_padding }}px;
-                  padding-right: {{ section.settings.button_x_padding }}px;
-                  border-radius: {{ section.settings.button_radius }}px;
-                  background: var(--pd-secondary-button-bg);
-                  color: var(--pd-secondary-button-text);
-                  border-color: var(--pd-border-color);
-                "
-                {% if section.settings.secondary_button_new_tab %}
-                  target="_blank"
-                {% endif %}
-              >
-                <span>DOwnoad BIM Fie{{ section.settings.secondary_button_label }}</span>
-              </a>
-            
-              {% assign spec_file = current_product.metafields.custom.technical_data_sheet %}
-              <a
-                href="{{ current_product.metafields.custom.technical_data_sheet }}"
-                class="font-bold flex items-center justify-center space-x-3 border"
-                style="
-                  padding-top: {{ section.settings.button_y_padding }}px;
-                  padding-bottom: {{ section.settings.button_y_padding }}px;
-                  padding-left: {{ section.settings.button_x_padding }}px;
-                  padding-right: {{ section.settings.button_x_padding }}px;
-                  border-radius: {{ section.settings.button_radius }}px;
-                  background: var(--pd-secondary-button-bg);
-                  color: var(--pd-secondary-button-text);
-                  border-color: var(--pd-border-color);
-                "
-                {% if section.settings.secondary_button_new_tab %}
-                  target="_blank"
-                {% endif %}
-              >
-                <span> Download Technical Data Sheet</span>
-              </a>
-          </div>
+  {% if bim_file != blank %}
+    <a
+      href="{{ bim_file.value }}"
+      class="font-bold flex items-center justify-center space-x-3 border"
+      style="
+        padding-top: {{ section.settings.button_y_padding }}px;
+        padding-bottom: {{ section.settings.button_y_padding }}px;
+        padding-left: {{ section.settings.button_x_padding }}px;
+        padding-right: {{ section.settings.button_x_padding }}px;
+        border-radius: {{ section.settings.button_radius }}px;
+        background: var(--pd-secondary-button-bg);
+        color: var(--pd-secondary-button-text);
+        border-color: var(--pd-border-color);
+      "
+      {% if section.settings.secondary_button_new_tab %}
+        target="_blank"
+      {% endif %}
+      rel="noopener noreferrer"
+    >
+      <span>Download BIM File</span>
+    </a>
+  {% endif %}
+
+  {% if tech_sheet != blank %}
+    <a
+      href="{{ tech_sheet.value }}"
+      class="font-bold flex items-center justify-center space-x-3 border"
+      style="
+        padding-top: {{ section.settings.button_y_padding }}px;
+        padding-bottom: {{ section.settings.button_y_padding }}px;
+        padding-left: {{ section.settings.button_x_padding }}px;
+        padding-right: {{ section.settings.button_x_padding }}px;
+        border-radius: {{ section.settings.button_radius }}px;
+        background: var(--pd-secondary-button-bg);
+        color: var(--pd-secondary-button-text);
+        border-color: var(--pd-border-color);
+      "
+      download
+      {% if section.settings.secondary_button_new_tab %}
+        target="_blank"
+      {% endif %}
+      rel="noopener noreferrer"
+    >
+      <span>Download Technical Data Sheet</span>
+    </a>
+  {% endif %}
+</div>
 
         {% if section.settings.show_specifications %}
           <div class="border-t pt-8" style="border-color: var(--pd-border-color);">
