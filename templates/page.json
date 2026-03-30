@@ -95,16 +95,48 @@
         "collection_filter_g3f9K8": {
           "type": "collection_filter",
           "settings": {
-            "label": "ClassicSeries®",
-            "link": "",
+            "label": "Napkin/Tampon Dispensers",
+            "link": "shopify://collections/napkin-tampon-dispensers",
             "active": false
           }
         },
         "collection_filter_fKXEEX": {
           "type": "collection_filter",
           "settings": {
-            "label": "Cubicle Collection",
-            "link": "",
+            "label": "Mirrors",
+            "link": "shopify://collections/mirrors",
+            "active": false
+          }
+        },
+        "collection_filter_TfHwrg": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Hand Dryers",
+            "link": "shopify://collections/hand-dryers",
+            "active": false
+          }
+        },
+        "collection_filter_6ExVYL": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Grab Bars",
+            "link": "shopify://collections/grab-bars",
+            "active": false
+          }
+        },
+        "collection_filter_RweT3g": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Sanitary Disposals",
+            "link": "shopify://collections/sanitary-disposals",
+            "active": false
+          }
+        },
+        "collection_filter_44PCbN": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Toilet Seat Cover Dispensers",
+            "link": "shopify://collections/toilet-seat-cover-dispensers",
             "active": false
           }
         }
@@ -120,7 +152,11 @@
         "collection_filter_AgiiMM",
         "collection_filter_bMXU8Q",
         "collection_filter_g3f9K8",
-        "collection_filter_fKXEEX"
+        "collection_filter_fKXEEX",
+        "collection_filter_TfHwrg",
+        "collection_filter_6ExVYL",
+        "collection_filter_RweT3g",
+        "collection_filter_44PCbN"
       ],
       "name": "App Shop",
       "settings": {
