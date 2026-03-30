@@ -210,53 +210,29 @@
         "product_card_ftYhfa": {
           "type": "product_card",
           "settings": {
-            "image": "shopify://shop_images/B-9541.MBLK_right_40f8bbc4-f5e0-4eee-8d0e-0f49ef774a1b.jpg",
-            "image_ratio": "square",
-            "badge": "Bobrick",
-            "title": "Bobrick  B-9541.MBLK -  Surface-Mounted Coat Hook with Bumper, Satin Finish Steel",
-            "sku_prefix": "SKU:",
-            "sku": "B-9541.MBLK",
-            "button_label": "View Details",
-            "link": "shopify://products/bobrick-b-9541-mblk-surface-mounted-coat-hook-with-bumper-satin-finish-steel"
+            "product": "bobrick-b-9541-mblk-surface-mounted-coat-hook-with-bumper-satin-finish-steel",
+            "image_ratio": "square"
           }
         },
         "product_card_KkRDfQ": {
           "type": "product_card",
           "settings": {
-            "image": "shopify://shop_images/BOB-B-3013_CA_d1b4cc5c-bad3-4403-abc6-ef260ea4fac2.jpg",
-            "image_ratio": "square",
-            "badge": "Bobrick",
-            "title": "Bobrick B-3013 - Recessed Seat-Cover Dispenser, Satin Finish",
-            "sku_prefix": "SKU:",
-            "sku": "B-3013",
-            "button_label": "View Details",
-            "link": "shopify://products/bobrick-b-3013-recessed-seat-cover-dispenser-satin-finish"
+            "product": "bobrick-b-3013-mblk-recessed-seat-cover-dispenser-matte-black",
+            "image_ratio": "square"
           }
         },
         "product_card_UUq6CA": {
           "type": "product_card",
           "settings": {
-            "image": "shopify://shop_images/BOB-B-30919.MBLK_CA_WC_aab7d2f1-65cd-4d84-a9c7-20f9deaa4b6d.jpg",
-            "image_ratio": "square",
-            "badge": "Bobrick",
-            "title": "Bobrick B-30919.MBLK -Surface-Mounted Horizontal Toilet Tissue / Seat-Cover Dispenser / Waste Disposal, Left Side",
-            "sku_prefix": "SKU:",
-            "sku": "B-30919.MBLK",
-            "button_label": "View Details",
-            "link": "shopify://products/bobrick-b-30919-mblk"
+            "product": "bobrick-b-30919-mblk",
+            "image_ratio": "square"
           }
         },
         "product_card_DgiiYq": {
           "type": "product_card",
           "settings": {
-            "image": "shopify://shop_images/B-38032_Zoom_37b089ed-43d1-433f-9735-8d98d13b46f6.jpg",
-            "image_ratio": "square",
-            "badge": "Bobrick",
-            "title": "Bobrick B-38032 - Semi-Recessed Paper Towel Dispenser and Waste Receptacle, Satin Finish, 6.3-Gallon Waste",
-            "sku_prefix": "SKU:",
-            "sku": "B-38032",
-            "button_label": "View Details",
-            "link": "shopify://products/bobrick-b-38032-semi-recessed-paper-towel-dispenser-and-waste-receptacle-satin-finish-6-3-gallon-waste"
+            "product": "bobrick-b-38032-semi-recessed-paper-towel-dispenser-and-waste-receptacle-satin-finish-6-3-gallon-waste",
+            "image_ratio": "square"
           }
         }
       },
@@ -301,7 +277,9 @@
         "card_radius": 24,
         "enable_hover_zoom": true,
         "zoom_scale": 1,
-        "show_badge": true
+        "show_badge": true,
+        "sku_prefix": "SKU:",
+        "button_label": "View Details"
       }
     },
     "app_cta_mDCCFm": {
