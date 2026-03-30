@@ -93,7 +93,7 @@
         "card_radius": 16,
         "show_action_buttons": true,
         "show_primary_button": true,
-        "primary_button_label": "Add to Quote Request",
+        "primary_button_label": "Add to Cart",
         "primary_button_url": "",
         "show_secondary_button": true,
         "secondary_button_label": "Download Spec Sheet",
