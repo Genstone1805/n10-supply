@@ -51,6 +51,7 @@
         "breadcrumb_label": "Back to Catalog",
         "breadcrumb_url": "",
         "breadcrumb_color": "#a3a3a3",
+        "breadcrumb_size": 15,
         "show_gallery": true,
         "show_thumbnails": true,
         "thumbnail_columns": 4,
