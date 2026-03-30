@@ -63,16 +63,16 @@
         "collection_filter_MFQhbz": {
           "type": "collection_filter",
           "settings": {
-            "label": "Fino Collection",
-            "link": "",
+            "label": "Soap Dispensers & Faucets",
+            "link": "shopify://collections/soap-dispensers-faucets",
             "active": false
           }
         },
         "collection_filter_mJNjgj": {
           "type": "collection_filter",
           "settings": {
-            "label": "Matte Black",
-            "link": "",
+            "label": "Combination Towel/waste Units",
+            "link": "shopify://collections/combination-towel-waste-units",
             "active": false
           }
         },
