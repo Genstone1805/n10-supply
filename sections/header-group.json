@@ -59,7 +59,7 @@
           "type": "nav_link",
           "settings": {
             "label": "Washroom Accessories",
-            "link": "shopify://pages/washroom-accessories"
+            "link": "shopify://collections/washroom-accessories"
           }
         },
         "nav_link_NdpcDy": {
