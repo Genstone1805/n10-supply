@@ -111,6 +111,56 @@
       order: 1;
     }
 
+    #{{ section_id }} .app-shop__mobile-collections {
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    #{{ section_id }} .app-shop__mobile-collections-label {
+      display: block;
+      margin: 0 0 8px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    #{{ section_id }} .app-shop__mobile-collections-wrap {
+      position: relative;
+    }
+
+    #{{ section_id }} .app-shop__mobile-collections-select {
+      width: 100%;
+      padding: 14px 48px 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-filter);
+      background: var(--surface-2);
+      color: var(--text);
+      font-size: var(--filter-size);
+      font-weight: 500;
+      line-height: 1.2;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    #{{ section_id }} .app-shop__mobile-collections-icon {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      width: 18px;
+      height: 18px;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    @media (max-width: 989px) {
+      #{{ section_id }} .app-shop__sidebar {
+        display: none;
+      }
+    }
+
     @media (min-width: 990px) {
       #{{ section_id }} .app-shop__layout {
         flex-direction: row;
@@ -124,6 +174,10 @@
 
       #{{ section_id }} .app-shop__main {
         order: 2;
+      }
+
+      #{{ section_id }} .app-shop__mobile-collections {
+        display: none;
       }
     }
 
@@ -662,6 +716,67 @@
             {% endif %}
           </h1>
 
+          {% if section.settings.show_collections %}
+            <div class="app-shop__mobile-collections">
+              <label class="app-shop__mobile-collections-label" for="MobileCollections-{{ section.id }}">
+                {{ section.settings.collections_heading }}
+              </label>
+              <div class="app-shop__mobile-collections-wrap">
+                <select
+                  id="MobileCollections-{{ section.id }}"
+                  class="app-shop__mobile-collections-select"
+                  data-mobile-collection-select
+                >
+                  {% for block in section.blocks %}
+                    {% if block.type == 'collection_filter' %}
+                      {% liquid
+                        assign filter_label_key = block.settings.label | strip | downcase
+                        assign fallback_collection_handle = block.settings.label | handleize
+                        assign fallback_collection = collections[fallback_collection_handle]
+                        assign filter_url = block.settings.link
+
+                        if filter_url == blank and fallback_collection != blank
+                          assign filter_url = fallback_collection.url
+                        endif
+
+                        if filter_url == blank and filter_label_key == 'all collections'
+                          assign filter_url = routes.all_products_collection_url
+                        endif
+
+                        assign filter_path = filter_url | replace: request.origin, '' | replace: shop.url, '' | split: '?' | first
+                        assign is_active_filter = false
+
+                        if filter_path != blank and filter_path == current_path
+                          assign is_active_filter = true
+                        elsif is_all_products and filter_label_key == 'all collections'
+                          assign is_active_filter = true
+                        endif
+                      %}
+                      {% if filter_url != blank %}
+                        <option value="{{ filter_url }}" {% if is_active_filter %}selected{% endif %}>
+                          {{ block.settings.label }}
+                        </option>
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                </select>
+                <svg
+                  class="app-shop__mobile-collections-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="{{ section.settings.filter_icon_stroke }}"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="m6 9 6 6 6-6"></path>
+                </svg>
+              </div>
+            </div>
+          {% endif %}
+
           {% if section.settings.show_search %}
             <div class="app-shop__search-wrap">
               {% if section.settings.show_search_icon %}
@@ -970,6 +1085,7 @@
     if (!section) return;
 
     var searchInput = section.querySelector('[data-shop-search]');
+    var mobileCollectionSelect = section.querySelector('[data-mobile-collection-select]');
     var productGrid = section.querySelector('[data-products-grid]');
     var productCards = Array.prototype.slice.call(section.querySelectorAll('[data-product-card]'));
     var countEl = section.querySelector('[data-shop-count]');
@@ -1026,6 +1142,14 @@
     if (searchInput) {
       searchInput.addEventListener('input', applySearch);
       applySearch();
+    }
+
+    if (mobileCollectionSelect) {
+      mobileCollectionSelect.addEventListener('change', function () {
+        var nextUrl = mobileCollectionSelect.value;
+        if (!nextUrl) return;
+        window.location.href = nextUrl;
+      });
     }
 
     addToCartButtons.forEach(function (button) {
