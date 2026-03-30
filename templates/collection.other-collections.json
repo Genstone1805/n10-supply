@@ -12,80 +12,143 @@
     "shop-page": {
       "type": "app-shop",
       "blocks": {
-        "brand_filter_zanq3L": {
-          "type": "brand_filter",
-          "settings": {
-            "label": "All Brands",
-            "link": "shopify://pages/brands",
-            "active": false
-          }
-        },
-        "brand_filter_yUGwJY": {
-          "type": "brand_filter",
-          "settings": {
-            "label": "Bobrick",
-            "link": "shopify://collections/bobrick",
-            "active": false
-          }
-        },
-        "collection_filter_AaqcaC": {
-          "type": "collection_filter",
-          "settings": {
-            "label": "Soap dispensers & faucets",
-            "link": "shopify://collections/soap-dispensers-faucets",
-            "active": true
-          }
-        },
-        "collection_filter_eMxaQw": {
-          "type": "collection_filter",
-          "settings": {
-            "label": "Fino Collection",
-            "link": "shopify://collections/frontpage",
-            "active": false
-          }
-        },
-        "collection_filter_zJtdKf": {
-          "type": "collection_filter",
-          "settings": {
-            "label": "Matte Black",
-            "link": "shopify://collections/matte-black",
-            "active": false
-          }
-        },
-        "collection_filter_BJwjpK": {
-          "type": "collection_filter",
-          "settings": {
-            "label": "ConturaSeries®",
-            "link": "shopify://collections/conturaseries®",
-            "active": false
-          }
-        },
-        "collection_filter_iDbH4r": {
-          "type": "collection_filter",
-          "settings": {
-            "label": "ClassicSeries®",
-            "link": "shopify://collections/classicseries®",
-            "active": false
-          }
-        },
         "collection_filter_FWfChC": {
           "type": "collection_filter",
           "settings": {
-            "label": "Cubicle Collection",
-            "link": "shopify://collections/cubicle-collection",
+            "label": "Soap Dispensers & Faucets",
+            "link": "shopify://collections/soap-dispensers-faucets",
+            "active": false
+          }
+        },
+        "collection_filter_DCnGjn": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Combination Towel/Waste Units",
+            "link": "shopify://collections/combination-towel-waste-units",
+            "active": false
+          }
+        },
+        "collection_filter_wU8fjV": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Paper Towel Dispensers",
+            "link": "shopify://collections/paper-towel-dispensers",
+            "active": false
+          }
+        },
+        "collection_filter_BtmAhA": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Waste Receptacles",
+            "link": "shopify://collections/waste-receptacles",
+            "active": false
+          }
+        },
+        "collection_filter_dbXNwM": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Napkin/Tampon Dispensers",
+            "link": "shopify://collections/napkin-tampon-dispensers",
+            "active": false
+          }
+        },
+        "collection_filter_xii7z6": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Mirrors",
+            "link": "shopify://collections/mirrors",
+            "active": false
+          }
+        },
+        "collection_filter_L8kArc": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Hand Dryers",
+            "link": "shopify://collections/hand-dryers",
+            "active": false
+          }
+        },
+        "collection_filter_LtT8jn": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Grab Bars",
+            "link": "shopify://collections/grab-bars",
+            "active": false
+          }
+        },
+        "collection_filter_M6n7AH": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Sanitary Disposals",
+            "link": "shopify://collections/sanitary-disposals",
+            "active": false
+          }
+        },
+        "collection_filter_XxGfcF": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Toilet Seat Cover Dispensers",
+            "link": "shopify://collections/toilet-seat-cover-dispensers",
+            "active": false
+          }
+        },
+        "collection_filter_PigYEP": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Toilet Tissue Dispensers",
+            "link": "shopify://collections/toilet-tissue-dispensers",
+            "active": false
+          }
+        },
+        "collection_filter_wBJHBN": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Combination Toilet Accessories",
+            "link": "shopify://collections/combination-toilet-accessories",
+            "active": false
+          }
+        },
+        "collection_filter_DJkUem": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Hooks & Shelves",
+            "link": "shopify://collections/hooks-shelves",
+            "active": false
+          }
+        },
+        "collection_filter_Ct6kBU": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Shower & Tub",
+            "link": "shopify://collections/shower-tub",
+            "active": false
+          }
+        },
+        "collection_filter_d8Qtnr": {
+          "type": "collection_filter",
+          "settings": {
+            "label": "Healthcare",
+            "link": "shopify://collections/healthcare",
             "active": false
           }
         }
       },
       "block_order": [
-        "brand_filter_zanq3L",
-        "brand_filter_yUGwJY",
-        "collection_filter_AaqcaC",
-        "collection_filter_eMxaQw",
-        "collection_filter_zJtdKf",
-        "collection_filter_BJwjpK",
-        "collection_filter_iDbH4r",
-        "collection_filter_FWfChC"
+        "collection_filter_FWfChC",
+        "collection_filter_DCnGjn",
+        "collection_filter_wU8fjV",
+        "collection_filter_BtmAhA",
+        "collection_filter_dbXNwM",
+        "collection_filter_xii7z6",
+        "collection_filter_L8kArc",
+        "collection_filter_LtT8jn",
+        "collection_filter_M6n7AH",
+        "collection_filter_XxGfcF",
+        "collection_filter_PigYEP",
+        "collection_filter_wBJHBN",
+        "collection_filter_DJkUem",
+        "collection_filter_Ct6kBU",
+        "collection_filter_d8Qtnr"
       ],
       "settings": {
         "products_per_page": 12,
