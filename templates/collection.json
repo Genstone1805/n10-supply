@@ -28,14 +28,6 @@
             "active": false
           }
         },
-        "collection_filter_AaqcaC": {
-          "type": "collection_filter",
-          "settings": {
-            "label": "Soap dispensers & faucets",
-            "link": "shopify://collections/soap-dispensers-faucets",
-            "active": true
-          }
-        },
         "collection_filter_eMxaQw": {
           "type": "collection_filter",
           "settings": {
@@ -80,7 +72,6 @@
       "block_order": [
         "brand_filter_zanq3L",
         "brand_filter_yUGwJY",
-        "collection_filter_AaqcaC",
         "collection_filter_eMxaQw",
         "collection_filter_zJtdKf",
         "collection_filter_BJwjpK",
