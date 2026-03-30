@@ -635,6 +635,22 @@
 </section>
 
 <style>
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  [data-thumb-slider-wrapper] button {
+    transition: all 0.25s ease;
+  }
+
+  [data-thumb-slider-wrapper] button:hover {
+    transform: scale(1.03);
+  }
+  
   [data-product-gallery] [data-gallery-thumb] {
     padding: 0;
     outline: none;
