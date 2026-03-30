@@ -92,6 +92,7 @@
     #{{ section_id }} .app-shop__sidebar {
       width: 100%;
       flex-shrink: 0;
+      order: 2;
     }
 
     #{{ section_id }} .app-shop__sidebar-inner {
@@ -107,6 +108,7 @@
     #{{ section_id }} .app-shop__main {
       min-width: 0;
       flex: 1;
+      order: 1;
     }
 
     @media (min-width: 990px) {
@@ -117,6 +119,11 @@
 
       #{{ section_id }} .app-shop__sidebar {
         width: var(--sidebar-width);
+        order: 1;
+      }
+
+      #{{ section_id }} .app-shop__main {
+        order: 2;
       }
     }
 
