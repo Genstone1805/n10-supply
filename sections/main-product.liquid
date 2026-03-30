@@ -65,262 +65,192 @@
     >
       {% if section.settings.show_gallery %}
         <div class="product-detail-media-column">
-        {% comment %}
-          <div class="space-y-4">
-            <div
-              class="aspect-square overflow-hidden border"
-              style="
-                border-radius: var(--pd-radius-main);
-                background: var(--pd-bg-light);
-                border-color: var(--pd-border-color);
-              "
-            >
-              {% if current_product.featured_image %}
-                <img
-                  src="{{ current_product.featured_image | image_url: width: section.settings.main_image_width }}"
-                  alt="{{ current_product.featured_image.alt | escape | default: current_product.title }}"
-                  class="w-full h-full object-cover"
-                  loading="eager"
+          {% comment %}
+            <div class="space-y-4">
+              <div
+                class="aspect-square overflow-hidden border"
+                style="
+                  border-radius: var(--pd-radius-main);
+                  background: var(--pd-bg-light);
+                  border-color: var(--pd-border-color);
+                "
+              >
+                {% if current_product.featured_image %}
+                  <img
+                    src="{{ current_product.featured_image | image_url: width: section.settings.main_image_width }}"
+                    alt="{{ current_product.featured_image.alt | escape | default: current_product.title }}"
+                    class="w-full h-full object-cover"
+                    loading="eager"
+                  >
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
+                {% endif %}
+              </div>
+
+              {% if section.settings.show_thumbnails and current_product.images.size > 1 %}
+                <div
+                  class="!grid"
+                  style="grid-template-columns: repeat(var(--pd-thumb-columns), minmax(0, 1fr)); gap: {{ section.settings.thumbnail_gap }}px;"
                 >
-              {% else %}
-                {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
+                  {% for image in current_product.images limit: section.settings.thumbnail_limit %}
+                    <div
+                      class="aspect-square overflow-hidden border cursor-pointer"
+                      style="
+                        border-radius: var(--pd-radius-thumb);
+                        background: var(--pd-bg-light);
+                        border-color: var(--pd-border-color);
+                        opacity: {% if forloop.first %}1{% else %}{{ section.settings.inactive_thumb_opacity }}{% endif %};
+                      "
+                    >
+                      <img
+                        src="{{ image | image_url: width: section.settings.thumbnail_width }}"
+                        alt="{{ image.alt | escape | default: current_product.title }}"
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                      >
+                    </div>
+                  {% endfor %}
+                </div>
               {% endif %}
             </div>
-
-            {% if section.settings.show_thumbnails and current_product.images.size > 1 %}
+          {% endcomment %}
+          {% if current_product.media.size > 0 %}
+            <div
+              class="space-y-4"
+              data-product-gallery
+              style="
+                --gallery-thumb-gap: {{ section.settings.thumbnail_gap }}px;
+                --gallery-main-radius: var(--pd-radius-main);
+                --gallery-thumb-radius: var(--pd-radius-thumb);
+                --gallery-border: var(--pd-border-color);
+                --gallery-bg: var(--pd-bg-light);
+                --gallery-thumb-opacity: {{ section.settings.inactive_thumb_opacity }};
+                --gallery-thumb-columns: {{ section.settings.thumbnail_columns }};
+              "
+            >
               <div
-                class="!grid"
-                style="grid-template-columns: repeat(var(--pd-thumb-columns), minmax(0, 1fr)); gap: {{ section.settings.thumbnail_gap }}px;"
+                class="relative aspect-square overflow-hidden border"
+                style="
+                  border-radius: var(--gallery-main-radius);
+                  background: var(--gallery-bg);
+                  border-color: var(--gallery-border);
+                "
               >
-                {% for image in current_product.images limit: section.settings.thumbnail_limit %}
+                <div class="w-full h-full" data-gallery-main>
+                  {% assign featured_media = current_product.selected_or_first_available_variant.featured_media
+                    | default: current_product.featured_media
+                    | default: current_product.media.first
+                  %}
+
+                  {% case featured_media.media_type %}
+                    {% when 'image' %}
+                      <img
+                        src="{{ featured_media | image_url: width: section.settings.main_image_width }}"
+                        alt="{{ featured_media.alt | escape | default: current_product.title }}"
+                        class="w-full h-full object-cover"
+                        loading="eager"
+                        data-main-media-element
+                      >
+
+                    {% when 'video' %}
+                      {{
+                        featured_media
+                        | video_tag:
+                          class: 'w-full h-full object-cover',
+                          controls: true,
+                          autoplay: false,
+                          loop: false,
+                          muted: false
+                      }}
+
+                    {% when 'external_video' %}
+                      {{ featured_media | external_video_tag: class: 'w-full h-full w-full h-full' }}
+
+                    {% when 'model' %}
+                      {{
+                        featured_media
+                        | model_viewer_tag: reveal: 'interaction', toggleable: true, class: 'w-full h-full'
+                      }}
+
+                    {% else %}
+                      {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
+                  {% endcase %}
+                </div>
+              </div>
+
+              {% if current_product.media.size > 1 %}
+                <div class="relative" data-thumb-slider-wrapper>
+                  <!-- LEFT BUTTON -->
+                  <button
+                    type="button"
+                    class="absolute left-0 top-1/2 -translate-y-1/2 z-10 px-2 py-3"
+                    style="font-size:50px"
+                    data-thumb-prev
+                  >
+                    ‹
+                  </button>
+
+                  <!-- RIGHT BUTTON -->
+                  <button
+                    type="button"
+                    class="absolute right-0 top-1/2 -translate-y-1/2 z-10 px-2 py-3"
+                    style="font-size:50px"
+                    data-thumb-next
+                  >
+                    ›
+                  </button>
+
+                  <!-- SCROLL CONTAINER -->
                   <div
-                    class="aspect-square overflow-hidden border cursor-pointer"
+                    class="flex overflow-x-auto no-scrollbar"
+                    data-thumb-slider
                     style="
-                      border-radius: var(--pd-radius-thumb);
-                      background: var(--pd-bg-light);
-                      border-color: var(--pd-border-color);
-                      opacity: {% if forloop.first %}1{% else %}{{ section.settings.inactive_thumb_opacity }}{% endif %};
+                      gap: var(--gallery-thumb-gap);
+                      scroll-behavior: smooth;
                     "
                   >
-                    <img
-                      src="{{ image | image_url: width: section.settings.thumbnail_width }}"
-                      alt="{{ image.alt | escape | default: current_product.title }}"
-                      class="w-full h-full object-cover"
-                      loading="lazy"
-                    >
+                    {% for media in current_product.media limit: section.settings.thumbnail_limit %}
+                      <button
+                        type="button"
+                        class="group relative shrink-0 aspect-square overflow-hidden border cursor-pointer transition-all"
+                        data-gallery-thumb
+                        data-media-id="{{ media.id }}"
+                        style="
+                          width: calc(100% / var(--gallery-thumb-columns));
+                          border-radius: var(--gallery-thumb-radius);
+                          background: var(--gallery-bg);
+                          border-color: var(--gallery-border);
+                          opacity: {% if media.id == featured_media.id %}1{% else %}var(--gallery-thumb-opacity){% endif %};
+                        "
+                      >
+                        {% if media.media_type == 'image' %}
+                          <img
+                            src="{{ media | image_url: width: section.settings.thumbnail_width }}"
+                            class="w-full h-full object-cover"
+                          >
+                        {% else %}
+                          {% if media.preview_image %}
+                            <img
+                              src="{{ media.preview_image | image_url: width: section.settings.thumbnail_width }}"
+                              class="w-full h-full object-cover"
+                            >
+                          {% endif %}
+
+                          <!-- ICON -->
+                          <span class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <span class="flex items-center justify-center w-8 h-8 rounded-full bg-black/50 text-white text-xs font-bold">
+                              {% if media.media_type == 'model' %}3D{% else %}▶{% endif %}
+                            </span>
+                          </span>
+                        {% endif %}
+                      </button>
+                    {% endfor %}
                   </div>
-                {% endfor %}
-              </div>
-            {% endif %}
-          </div>
-        {% endcomment %}
-        {% if current_product.media.size > 0 %}
-          <div
-            class="space-y-4"
-            data-product-gallery
-            style="
-              --gallery-thumb-gap: {{ section.settings.thumbnail_gap }}px;
-              --gallery-main-radius: var(--pd-radius-main);
-              --gallery-thumb-radius: var(--pd-radius-thumb);
-              --gallery-border: var(--pd-border-color);
-              --gallery-bg: var(--pd-bg-light);
-              --gallery-thumb-opacity: {{ section.settings.inactive_thumb_opacity }};
-              --gallery-thumb-columns: {{ section.settings.thumbnail_columns }};
-            "
-          >
-            <div
-              class="relative aspect-square overflow-hidden border"
-              style="
-                border-radius: var(--gallery-main-radius);
-                background: var(--gallery-bg);
-                border-color: var(--gallery-border);
-              "
-            >
-              <div class="w-full h-full" data-gallery-main>
-                {% assign featured_media = current_product.selected_or_first_available_variant.featured_media
-                  | default: current_product.featured_media
-                  | default: current_product.media.first
-                %}
-
-                {% case featured_media.media_type %}
-                  {% when 'image' %}
-                    <img
-                      src="{{ featured_media | image_url: width: section.settings.main_image_width }}"
-                      alt="{{ featured_media.alt | escape | default: current_product.title }}"
-                      class="w-full h-full object-cover"
-                      loading="eager"
-                      data-main-media-element
-                    >
-
-                  {% when 'video' %}
-                    {{
-                      featured_media
-                      | video_tag:
-                        class: 'w-full h-full object-cover',
-                        controls: true,
-                        autoplay: false,
-                        loop: false,
-                        muted: false
-                    }}
-
-                  {% when 'external_video' %}
-                    {{ featured_media | external_video_tag: class: 'w-full h-full w-full h-full' }}
-
-                  {% when 'model' %}
-                    {{
-                      featured_media
-                      | model_viewer_tag: reveal: 'interaction', toggleable: true, class: 'w-full h-full'
-                    }}
-
-                  {% else %}
-                    {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
-                {% endcase %}
-              </div>
-            </div>
-
-            {% comment %}
-              {% if current_product.media.size > 1 %}
-                <div
-                  class="grid"
-                  style="
-                    grid-template-columns: repeat(var(--gallery-thumb-columns), minmax(0, 1fr));
-                    gap: var(--gallery-thumb-gap);
-                  "
-                >
-                  {% for media in current_product.media limit: section.settings.thumbnail_limit %}
-                    <button
-                      type="button"
-                      class="group relative aspect-square overflow-hidden border cursor-pointer transition-all"
-                      data-gallery-thumb
-                      data-media-id="{{ media.id }}"
-                      data-media-type="{{ media.media_type }}"
-                      data-media-alt="{{ media.alt | escape | default: current_product.title }}"
-                      {% if media.media_type == 'image' %}
-                        data-media-src="{{ media | image_url: width: section.settings.main_image_width }}"
-                      {% endif %}
-                      style="
-                        border-radius: var(--gallery-thumb-radius);
-                        background: var(--gallery-bg);
-                        border-color: var(--gallery-border);
-                        opacity: {% if media.id == featured_media.id %}1{% else %}var(--gallery-thumb-opacity){% endif %};
-                      "
-                      aria-label="View media {{ forloop.index }}"
-                    >
-                      {% if media.media_type == 'image' %}
-                        <img
-                          src="{{ media | image_url: width: section.settings.thumbnail_width }}"
-                          alt="{{ media.alt | escape | default: current_product.title }}"
-                          class="w-full h-full object-cover"
-                          loading="lazy"
-                        >
-                      {% elsif media.media_type == 'video' or media.media_type == 'external_video' %}
-                        {% if media.preview_image %}
-                          <img
-                            src="{{ media.preview_image | image_url: width: section.settings.thumbnail_width }}"
-                            alt="{{ media.alt | escape | default: current_product.title }}"
-                            class="w-full h-full object-cover"
-                            loading="lazy"
-                          >
-                        {% endif %}
-                        <span class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                          <span class="flex items-center justify-center w-10 h-10 rounded-full bg-black/50 text-white text-xs font-bold">
-                            ▶
-                          </span>
-                        </span>
-                      {% elsif media.media_type == 'model' %}
-                        {% if media.preview_image %}
-                          <img
-                            src="{{ media.preview_image | image_url: width: section.settings.thumbnail_width }}"
-                            alt="{{ media.alt | escape | default: current_product.title }}"
-                            class="w-full h-full object-cover"
-                            loading="lazy"
-                          >
-                        {% endif %}
-                        <span class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                          <span class="flex items-center justify-center w-10 h-10 rounded-full bg-black/50 text-white text-[10px] font-bold">
-                            3D
-                          </span>
-                        </span>
-                      {% endif %}
-                    </button>
-                  {% endfor %}
                 </div>
               {% endif %}
-            {% endcomment %}
+            </div>
 
-            {% if current_product.media.size > 1 %}
-              <div class="relative" data-thumb-slider-wrapper>
-                <!-- LEFT BUTTON -->
-                <button
-                  type="button"
-                  class="absolute left-0 top-1/2 -translate-y-1/2 z-10 px-2 py-3"
-                  style="font-size:50px"
-                  data-thumb-prev
-                >
-                  ‹
-                </button>
-
-                <!-- RIGHT BUTTON -->
-                <button
-                  type="button"
-                  class="absolute right-0 top-1/2 -translate-y-1/2 z-10 px-2 py-3"
-                  style="font-size:50px"
-                  data-thumb-next
-                >
-                  ›
-                </button>
-
-                <!-- SCROLL CONTAINER -->
-                <div
-                  class="flex overflow-x-auto no-scrollbar"
-                  data-thumb-slider
-                  style="
-                    gap: var(--gallery-thumb-gap);
-                    scroll-behavior: smooth;
-                  "
-                >
-                  {% for media in current_product.media limit: section.settings.thumbnail_limit %}
-                    <button
-                      type="button"
-                      class="group relative shrink-0 aspect-square overflow-hidden border cursor-pointer transition-all"
-                      data-gallery-thumb
-                      data-media-id="{{ media.id }}"
-                      style="
-                        width: calc(100% / var(--gallery-thumb-columns));
-                        border-radius: var(--gallery-thumb-radius);
-                        background: var(--gallery-bg);
-                        border-color: var(--gallery-border);
-                        opacity: {% if media.id == featured_media.id %}1{% else %}var(--gallery-thumb-opacity){% endif %};
-                      "
-                    >
-                      {% if media.media_type == 'image' %}
-                        <img
-                          src="{{ media | image_url: width: section.settings.thumbnail_width }}"
-                          class="w-full h-full object-cover"
-                        >
-                      {% else %}
-                        {% if media.preview_image %}
-                          <img
-                            src="{{ media.preview_image | image_url: width: section.settings.thumbnail_width }}"
-                            class="w-full h-full object-cover"
-                          >
-                        {% endif %}
-
-                        <!-- ICON -->
-                        <span class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                          <span class="flex items-center justify-center w-8 h-8 rounded-full bg-black/50 text-white text-xs font-bold">
-                            {% if media.media_type == 'model' %}3D{% else %}▶{% endif %}
-                          </span>
-                        </span>
-                      {% endif %}
-                    </button>
-                  {% endfor %}
-                </div>
-              </div>
-            {% endif %}
-          </div>
-
-          <script>
+            <script>
             document.addEventListener('DOMContentLoaded', function () {
               const gallery = document.querySelector('[data-product-gallery]');
               if (!gallery) return;
@@ -368,19 +298,19 @@
                 });
               });
             });
-          </script>
-        {% else %}
-          <div
-            class="aspect-square overflow-hidden border"
-            style="
-              border-radius: var(--pd-radius-main);
-              background: var(--pd-bg-light);
-              border-color: var(--pd-border-color);
-            "
-          >
-            {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
-          </div>
-        {% endif %}
+            </script>
+          {% else %}
+            <div
+              class="aspect-square overflow-hidden border"
+              style="
+                border-radius: var(--pd-radius-main);
+                background: var(--pd-bg-light);
+                border-color: var(--pd-border-color);
+              "
+            >
+              {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
+            </div>
+          {% endif %}
         </div>
       {% endif %}
 
@@ -594,6 +524,7 @@
           {% if bim_file != blank %}
             <a
               href="{{ bim_file.value }}"
+              download="Product-Ibm-File.pdf"
               class="font-bold flex items-center justify-center space-x-3 border"
               style="
                 padding-top: {{ section.settings.button_y_padding }}px;
@@ -617,6 +548,7 @@
           {% if tech_sheet != blank %}
             <a
               href="{{ tech_sheet.value }}"
+              download="Product-Tech-Sheet.pdf"
               class="font-bold flex items-center justify-center space-x-3 border"
               style="
                 padding-top: {{ section.settings.button_y_padding }}px;
