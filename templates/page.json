@@ -79,8 +79,8 @@
         "collection_filter_AgiiMM": {
           "type": "collection_filter",
           "settings": {
-            "label": "TrimLineSeries™",
-            "link": "",
+            "label": "Paper Towel Dispensers",
+            "link": "shopify://collections/paper-towel-dispensers",
             "active": false
           }
         },
