@@ -172,7 +172,7 @@
               </div>
             </div>
 
-            {% if current_product.media.size > 1 %}
+            {% comment %} {% if current_product.media.size > 1 %}
               <div
                 class="grid"
                 style="
@@ -238,7 +238,78 @@
                   </button>
                 {% endfor %}
               </div>
+            {% endif %} {% endcomment %}
+
+            {% if current_product.media.size > 1 %}
+  <div class="relative" data-thumb-slider-wrapper>
+
+    <!-- LEFT BUTTON -->
+    <button
+      type="button"
+      class="absolute left-0 top-1/2 -translate-y-1/2 z-10 px-2 py-3 bg-white/80 backdrop-blur border rounded-full shadow"
+      data-thumb-prev
+    >
+      ‹
+    </button>
+
+    <!-- RIGHT BUTTON -->
+    <button
+      type="button"
+      class="absolute right-0 top-1/2 -translate-y-1/2 z-10 px-2 py-3 bg-white/80 backdrop-blur border rounded-full shadow"
+      data-thumb-next
+    >
+      ›
+    </button>
+
+    <!-- SCROLL CONTAINER -->
+    <div
+      class="flex overflow-x-auto no-scrollbar"
+      data-thumb-slider
+      style="
+        gap: var(--gallery-thumb-gap);
+        scroll-behavior: smooth;
+      "
+    >
+      {% for media in current_product.media limit: section.settings.thumbnail_limit %}
+        <button
+          type="button"
+          class="group relative shrink-0 aspect-square overflow-hidden border cursor-pointer transition-all"
+          data-gallery-thumb
+          data-media-id="{{ media.id }}"
+          style="
+            width: calc(100% / var(--gallery-thumb-columns));
+            border-radius: var(--gallery-thumb-radius);
+            background: var(--gallery-bg);
+            border-color: var(--gallery-border);
+            opacity: {% if media.id == featured_media.id %}1{% else %}var(--gallery-thumb-opacity){% endif %};
+          "
+        >
+          {% if media.media_type == 'image' %}
+            <img
+              src="{{ media | image_url: width: section.settings.thumbnail_width }}"
+              class="w-full h-full object-cover"
+            >
+          {% else %}
+            {% if media.preview_image %}
+              <img
+                src="{{ media.preview_image | image_url: width: section.settings.thumbnail_width }}"
+                class="w-full h-full object-cover"
+              >
             {% endif %}
+
+            <!-- ICON -->
+            <span class="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <span class="flex items-center justify-center w-8 h-8 rounded-full bg-black/50 text-white text-xs font-bold">
+                {% if media.media_type == 'model' %}3D{% else %}▶{% endif %}
+              </span>
+            </span>
+          {% endif %}
+        </button>
+      {% endfor %}
+    </div>
+
+  </div>
+{% endif %}
           </div>
 
           <script>
