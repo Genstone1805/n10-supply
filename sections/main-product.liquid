@@ -298,9 +298,7 @@
           </div>
         {% endif %}
 
-        {% if section.settings.show_action_buttons %}
           <div class="flex flex-col sm:flex-row gap-4 mb-12">
-            {% if section.settings.show_primary_button %}
               <a
                 href="{{ section.settings.primary_button_url | default: current_product.url }}"
                 class="flex-1 font-bold flex items-center justify-center space-x-3 transition-all"
@@ -316,9 +314,7 @@
               >
                 <span>{{ section.settings.primary_button_label }}</span>
               </a>
-            {% endif %}
 
-            {% if section.settings.show_secondary_button %}
               {% assign spec_file = current_product.metafields.custom.technical_data_sheet %}
               <a
                 href="{% if spec_file != blank %}{{ spec_file.value }}{% else %}{{ section.settings.secondary_button_url }}{% endif %}"
@@ -337,11 +333,10 @@
                   target="_blank"
                 {% endif %}
               >
-                <span>{{ section.settings.secondary_button_label }}</span>
+                <span>DOwnoad BIM Fie{{ section.settings.secondary_button_label }}</span>
               </a>
-            {% endif %}
+
             
-            {% if section.settings.show_secondary_button %}
               {% assign spec_file = current_product.metafields.custom.technical_data_sheet %}
               <a
                 href="{% if spec_file != blank %}{{ spec_file.value }}{% else %}{{ section.settings.secondary_button_url }}{% endif %}"
@@ -360,16 +355,9 @@
                   target="_blank"
                 {% endif %}
               >
-                <span>{{ section.settings.secondary_button_label }}</span>
+                <span> Download Technical Data Sheet</span>
               </a>
-            {% endif %}
-
-            {% comment %}
-              UNUSED / OPTIONAL:
-              Add a third button here later for BIM file, quote modal, or add-to-cart.
-            {% endcomment %}
           </div>
-        {% endif %}
 
         {% if section.settings.show_specifications %}
           <div class="border-t pt-8" style="border-color: var(--pd-border-color);">
@@ -889,29 +877,6 @@
     },
 
     { "type": "header", "content": "Buttons" },
-    { "type": "checkbox", "id": "show_action_buttons", "label": "Show action buttons", "default": true },
-    { "type": "checkbox", "id": "show_primary_button", "label": "Show primary button", "default": true },
-    {
-      "type": "text",
-      "id": "primary_button_label",
-      "label": "Primary button label",
-      "default": "Add to Quote Request"
-    },
-    { "type": "url", "id": "primary_button_url", "label": "Primary button URL" },
-    { "type": "checkbox", "id": "show_secondary_button", "label": "Show secondary button", "default": true },
-    {
-      "type": "text",
-      "id": "secondary_button_label",
-      "label": "Secondary button label",
-      "default": "Download Spec Sheet"
-    },
-    { "type": "url", "id": "secondary_button_url", "label": "Secondary button fallback URL" },
-    {
-      "type": "checkbox",
-      "id": "secondary_button_new_tab",
-      "label": "Open secondary button in new tab",
-      "default": true
-    },
     {
       "type": "range",
       "id": "button_x_padding",
