@@ -506,7 +506,8 @@
                     {% if block.type == 'brand_filter' %}
                       {% liquid
                         assign filter_label_key = block.settings.label | strip | downcase
-                        assign fallback_collection = collections[block.settings.label | handleize]
+                        assign fallback_collection_handle = block.settings.label | handleize
+                        assign fallback_collection = collections[fallback_collection_handle]
                         assign filter_url = block.settings.link
 
                         if filter_url == blank and fallback_collection != blank
@@ -570,7 +571,8 @@
                     {% if block.type == 'collection_filter' %}
                       {% liquid
                         assign filter_label_key = block.settings.label | strip | downcase
-                        assign fallback_collection = collections[block.settings.label | handleize]
+                        assign fallback_collection_handle = block.settings.label | handleize
+                        assign fallback_collection = collections[fallback_collection_handle]
                         assign filter_url = block.settings.link
 
                         if filter_url == blank and fallback_collection != blank
@@ -687,10 +689,7 @@
                       {{
                         product.featured_image
                         | image_url: width: 900
-                        | image_tag:
-                          class: 'app-shop__product-image',
-                          loading: 'lazy',
-                          alt: product.title
+                        | image_tag: class: 'app-shop__product-image', loading: 'lazy', alt: product.title
                       }}
                     {% else %}
                       <div class="app-shop__placeholder">No product image</div>
@@ -708,7 +707,8 @@
                       <p class="app-shop__sku">{{ product.vendor }}</p>
                     {% elsif section.settings.show_sku and current_variant.sku != blank %}
                       <p class="app-shop__sku">
-                        {{ section.settings.sku_prefix }}{{ current_variant.sku }}
+                        {{ section.settings.sku_prefix -}}
+                        {{- current_variant.sku }}
                       </p>
                     {% endif %}
 
@@ -796,40 +796,40 @@
             <div class="app-shop__empty" data-search-empty hidden>No products match your search.</div>
 
             {% if paginate.pages > 1 %}
-  <nav class="app-shop__pagination" aria-label="Pagination" data-products-pagination>
-    {% if paginate.previous %}
-      <a class="app-shop__pagination-btn app-shop__pagination-prev" href="{{ paginate.previous.url }}">
-        Previous
-      </a>
-    {% endif %}
+              <nav class="app-shop__pagination" aria-label="Pagination" data-products-pagination>
+                {% if paginate.previous %}
+                  <a class="app-shop__pagination-btn app-shop__pagination-prev" href="{{ paginate.previous.url }}">
+                    Previous
+                  </a>
+                {% endif %}
 
-    <div class="app-shop__pagination-list">
-      {% for part in paginate.parts %}
-        {% if part.is_link %}
-          <a class="app-shop__pagination-btn" href="{{ part.url }}">
-            {{ part.title }}
-          </a>
-        {% else %}
-          {% if part.title == paginate.current_page %}
-            <span class="app-shop__pagination-btn is-active" aria-current="page">
-              {{ part.title }}
-            </span>
-          {% else %}
-            <span class="app-shop__pagination-dots">
-              {{ part.title }}
-            </span>
-          {% endif %}
-        {% endif %}
-      {% endfor %}
-    </div>
+                <div class="app-shop__pagination-list">
+                  {% for part in paginate.parts %}
+                    {% if part.is_link %}
+                      <a class="app-shop__pagination-btn" href="{{ part.url }}">
+                        {{ part.title }}
+                      </a>
+                    {% else %}
+                      {% if part.title == paginate.current_page %}
+                        <span class="app-shop__pagination-btn is-active" aria-current="page">
+                          {{ part.title }}
+                        </span>
+                      {% else %}
+                        <span class="app-shop__pagination-dots">
+                          {{ part.title }}
+                        </span>
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                </div>
 
-    {% if paginate.next %}
-      <a class="app-shop__pagination-btn app-shop__pagination-next" href="{{ paginate.next.url }}">
-        Next
-      </a>
-    {% endif %}
-  </nav>
-{% endif %}
+                {% if paginate.next %}
+                  <a class="app-shop__pagination-btn app-shop__pagination-next" href="{{ paginate.next.url }}">
+                    Next
+                  </a>
+                {% endif %}
+              </nav>
+            {% endif %}
           {% else %}
             <div class="app-shop__empty">No products found in this collection.</div>
           {% endif %}
@@ -840,84 +840,84 @@
 </section>
 
 <style>
-  #{{ section_id }} .app-shop__pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 40px;
-}
-
-#{{ section_id }} .app-shop__pagination-list {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-#{{ section_id }} .app-shop__pagination-btn,
-#{{ section_id }} .app-shop__pagination-dots {
-  min-width: 44px;
-  height: 44px;
-  padding: 0 14px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: #fff;
-  color: var(--text);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1;
-  transition: all 0.25s ease;
-  white-space: nowrap;
-}
-
-#{{ section_id }} .app-shop__pagination-btn:hover {
-  background: var(--primary);
-  color: var(--primary-contrast);
-  border-color: var(--primary);
-}
-
-#{{ section_id }} .app-shop__pagination-btn.is-active {
-  background: var(--primary);
-  color: var(--primary-contrast);
-  border-color: var(--primary);
-}
-
-#{{ section_id }} .app-shop__pagination-dots {
-  border: 0;
-  background: transparent;
-  min-width: auto;
-  padding: 0 4px;
-  color: var(--muted);
-}
-
-#{{ section_id }} .app-shop__pagination-prev,
-#{{ section_id }} .app-shop__pagination-next {
-  padding-left: 18px;
-  padding-right: 18px;
-}
-
-@media (max-width: 640px) {
-  #{{ section_id }} .app-shop__pagination {
-    gap: 10px;
+    #{{ section_id }} .app-shop__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 40px;
   }
 
   #{{ section_id }} .app-shop__pagination-list {
-    width: 100%;
-    order: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  #{{ section_id }} .app-shop__pagination-btn,
+  #{{ section_id }} .app-shop__pagination-dots {
+    min-width: 44px;
+    height: 44px;
+    padding: 0 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+  }
+
+  #{{ section_id }} .app-shop__pagination-btn:hover {
+    background: var(--primary);
+    color: var(--primary-contrast);
+    border-color: var(--primary);
+  }
+
+  #{{ section_id }} .app-shop__pagination-btn.is-active {
+    background: var(--primary);
+    color: var(--primary-contrast);
+    border-color: var(--primary);
+  }
+
+  #{{ section_id }} .app-shop__pagination-dots {
+    border: 0;
+    background: transparent;
+    min-width: auto;
+    padding: 0 4px;
+    color: var(--muted);
   }
 
   #{{ section_id }} .app-shop__pagination-prev,
   #{{ section_id }} .app-shop__pagination-next {
-    min-width: calc(50% - 6px);
+    padding-left: 18px;
+    padding-right: 18px;
   }
-}
+
+  @media (max-width: 640px) {
+    #{{ section_id }} .app-shop__pagination {
+      gap: 10px;
+    }
+
+    #{{ section_id }} .app-shop__pagination-list {
+      width: 100%;
+      order: 3;
+    }
+
+    #{{ section_id }} .app-shop__pagination-prev,
+    #{{ section_id }} .app-shop__pagination-next {
+      min-width: calc(50% - 6px);
+    }
+  }
 </style>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -932,7 +932,9 @@
     var countEl = section.querySelector('[data-shop-count]');
     var emptyState = section.querySelector('[data-search-empty]');
     var pagination = section.querySelector('[data-products-pagination]');
-    var baseCount = countEl ? parseInt(countEl.getAttribute('data-base-count'), 10) || productCards.length : productCards.length;
+    var baseCount = countEl
+      ? parseInt(countEl.getAttribute('data-base-count'), 10) || productCards.length
+      : productCards.length;
 
     function normalizeValue(value) {
       return (value || '').toString().toLowerCase().replace(/\s+/g, ' ').trim();
@@ -945,9 +947,11 @@
 
       productCards.forEach(function (card) {
         var searchText = normalizeValue(card.getAttribute('data-product-search-text'));
-        var matches = !searchTerms.length || searchTerms.every(function (term) {
-          return searchText.indexOf(term) !== -1;
-        });
+        var matches =
+          !searchTerms.length ||
+          searchTerms.every(function (term) {
+            return searchText.indexOf(term) !== -1;
+          });
 
         card.hidden = !matches;
 
@@ -987,38 +991,38 @@
       "content": "Page content"
     },
     {
-  "type": "range",
-  "id": "products_per_page",
-  "label": "Products per page",
-  "min": 4,
-  "max": 36,
-  "step": 4,
-  "default": 12
-},
-{
-  "type": "text",
-  "id": "primary_button_label",
-  "label": "Primary button label",
-  "default": "View Details"
-},
-{
-  "type": "checkbox",
-  "id": "show_price",
-  "label": "Show price",
-  "default": true
-},
-{
-  "type": "checkbox",
-  "id": "show_vendor",
-  "label": "Show vendor instead of SKU",
-  "default": false
-},
-{
-  "type": "text",
-  "id": "sku_prefix",
-  "label": "SKU prefix",
-  "default": "SKU: "
-},
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 4,
+      "max": 36,
+      "step": 4,
+      "default": 12
+    },
+    {
+      "type": "text",
+      "id": "primary_button_label",
+      "label": "Primary button label",
+      "default": "View Details"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Show price",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor instead of SKU",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "sku_prefix",
+      "label": "SKU prefix",
+      "default": "SKU: "
+    },
     {
       "type": "text",
       "id": "page_title",
@@ -1968,7 +1972,7 @@
           "default": false
         }
       ]
-    },
+    }
   ],
   "presets": [
     {
