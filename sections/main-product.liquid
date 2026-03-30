@@ -111,197 +111,197 @@
           {% endif %}
         </div> {% endcomment %}
         {% if current_product.media.size > 0 %}
-  <div
-    class="space-y-4"
-    data-product-gallery
-    style="
-      --gallery-thumb-gap: {{ section.settings.thumbnail_gap }}px;
-      --gallery-main-radius: var(--pd-radius-main);
-      --gallery-thumb-radius: var(--pd-radius-thumb);
-      --gallery-border: var(--pd-border-color);
-      --gallery-bg: var(--pd-bg-light);
-      --gallery-thumb-opacity: {{ section.settings.inactive_thumb_opacity }};
-      --gallery-thumb-columns: {{ section.settings.thumbnail_columns }};
-    "
-  >
-    <div
-      class="relative aspect-square overflow-hidden border"
-      style="
-        border-radius: var(--gallery-main-radius);
-        background: var(--gallery-bg);
-        border-color: var(--gallery-border);
-      "
-    >
-      <div class="w-full h-full" data-gallery-main>
-        {% assign featured_media = current_product.selected_or_first_available_variant.featured_media | default: current_product.featured_media | default: current_product.media.first %}
-
-        {% case featured_media.media_type %}
-          {% when 'image' %}
-            <img
-              src="{{ featured_media | image_url: width: section.settings.main_image_width }}"
-              alt="{{ featured_media.alt | escape | default: current_product.title }}"
-              class="w-full h-full object-cover"
-              loading="eager"
-              data-main-media-element
-            >
-
-          {% when 'video' %}
-            {{
-              featured_media
-              | video_tag:
-                class: 'w-full h-full object-cover',
-                controls: true,
-                autoplay: false,
-                loop: false,
-                muted: false
-            }}
-
-          {% when 'external_video' %}
-            {{
-              featured_media
-              | external_video_tag:
-                class: 'w-full h-full w-full h-full'
-            }}
-
-          {% when 'model' %}
-            {{ featured_media | model_viewer_tag: reveal: 'interaction', toggleable: true, class: 'w-full h-full' }}
-
-          {% else %}
-            {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
-        {% endcase %}
-      </div>
-    </div>
-
-    {% if current_product.media.size > 1 %}
-      <div
-        class="grid"
-        style="
-          grid-template-columns: repeat(var(--gallery-thumb-columns), minmax(0, 1fr));
-          gap: var(--gallery-thumb-gap);
-        "
-      >
-        {% for media in current_product.media limit: section.settings.thumbnail_limit %}
-          <button
-            type="button"
-            class="group relative aspect-square overflow-hidden border cursor-pointer transition-all"
-            data-gallery-thumb
-            data-media-id="{{ media.id }}"
-            data-media-type="{{ media.media_type }}"
-            data-media-alt="{{ media.alt | escape | default: current_product.title }}"
-            {% if media.media_type == 'image' %}
-              data-media-src="{{ media | image_url: width: section.settings.main_image_width }}"
-            {% endif %}
+          <div
+            class="space-y-4"
+            data-product-gallery
             style="
-              border-radius: var(--gallery-thumb-radius);
-              background: var(--gallery-bg);
-              border-color: var(--gallery-border);
-              opacity: {% if media.id == featured_media.id %}1{% else %}var(--gallery-thumb-opacity){% endif %};
+              --gallery-thumb-gap: {{ section.settings.thumbnail_gap }}px;
+              --gallery-main-radius: var(--pd-radius-main);
+              --gallery-thumb-radius: var(--pd-radius-thumb);
+              --gallery-border: var(--pd-border-color);
+              --gallery-bg: var(--pd-bg-light);
+              --gallery-thumb-opacity: {{ section.settings.inactive_thumb_opacity }};
+              --gallery-thumb-columns: {{ section.settings.thumbnail_columns }};
             "
-            aria-label="View media {{ forloop.index }}"
           >
-            {% if media.media_type == 'image' %}
-              <img
-                src="{{ media | image_url: width: section.settings.thumbnail_width }}"
-                alt="{{ media.alt | escape | default: current_product.title }}"
-                class="w-full h-full object-cover"
-                loading="lazy"
+            <div
+              class="relative aspect-square overflow-hidden border"
+              style="
+                border-radius: var(--gallery-main-radius);
+                background: var(--gallery-bg);
+                border-color: var(--gallery-border);
+              "
+            >
+              <div class="w-full h-full" data-gallery-main>
+                {% assign featured_media = current_product.selected_or_first_available_variant.featured_media | default: current_product.featured_media | default: current_product.media.first %}
+
+                {% case featured_media.media_type %}
+                  {% when 'image' %}
+                    <img
+                      src="{{ featured_media | image_url: width: section.settings.main_image_width }}"
+                      alt="{{ featured_media.alt | escape | default: current_product.title }}"
+                      class="w-full h-full object-cover"
+                      loading="eager"
+                      data-main-media-element
+                    >
+
+                  {% when 'video' %}
+                    {{
+                      featured_media
+                      | video_tag:
+                        class: 'w-full h-full object-cover',
+                        controls: true,
+                        autoplay: false,
+                        loop: false,
+                        muted: false
+                    }}
+
+                  {% when 'external_video' %}
+                    {{
+                      featured_media
+                      | external_video_tag:
+                        class: 'w-full h-full w-full h-full'
+                    }}
+
+                  {% when 'model' %}
+                    {{ featured_media | model_viewer_tag: reveal: 'interaction', toggleable: true, class: 'w-full h-full' }}
+
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
+                {% endcase %}
+              </div>
+            </div>
+
+            {% if current_product.media.size > 1 %}
+              <div
+                class="grid"
+                style="
+                  grid-template-columns: repeat(var(--gallery-thumb-columns), minmax(0, 1fr));
+                  gap: var(--gallery-thumb-gap);
+                "
               >
-            {% elsif media.media_type == 'video' or media.media_type == 'external_video' %}
-              {% if media.preview_image %}
-                <img
-                  src="{{ media.preview_image | image_url: width: section.settings.thumbnail_width }}"
-                  alt="{{ media.alt | escape | default: current_product.title }}"
-                  class="w-full h-full object-cover"
-                  loading="lazy"
-                >
-              {% endif %}
-              <span class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <span class="flex items-center justify-center w-10 h-10 rounded-full bg-black/50 text-white text-xs font-bold">
-                  ▶
-                </span>
-              </span>
-            {% elsif media.media_type == 'model' %}
-              {% if media.preview_image %}
-                <img
-                  src="{{ media.preview_image | image_url: width: section.settings.thumbnail_width }}"
-                  alt="{{ media.alt | escape | default: current_product.title }}"
-                  class="w-full h-full object-cover"
-                  loading="lazy"
-                >
-              {% endif %}
-              <span class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <span class="flex items-center justify-center w-10 h-10 rounded-full bg-black/50 text-white text-[10px] font-bold">
-                  3D
-                </span>
-              </span>
+                {% for media in current_product.media limit: section.settings.thumbnail_limit %}
+                  <button
+                    type="button"
+                    class="group relative aspect-square overflow-hidden border cursor-pointer transition-all"
+                    data-gallery-thumb
+                    data-media-id="{{ media.id }}"
+                    data-media-type="{{ media.media_type }}"
+                    data-media-alt="{{ media.alt | escape | default: current_product.title }}"
+                    {% if media.media_type == 'image' %}
+                      data-media-src="{{ media | image_url: width: section.settings.main_image_width }}"
+                    {% endif %}
+                    style="
+                      border-radius: var(--gallery-thumb-radius);
+                      background: var(--gallery-bg);
+                      border-color: var(--gallery-border);
+                      opacity: {% if media.id == featured_media.id %}1{% else %}var(--gallery-thumb-opacity){% endif %};
+                    "
+                    aria-label="View media {{ forloop.index }}"
+                  >
+                    {% if media.media_type == 'image' %}
+                      <img
+                        src="{{ media | image_url: width: section.settings.thumbnail_width }}"
+                        alt="{{ media.alt | escape | default: current_product.title }}"
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                      >
+                    {% elsif media.media_type == 'video' or media.media_type == 'external_video' %}
+                      {% if media.preview_image %}
+                        <img
+                          src="{{ media.preview_image | image_url: width: section.settings.thumbnail_width }}"
+                          alt="{{ media.alt | escape | default: current_product.title }}"
+                          class="w-full h-full object-cover"
+                          loading="lazy"
+                        >
+                      {% endif %}
+                      <span class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <span class="flex items-center justify-center w-10 h-10 rounded-full bg-black/50 text-white text-xs font-bold">
+                          ▶
+                        </span>
+                      </span>
+                    {% elsif media.media_type == 'model' %}
+                      {% if media.preview_image %}
+                        <img
+                          src="{{ media.preview_image | image_url: width: section.settings.thumbnail_width }}"
+                          alt="{{ media.alt | escape | default: current_product.title }}"
+                          class="w-full h-full object-cover"
+                          loading="lazy"
+                        >
+                      {% endif %}
+                      <span class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <span class="flex items-center justify-center w-10 h-10 rounded-full bg-black/50 text-white text-[10px] font-bold">
+                          3D
+                        </span>
+                      </span>
+                    {% endif %}
+                  </button>
+                {% endfor %}
+              </div>
             {% endif %}
-          </button>
-        {% endfor %}
-      </div>
-    {% endif %}
-  </div>
+          </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const gallery = document.querySelector('[data-product-gallery]');
-      if (!gallery) return;
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              const gallery = document.querySelector('[data-product-gallery]');
+              if (!gallery) return;
 
-      const main = gallery.querySelector('[data-gallery-main]');
-      const thumbs = gallery.querySelectorAll('[data-gallery-thumb]');
+              const main = gallery.querySelector('[data-gallery-main]');
+              const thumbs = gallery.querySelectorAll('[data-gallery-thumb]');
 
-      if (!main || !thumbs.length) return;
+              if (!main || !thumbs.length) return;
 
-      const mediaMarkup = {
-        {% for media in current_product.media limit: section.settings.thumbnail_limit %}
-          "{{ media.id }}": `{% case media.media_type %}
-            {% when 'image' %}
-              <img
-                src="{{ media | image_url: width: section.settings.main_image_width }}"
-                alt="{{ media.alt | escape | default: current_product.title }}"
-                class="w-full h-full object-cover"
-                loading="eager"
-                data-main-media-element
-              >
-            {% when 'video' %}
-              {{ media | video_tag: class: 'w-full h-full object-cover', controls: true, autoplay: false, loop: false, muted: false | strip_newlines | replace: '`', '\`' }}
-            {% when 'external_video' %}
-              {{ media | external_video_tag: class: 'w-full h-full' | strip_newlines | replace: '`', '\`' }}
-            {% when 'model' %}
-              {{ media | model_viewer_tag: reveal: 'interaction', toggleable: true, class: 'w-full h-full' | strip_newlines | replace: '`', '\`' }}
-            {% else %}
-              {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' | strip_newlines | replace: '`', '\`' }}
-          {% endcase %}`,
-        {% endfor %}
-      };
+              const mediaMarkup = {
+                {% for media in current_product.media limit: section.settings.thumbnail_limit %}
+                  "{{ media.id }}": `{% case media.media_type %}
+                    {% when 'image' %}
+                      <img
+                        src="{{ media | image_url: width: section.settings.main_image_width }}"
+                        alt="{{ media.alt | escape | default: current_product.title }}"
+                        class="w-full h-full object-cover"
+                        loading="eager"
+                        data-main-media-element
+                      >
+                    {% when 'video' %}
+                      {{ media | video_tag: class: 'w-full h-full object-cover', controls: true, autoplay: false, loop: false, muted: false | strip_newlines | replace: '`', '\`' }}
+                    {% when 'external_video' %}
+                      {{ media | external_video_tag: class: 'w-full h-full' | strip_newlines | replace: '`', '\`' }}
+                    {% when 'model' %}
+                      {{ media | model_viewer_tag: reveal: 'interaction', toggleable: true, class: 'w-full h-full' | strip_newlines | replace: '`', '\`' }}
+                    {% else %}
+                      {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' | strip_newlines | replace: '`', '\`' }}
+                  {% endcase %}`,
+                {% endfor %}
+              };
 
-      thumbs.forEach((thumb) => {
-        thumb.addEventListener('click', function () {
-          const mediaId = this.dataset.mediaId;
-          if (!mediaId || !mediaMarkup[mediaId]) return;
+              thumbs.forEach((thumb) => {
+                thumb.addEventListener('click', function () {
+                  const mediaId = this.dataset.mediaId;
+                  if (!mediaId || !mediaMarkup[mediaId]) return;
 
-          main.innerHTML = mediaMarkup[mediaId];
+                  main.innerHTML = mediaMarkup[mediaId];
 
-          thumbs.forEach((item) => {
-            item.style.opacity = getComputedStyle(gallery).getPropertyValue('--gallery-thumb-opacity').trim() || '0.6';
-          });
+                  thumbs.forEach((item) => {
+                    item.style.opacity = getComputedStyle(gallery).getPropertyValue('--gallery-thumb-opacity').trim() || '0.6';
+                  });
 
-          this.style.opacity = '1';
-        });
-      });
-    });
-  </script>
-{% else %}
-  <div
-    class="aspect-square overflow-hidden border"
-    style="
-      border-radius: var(--pd-radius-main);
-      background: var(--pd-bg-light);
-      border-color: var(--pd-border-color);
-    "
-  >
-    {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
-  </div>
-{% endif %}
+                  this.style.opacity = '1';
+                });
+              });
+            });
+          </script>
+        {% else %}
+          <div
+            class="aspect-square overflow-hidden border"
+            style="
+              border-radius: var(--pd-radius-main);
+              background: var(--pd-bg-light);
+              border-color: var(--pd-border-color);
+            "
+          >
+            {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover' }}
+          </div>
+        {% endif %}
       {% endif %}
 
       <div>
