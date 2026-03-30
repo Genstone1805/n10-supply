@@ -340,6 +340,29 @@
                 <span>{{ section.settings.secondary_button_label }}</span>
               </a>
             {% endif %}
+            
+            {% if section.settings.show_secondary_button %}
+              {% assign spec_file = current_product.metafields.custom.technical_data_sheet %}
+              <a
+                href="{% if spec_file != blank %}{{ spec_file.value }}{% else %}{{ section.settings.secondary_button_url }}{% endif %}"
+                class="font-bold flex items-center justify-center space-x-3 border"
+                style="
+                  padding-top: {{ section.settings.button_y_padding }}px;
+                  padding-bottom: {{ section.settings.button_y_padding }}px;
+                  padding-left: {{ section.settings.button_x_padding }}px;
+                  padding-right: {{ section.settings.button_x_padding }}px;
+                  border-radius: {{ section.settings.button_radius }}px;
+                  background: var(--pd-secondary-button-bg);
+                  color: var(--pd-secondary-button-text);
+                  border-color: var(--pd-border-color);
+                "
+                {% if section.settings.secondary_button_new_tab %}
+                  target="_blank"
+                {% endif %}
+              >
+                <span>{{ section.settings.secondary_button_label }}</span>
+              </a>
+            {% endif %}
 
             {% comment %}
               UNUSED / OPTIONAL:
