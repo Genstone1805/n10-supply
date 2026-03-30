@@ -530,6 +530,66 @@
   </div>
 </section>
 
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const addToCartBtn = document.querySelector('.js-ajax-add-to-cart');
+
+    if (!addToCartBtn) return;
+
+    addToCartBtn.addEventListener('click', async function () {
+      const variantId = this.dataset.variantId;
+      const buttonText = this.querySelector('.js-add-to-cart-text');
+      const originalText = buttonText ? buttonText.textContent : 'Add to cart';
+
+      try {
+        this.disabled = true;
+        if (buttonText) buttonText.textContent = 'Adding...';
+
+        const response = await fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            id: variantId,
+            quantity: 1
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to add product to cart');
+        }
+
+        const data = await response.json();
+
+        if (buttonText) buttonText.textContent = 'Added';
+
+        document.documentElement.dispatchEvent(
+          new CustomEvent('cart:updated', {
+            detail: { product: data }
+          })
+        );
+
+        setTimeout(() => {
+          if (buttonText) buttonText.textContent = originalText;
+          this.disabled = false;
+        }, 1200);
+
+      } catch (error) {
+        console.error(error);
+        if (buttonText) buttonText.textContent = 'Error';
+        setTimeout(() => {
+          if (buttonText) buttonText.textContent = originalText;
+          this.disabled = false;
+        }, 1500);
+      }
+    });
+  });
+</script>
+
+
 {% schema %}
 {
   "name": "Advanced Product Detail",
