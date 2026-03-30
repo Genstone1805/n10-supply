@@ -113,67 +113,43 @@
         "card_Wkptba": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/imgi_8_Banner-3.jpg",
-            "image_ratio": "video",
-            "title": "Fino Collection",
-            "text": "Crafted with high-quality satin-finish stainless steel, seamless construction, well-defined edges and concealed hardware.",
-            "button_label": "Explore collection",
-            "link": "shopify://collections/frontpage"
+            "collection": "frontpage",
+            "image_ratio": "video"
           }
         },
         "card_kL4ay3": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/imgi_8_01_MatteBlack_header.jpg",
-            "image_ratio": "video",
-            "title": "Matte Black",
-            "text": "Matte Black powder-coated stainless-steel accessories reveal glamorous possibilities, with high-end design, labor-saving function and sustainable operation.",
-            "button_label": "Explore collection",
-            "link": "shopify://collections/matte-black"
+            "collection": "matte-black",
+            "image_ratio": "video"
           }
         },
         "card_Kefp96": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/imgi_8_01_TrimLine_header.jpg",
-            "image_ratio": "video",
-            "title": "TrimLineSeries™",
-            "text": "Specify these accessories for contemporary environments, from prestige buildings and hospitality environments to healthcare and retail properties.",
-            "button_label": "Explore collection",
-            "link": "shopify://collections/trimlineseries™"
+            "collection": "trimlineseries™",
+            "image_ratio": "video"
           }
         },
         "card_XkXi3X": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/imgi_8_01_ConturaSeries_header.jpg",
-            "image_ratio": "video",
-            "title": "ConturaSeries®",
-            "text": "For prestige projects, ConturaSeries accessories feature gentle 27° curvilinear design and consistent styling with flush tumbler locks.",
-            "button_label": "Explore collection",
-            "link": "shopify://collections/conturaseries®"
+            "collection": "conturaseries®",
+            "image_ratio": "video"
           }
         },
         "card_jYLUeD": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/imgi_8_01_ClassicSeries_header.jpg",
-            "image_ratio": "video",
-            "title": "ClassicSeries®",
-            "text": "Ideal for budget sensitive projects, ClassicSeries is the standard of value and offers the largest selection of models for all Type-304 washroom accessories.",
-            "button_label": "Explore collection",
-            "link": "shopify://collections/classicseries®"
+            "collection": "classicseries®",
+            "image_ratio": "video"
           }
         },
         "card_WEgJGe": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/imgi_8_Cubicle-Collection_c14ef356-357e-4878-a09a-ba50ce963872.jpg",
-            "image_ratio": "video",
-            "title": "Cubicle Collection",
-            "text": "Add convenience and style to your cubicle interiors. Featuring contemporary styling for coordinating elegance, all Cubicle Collection models share common elements such as threaded escutcheons and post diameters.",
-            "button_label": "Explore collection",
-            "link": "shopify://collections/cubicle-collection"
+            "collection": "cubicle-collection",
+            "image_ratio": "video"
           }
         }
       },
@@ -224,6 +200,7 @@
         "show_arrow": true,
         "arrow_size": 20,
         "show_button_text": false,
+        "button_label": "Explore collection",
         "show_button_arrow": true
       }
     },
