@@ -367,95 +367,6 @@
           {% endif %}
         </div>
 
-        {% if section.settings.show_specifications %}
-          <div class="border-t pt-8" style="border-color: var(--pd-border-color);">
-            <h4
-              class="font-bold uppercase tracking-widest mb-6 flex items-center space-x-2"
-              style="
-                color: var(--pd-heading-color);
-                font-size: {{ section.settings.spec_heading_size }}px;
-              "
-            >
-              <span>{{ section.settings.spec_heading }}</span>
-            </h4>
-
-            <div class="space-y-4">
-              {% if section.settings.show_material_row %}
-                {% assign spec_material = current_product.metafields.shopify.material.value %}
-                {% if spec_material != blank %}
-                  <div class="flex justify-between text-sm py-2 border-b" style="border-color: var(--pd-border-color);">
-                    <span style="color: var(--pd-muted-color);">{{ section.settings.material_label }}</span>
-                    <span class="font-medium" style="color: var(--pd-heading-color);">{{ spec_material }}</span>
-                  </div>
-                {% endif %}
-              {% endif %}
-
-              {% if section.settings.show_finish_row %}
-                {% assign spec_finish = current_product.metafields.shopify['color-pattern'].value %}
-                {% if spec_finish != blank %}
-                  <div class="flex justify-between text-sm py-2 border-b" style="border-color: var(--pd-border-color);">
-                    <span style="color: var(--pd-muted-color);">{{ section.settings.finish_label }}</span>
-                    <span class="font-medium" style="color: var(--pd-heading-color);">{{ spec_finish }}</span>
-                  </div>
-                {% endif %}
-              {% endif %}
-
-              {% if section.settings.show_mounting_row %}
-                {% assign spec_mounting = current_product.metafields.shopify['mounting-type'].value %}
-                {% if spec_mounting != blank %}
-                  <div class="flex justify-between text-sm py-2 border-b" style="border-color: var(--pd-border-color);">
-                    <span style="color: var(--pd-muted-color);">{{ section.settings.mounting_label }}</span>
-                    <span class="font-medium" style="color: var(--pd-heading-color);">{{ spec_mounting }}</span>
-                  </div>
-                {% endif %}
-              {% endif %}
-
-              {% if section.settings.show_shape_row %}
-                {% assign spec_shape = current_product.metafields.shopify.shape.value %}
-                {% if spec_shape != blank %}
-                  <div class="flex justify-between text-sm py-2 border-b" style="border-color: var(--pd-border-color);">
-                    <span style="color: var(--pd-muted-color);">{{ section.settings.shape_label }}</span>
-                    <span class="font-medium" style="color: var(--pd-heading-color);">{{ spec_shape }}</span>
-                  </div>
-                {% endif %}
-              {% endif %}
-
-              {% if section.settings.show_location_row %}
-                {% assign spec_location = current_product.metafields.shopify['suitable-location'].value %}
-                {% if spec_location != blank %}
-                  <div class="flex justify-between text-sm py-2 border-b" style="border-color: var(--pd-border-color);">
-                    <span style="color: var(--pd-muted-color);">{{ section.settings.location_label }}</span>
-                    <span class="font-medium" style="color: var(--pd-heading-color);">{{ spec_location }}</span>
-                  </div>
-                {% endif %}
-              {% endif %}
-
-              {% if section.settings.show_custom_spec_1
-                and section.settings.custom_spec_1_label != blank
-                and section.settings.custom_spec_1_value != blank
-              %}
-                <div class="flex justify-between text-sm py-2 border-b" style="border-color: var(--pd-border-color);">
-                  <span style="color: var(--pd-muted-color);">{{ section.settings.custom_spec_1_label }}</span>
-                  <span class="font-medium" style="color: var(--pd-heading-color);">
-                    {{- section.settings.custom_spec_1_value -}}
-                  </span>
-                </div>
-              {% endif %}
-
-              {% if section.settings.show_custom_spec_2
-                and section.settings.custom_spec_2_label != blank
-                and section.settings.custom_spec_2_value != blank
-              %}
-                <div class="flex justify-between text-sm py-2 border-b" style="border-color: var(--pd-border-color);">
-                  <span style="color: var(--pd-muted-color);">{{ section.settings.custom_spec_2_label }}</span>
-                  <span class="font-medium" style="color: var(--pd-heading-color);">
-                    {{- section.settings.custom_spec_2_value -}}
-                  </span>
-                </div>
-              {% endif %}
-            </div>
-          </div>
-        {% endif %}
 
         {% if section.settings.show_downloads %}
           <div class="mt-10">
@@ -989,7 +900,6 @@
 
 
     { "type": "header", "content": "Downloads" },
-    { "type": "checkbox", "id": "show_downloads", "label": "Show downloads", "default": true },
     { "type": "text", "id": "download_heading", "label": "Download heading", "default": "Downloads" },
     {
       "type": "range",
